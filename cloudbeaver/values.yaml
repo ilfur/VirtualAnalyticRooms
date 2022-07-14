@@ -1,0 +1,10 @@
+replicaCount: 1
+
+image:
+  repository: "docker.io/dbeaver/cloudbeaver"
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  port: 8080
+

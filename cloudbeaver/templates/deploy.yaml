@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "cloudbeaver.fullname" . }}
+  labels:
+    {{- include "cloudbeaver.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "cloudbeaver.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "cloudbeaver.labels" . | nindent 4 }}
+    spec:
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}
+          ports:
+            - containerPort: 8978
+              name: cloudbeaver
+          volumeMounts:
+            - name: storagebv
+              mountPath: /opt/cloudbeaver/workspace
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: storagebv
+          persistentVolumeClaim:
+            claimName: cloudbeaver-pvc
+
+
+
+
+

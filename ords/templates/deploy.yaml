@@ -1,0 +1,39 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "ords.fullname" . }}
+  labels:
+    {{- include "ords.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "ords.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "ords.labels" . | nindent 4 }}
+    spec:
+      containers:
+        - name: app
+          image: {{ .Values.image.repository }}
+          ports:
+            - containerPort: 8181
+              name: ords
+          volumeMounts:
+            - name: storageords
+              mountPath: /etc/ords/config
+          volumeMounts:
+            - name: secretords
+              configMap:
+                name: ords-secrets
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: storageords
+          persistentVolumeClaim:
+            claimName: ords-pvc
+
+
+
+
+
