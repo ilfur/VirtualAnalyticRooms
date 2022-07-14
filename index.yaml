@@ -1,0 +1,74 @@
+apiVersion: v1
+entries:
+  cloudbeaver:
+  - apiVersion: v2
+    appVersion: 21.3.3
+    created: "2022-07-14T11:38:24.654690982Z"
+    description: DBeaver Web UI Community Edition
+    digest: 8c5cb800f920034e9a0c47b4dd89bde16f2a471625b793087375e2515bb68784
+    icon: https://ilfur.github.io/AnalyticDataRooms/cloudbeaver_logo.png
+    name: cloudbeaver
+    type: application
+    urls:
+    - cloudbeaver-1.0.0.tgz
+    version: 1.0.0
+  graph-server:
+  - apiVersion: v2
+    appVersion: 22.2.0.0.0
+    created: "2022-07-14T11:38:24.655060421Z"
+    description: Oracle Graph & RDF Server with UI
+    digest: a1488ba287e251d809aa0de4fbc36c439a8bb907714f6754432ebb4dd9d6fbb8
+    icon: https://ilfur.github.io/AnalyticDataRooms/graph_logo.png
+    name: graph-server
+    type: application
+    urls:
+    - graph-server-1.0.0.tgz
+    version: 1.0.0
+  jupyterhub:
+  - annotations:
+      category: MachineLearning
+    apiVersion: v2
+    appVersion: 1.5.0
+    created: "2022-07-14T11:38:24.670783868Z"
+    dependencies:
+    - condition: postgresql.enabled
+      name: postgresql
+      repository: https://charts.bitnami.com/bitnami
+      version: 11.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: JupyterHub brings the power of notebooks to groups of users. It gives
+      users access to computational environments and resources without burdening the
+      users with installation and maintenance tasks.
+    digest: 92e14606ee3d3945baa5e2cc8f4078897d52c06e818e31d33f704575dfc7c837
+    home: https://jupyter.org/hub
+    icon: https://ilfur.github.io/AnalyticDataRooms/jupyterhub_logo.png
+    keywords:
+    - python
+    - scientific
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: jupyterhub
+    sources:
+    - https://github.com/bitnami/bitnami-docker-jupyterhub
+    - https://github.com/jupyterhub/jupyterhub
+    urls:
+    - jupyterhub-1.3.8.tgz
+    version: 1.3.8
+  ords:
+  - apiVersion: v2
+    appVersion: 22.2.0
+    created: "2022-07-14T11:38:24.671185873Z"
+    description: Oracle Apex, SQL Developer Web and REST Gateway
+    digest: 3d9ec5baafcf9a2a7084220beae3fab1ef8885fddb2b0235998ca97575d4c090
+    icon: https://ilfur.github.io/AnalyticDataRooms/ords_logo.png
+    name: ords
+    type: application
+    urls:
+    - ords-1.0.0.tgz
+    version: 1.0.0
+generated: "2022-07-14T11:38:24.654095008Z"
