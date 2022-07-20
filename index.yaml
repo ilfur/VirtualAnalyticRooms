@@ -1,21 +1,93 @@
 apiVersion: v1
 entries:
+  analytics-server:
+  - apiVersion: v2
+    appVersion: 6.4.0
+    created: "2022-07-20T14:32:37.533062798Z"
+    description: Oracle Analytics Server
+    digest: cb241e281522374f8ed156c7bde00c7b87741a2df07bef69181aa2c4c458ef5a
+    icon: https://ilfur.github.io/AnalyticDataRooms/oas_logo.png
+    name: analytics-server
+    type: application
+    urls:
+    - analytics-server-1.0.0.tgz
+    version: 1.0.0
   cloudbeaver:
   - apiVersion: v2
     appVersion: 21.3.3
-    created: "2022-07-14T11:54:53.504695873Z"
+    created: "2022-07-20T14:32:37.533544687Z"
     description: DBeaver Web UI Community Edition
-    digest: 9f1a8c473c859c639c1467e3e8978550dd434da6d8968f3b3b53e848158a4dbf
+    digest: b89a8e166fddc30e497bb3698a52c0732793dd4fd6cd031a1f64f59fc8650655
     icon: https://ilfur.github.io/AnalyticDataRooms/cloudbeaver_logo.png
     name: cloudbeaver
     type: application
     urls:
     - cloudbeaver-1.0.0.tgz
     version: 1.0.0
+  goldengate-bigdata:
+  - apiVersion: v2
+    appVersion: 21.4.0.0.3
+    created: "2022-07-20T14:32:37.534060128Z"
+    description: Oracle GoldenGate Microservices for BigData
+    digest: 8e5d2d1da690278cd942951fe6575d1220fd62804a5e4887c10d667f000827fa
+    icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
+    name: goldengate-bigdata
+    type: application
+    urls:
+    - goldengate-bigdata-1.0.0.tgz
+    version: 1.0.0
+  goldengate-mssql:
+  - apiVersion: v2
+    appVersion: 21.3.0.0.0
+    created: "2022-07-20T14:32:37.534474768Z"
+    description: Oracle GoldenGate Microservices for MS SQL Server
+    digest: 53c319b04b1242411fc7814f3afa5cf76fdbe831fee6e38e2916095751ea510f
+    icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
+    name: goldengate-mssql
+    type: application
+    urls:
+    - goldengate-mssql-1.0.0.tgz
+    version: 1.0.0
+  goldengate-mysql:
+  - apiVersion: v2
+    appVersion: 21.3.0.0.0
+    created: "2022-07-20T14:32:37.534858294Z"
+    description: Oracle GoldenGate Microservices for MySQL
+    digest: e37ea0beaeb3affcfb0fcbbccfc1d635ded457271a084a152e4400e108dc1294
+    icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
+    name: goldengate-mysql
+    type: application
+    urls:
+    - goldengate-mysql-1.0.0.tgz
+    version: 1.0.0
+  goldengate-oracle:
+  - apiVersion: v2
+    appVersion: 21.3.0.0.0
+    created: "2022-07-20T14:32:37.535183067Z"
+    description: Oracle GoldenGate Microservices for Oracle Database
+    digest: b1df1a57f5f7e6d76e7e3def9899fc7b252bfffe09c90e98f28146da09d2836a
+    icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
+    name: goldengate-oracle
+    type: application
+    urls:
+    - goldengate-oracle-1.0.0.tgz
+    version: 1.0.0
+  goldengate-postgres:
+  - apiVersion: v2
+    appVersion: 21.3.0.0.0
+    created: "2022-07-20T14:32:37.535600022Z"
+    description: Oracle GoldenGate Microservices for Postgres
+    digest: 9073e01d98dafc4d2cdb90f2d444419940576981fc195a707811801d4d322005
+    icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
+    name: goldengate-postgres
+    type: application
+    urls:
+    - goldengate-postgres-1.0.0.tgz
+    version: 1.0.0
   graph-server:
   - apiVersion: v2
     appVersion: 22.2.0.0.0
-    created: "2022-07-14T11:54:53.505046484Z"
+    created: "2022-07-20T14:32:37.535921907Z"
     description: Oracle Graph & RDF Server with UI
     digest: 07144eeac2a93c44ef47b3ce5d625c645a3b5d1f50659ad7e7d97a988c756b12
     icon: https://ilfur.github.io/AnalyticDataRooms/graph_logo.png
@@ -29,7 +101,7 @@ entries:
       category: MachineLearning
     apiVersion: v2
     appVersion: 1.5.0
-    created: "2022-07-14T11:54:53.52078743Z"
+    created: "2022-07-20T14:32:37.552742532Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -62,7 +134,7 @@ entries:
   ords:
   - apiVersion: v2
     appVersion: 22.2.0
-    created: "2022-07-14T11:54:53.521217162Z"
+    created: "2022-07-20T14:32:37.553133027Z"
     description: Oracle Apex, SQL Developer Web and REST Gateway
     digest: 63ae867d40d4eeff0f61808b2fc5f95dd46aaa2593b78de7bf073c8f91f372bf
     icon: https://ilfur.github.io/AnalyticDataRooms/ords_logo.png
@@ -71,4 +143,4 @@ entries:
     urls:
     - ords-1.0.0.tgz
     version: 1.0.0
-generated: "2022-07-14T11:54:53.504186189Z"
+generated: "2022-07-20T14:32:37.532205701Z"
