@@ -3,9 +3,9 @@ entries:
   cloudbeaver:
   - apiVersion: v2
     appVersion: 21.3.3
-    created: "2022-07-14T11:38:24.654690982Z"
+    created: "2022-07-14T11:54:53.504695873Z"
     description: DBeaver Web UI Community Edition
-    digest: 8c5cb800f920034e9a0c47b4dd89bde16f2a471625b793087375e2515bb68784
+    digest: 9f1a8c473c859c639c1467e3e8978550dd434da6d8968f3b3b53e848158a4dbf
     icon: https://ilfur.github.io/AnalyticDataRooms/cloudbeaver_logo.png
     name: cloudbeaver
     type: application
@@ -15,9 +15,9 @@ entries:
   graph-server:
   - apiVersion: v2
     appVersion: 22.2.0.0.0
-    created: "2022-07-14T11:38:24.655060421Z"
+    created: "2022-07-14T11:54:53.505046484Z"
     description: Oracle Graph & RDF Server with UI
-    digest: a1488ba287e251d809aa0de4fbc36c439a8bb907714f6754432ebb4dd9d6fbb8
+    digest: 07144eeac2a93c44ef47b3ce5d625c645a3b5d1f50659ad7e7d97a988c756b12
     icon: https://ilfur.github.io/AnalyticDataRooms/graph_logo.png
     name: graph-server
     type: application
@@ -29,7 +29,7 @@ entries:
       category: MachineLearning
     apiVersion: v2
     appVersion: 1.5.0
-    created: "2022-07-14T11:38:24.670783868Z"
+    created: "2022-07-14T11:54:53.52078743Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -62,13 +62,13 @@ entries:
   ords:
   - apiVersion: v2
     appVersion: 22.2.0
-    created: "2022-07-14T11:38:24.671185873Z"
+    created: "2022-07-14T11:54:53.521217162Z"
     description: Oracle Apex, SQL Developer Web and REST Gateway
-    digest: 3d9ec5baafcf9a2a7084220beae3fab1ef8885fddb2b0235998ca97575d4c090
+    digest: 63ae867d40d4eeff0f61808b2fc5f95dd46aaa2593b78de7bf073c8f91f372bf
     icon: https://ilfur.github.io/AnalyticDataRooms/ords_logo.png
     name: ords
     type: application
     urls:
     - ords-1.0.0.tgz
     version: 1.0.0
-generated: "2022-07-14T11:38:24.654095008Z"
+generated: "2022-07-14T11:54:53.504186189Z"

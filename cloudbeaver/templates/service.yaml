@@ -4,7 +4,8 @@ metadata:
   name:  {{ include "cloudbeaver.fullname" . }}
 spec:
   selector:
-    app: graphserver
+    matchLabels:
+      {{- include "cloudbeaver.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8978

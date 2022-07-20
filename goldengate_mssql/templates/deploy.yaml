@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "ggate.fullname" . }}
+  labels:
+    {{- include "ggate.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "ggate.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "ggate.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: app
+          image: docker.io/ilfur/gg_micro_mssql:21.3.0.0.0
+          ports:
+            - containerPort: 443
+              name: ggate
+          volumeMounts:
+            - name: u01
+              mountPath: /u01/ogg/scripts
+            - name: u02
+              mountPath: /u02
+            - name: u03
+              mountPath: /u03
+          imagePullPolicy: IfNotPresent
+      env:
+        - name: OGG_DEPLOYMENT
+          value: {{ .Values.ogg.deployment }}
+        - name: OGG_ADMIN
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "ggate.fullname" . }}-secret
+                key: oggadmin
+        - name: OGG_ADMIN_PWD
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "ggate.fullname" . }}-secret
+                key: oggadminpwd
+      volumes:
+        - name: u01
+          persistentVolumeClaim:
+            claimName: ogg-u01-pvc
+        - name: u02
+          persistentVolumeClaim:
+            claimName: ogg-u02-pvc
+        - name: u03
+          persistentVolumeClaim:
+            claimName: ogg-u03-pvc
+
+
+
+
+

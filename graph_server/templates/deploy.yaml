@@ -12,7 +12,7 @@ spec:
   template:
     metadata:
       labels:
-        {{- include "graph_server.labels" . | nindent 4 }}
+        {{- include "graph_server.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: app

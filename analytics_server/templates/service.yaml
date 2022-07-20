@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ include "oas.fullname" . }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "oas.selectorLabels" . | nindent 6 }}
+  ports:
+    - port: {{ .Values.service.consoleport }}
+      targetPort: 9500
+      name: console
+  ports:
+    - port: {{ .Values.service.dvport }}
+      targetPort: 9502
+      name: dv
+  type: {{ .Values.service.type }}

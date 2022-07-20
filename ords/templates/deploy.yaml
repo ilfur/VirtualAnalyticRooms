@@ -7,12 +7,12 @@ metadata:
 spec:
   selector:
     matchLabels:
-            {{- include "ords.selectorLabels" . | nindent 6 }}
+      {{- include "ords.selectorLabels" . | nindent 6 }}
   replicas: {{ .Values.replicaCount }}
   template:
     metadata:
       labels:
-        {{- include "ords.labels" . | nindent 4 }}
+        {{- include "ords.selectorLabels" . | nindent 8 }}
     spec:
       containers:
         - name: app
@@ -25,13 +25,16 @@ spec:
               mountPath: /etc/ords/config
           volumeMounts:
             - name: secretords
-              configMap:
-                name: ords-secrets
+              mountPath: /opt/oracle/variables
           imagePullPolicy: IfNotPresent
       volumes:
         - name: storageords
           persistentVolumeClaim:
             claimName: ords-pvc
+        - name: secretords
+          configMap:
+            name: ords-secrets
+
 
 
 

@@ -4,3 +4,4 @@ metadata:
   name: ords-secrets
 data:
   conn_string.txt: "CONN_STRING={{ .Values.connString }}"
+

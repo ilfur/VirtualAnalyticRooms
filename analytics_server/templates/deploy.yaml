@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "oas.fullname" . }}
+  labels:
+    {{- include "oas.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "oas.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "oas.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: app
+          image: docker.io/ilfur/oas:6.4.0
+          ports:
+            - containerPort: 9500
+              name: console
+            - containerPort: 9502
+              name: dv
+          imagePullPolicy: IfNotPresent
+      env:
+        - name: BI_CONFIG_RCU_DBSTRING
+          value: {{ .Values.bi.bi_rcu_dbconnect }}
+        - name: BI_CONFIG_RCU_PWD
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "oas.fullname" . }}-secret
+                key: bi_sys_pwd
+        - name: BI_CONFIG_RCU_NEW_DB_PWD
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "oas.fullname" . }}-secret
+                key: bi_admin_pwd
+        - name: BI_CONFIG_ADMIN_USER
+          value: {{ .Values.bi.bi_admin_user }}
+        - name: BI_CONFIG_ADMIN_PWD
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "oas.fullname" . }}-secret
+                key: bi_admin_pwd
+
+
+
+
+

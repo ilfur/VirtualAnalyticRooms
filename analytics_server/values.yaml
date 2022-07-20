@@ -1,0 +1,16 @@
+bi:
+  bi_admin_user: weblogic
+  bi_admin_pwd: CplxPwd123##
+  bi_rcu_dbconnect: 192.168.120.80:1521:orclpdb1
+  bi_rcu_sys_pwd: YourSysPwd
+
+replicaCount: 1
+
+image:
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  consoleport: 9500
+  dvport: 9502
+
