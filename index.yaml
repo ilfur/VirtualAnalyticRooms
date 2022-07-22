@@ -3,7 +3,7 @@ entries:
   analytics-server:
   - apiVersion: v2
     appVersion: 6.4.0
-    created: "2022-07-20T14:32:37.533062798Z"
+    created: "2022-07-22T14:02:36.973233667Z"
     description: Oracle Analytics Server
     digest: cb241e281522374f8ed156c7bde00c7b87741a2df07bef69181aa2c4c458ef5a
     icon: https://ilfur.github.io/AnalyticDataRooms/oas_logo.png
@@ -15,7 +15,7 @@ entries:
   cloudbeaver:
   - apiVersion: v2
     appVersion: 21.3.3
-    created: "2022-07-20T14:32:37.533544687Z"
+    created: "2022-07-22T14:02:36.973620714Z"
     description: DBeaver Web UI Community Edition
     digest: b89a8e166fddc30e497bb3698a52c0732793dd4fd6cd031a1f64f59fc8650655
     icon: https://ilfur.github.io/AnalyticDataRooms/cloudbeaver_logo.png
@@ -27,7 +27,7 @@ entries:
   goldengate-bigdata:
   - apiVersion: v2
     appVersion: 21.4.0.0.3
-    created: "2022-07-20T14:32:37.534060128Z"
+    created: "2022-07-22T14:02:36.974078258Z"
     description: Oracle GoldenGate Microservices for BigData
     digest: 8e5d2d1da690278cd942951fe6575d1220fd62804a5e4887c10d667f000827fa
     icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
@@ -39,7 +39,7 @@ entries:
   goldengate-mssql:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-20T14:32:37.534474768Z"
+    created: "2022-07-22T14:02:36.974521387Z"
     description: Oracle GoldenGate Microservices for MS SQL Server
     digest: 53c319b04b1242411fc7814f3afa5cf76fdbe831fee6e38e2916095751ea510f
     icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
@@ -51,7 +51,7 @@ entries:
   goldengate-mysql:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-20T14:32:37.534858294Z"
+    created: "2022-07-22T14:02:36.974966513Z"
     description: Oracle GoldenGate Microservices for MySQL
     digest: e37ea0beaeb3affcfb0fcbbccfc1d635ded457271a084a152e4400e108dc1294
     icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
@@ -63,7 +63,7 @@ entries:
   goldengate-oracle:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-20T14:32:37.535183067Z"
+    created: "2022-07-22T14:02:36.975368473Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: b1df1a57f5f7e6d76e7e3def9899fc7b252bfffe09c90e98f28146da09d2836a
     icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
@@ -75,7 +75,7 @@ entries:
   goldengate-postgres:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-20T14:32:37.535600022Z"
+    created: "2022-07-22T14:02:36.97576387Z"
     description: Oracle GoldenGate Microservices for Postgres
     digest: 9073e01d98dafc4d2cdb90f2d444419940576981fc195a707811801d4d322005
     icon: https://ilfur.github.io/AnalyticDataRooms/goldengate_logo.png
@@ -87,7 +87,7 @@ entries:
   graph-server:
   - apiVersion: v2
     appVersion: 22.2.0.0.0
-    created: "2022-07-20T14:32:37.535921907Z"
+    created: "2022-07-22T14:02:36.976142896Z"
     description: Oracle Graph & RDF Server with UI
     digest: 07144eeac2a93c44ef47b3ce5d625c645a3b5d1f50659ad7e7d97a988c756b12
     icon: https://ilfur.github.io/AnalyticDataRooms/graph_logo.png
@@ -101,7 +101,7 @@ entries:
       category: MachineLearning
     apiVersion: v2
     appVersion: 1.5.0
-    created: "2022-07-20T14:32:37.552742532Z"
+    created: "2022-07-22T14:02:36.989606977Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -131,10 +131,48 @@ entries:
     urls:
     - jupyterhub-1.3.8.tgz
     version: 1.3.8
+  kafka:
+  - annotations:
+      category: Infrastructure
+    apiVersion: v2
+    appVersion: 3.2.0
+    created: "2022-07-22T14:02:37.003224151Z"
+    dependencies:
+    - condition: zookeeper.enabled
+      name: zookeeper
+      repository: https://charts.bitnami.com/bitnami
+      version: 10.x.x
+    - name: common
+      repository: https://charts.bitnami.com/bitnami
+      tags:
+      - bitnami-common
+      version: 1.x.x
+    description: Apache Kafka is a distributed streaming platform designed to build
+      real-time pipelines and can be used as a message broker or as a replacement
+      for a log aggregation solution for big data applications.
+    digest: 1f05cb5a212f798c31eb5a7aaa55274b3e1fa48861e59310df39d65e121e1281
+    home: https://github.com/bitnami/charts/tree/master/bitnami/kafka
+    icon: https://bitnami.com/assets/stacks/kafka/img/kafka-stack-220x234.png
+    keywords:
+    - kafka
+    - zookeeper
+    - streaming
+    - producer
+    - consumer
+    maintainers:
+    - name: Bitnami
+      url: https://github.com/bitnami/charts
+    name: kafka
+    sources:
+    - https://github.com/bitnami/bitnami-docker-kafka
+    - https://kafka.apache.org/
+    urls:
+    - kafka-18.0.3.tgz
+    version: 18.0.3
   ords:
   - apiVersion: v2
     appVersion: 22.2.0
-    created: "2022-07-20T14:32:37.553133027Z"
+    created: "2022-07-22T14:02:37.003574046Z"
     description: Oracle Apex, SQL Developer Web and REST Gateway
     digest: 63ae867d40d4eeff0f61808b2fc5f95dd46aaa2593b78de7bf073c8f91f372bf
     icon: https://ilfur.github.io/AnalyticDataRooms/ords_logo.png
@@ -143,4 +181,4 @@ entries:
     urls:
     - ords-1.0.0.tgz
     version: 1.0.0
-generated: "2022-07-20T14:32:37.532205701Z"
+generated: "2022-07-22T14:02:36.972340481Z"
