@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "oml4py.fullname" . }}
+  labels:
+    {{- include "oml4py.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "oml4py.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "oml4py.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: app
+          image: docker.io/ilfur/oml4py:1.0
+          ports:
+            - containerPort: 8888
+              name: oml4py
+          volumeMounts:
+            - name: notebooks
+              mountPath: /notebooks
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: notebooks
+          persistentVolumeClaim:
+            claimName: oml4py-pvc
+
+
+
+
+
