@@ -4,7 +4,6 @@ metadata:
   name:  {{ include "oml4py.fullname" . }}
 spec:
   selector:
-    matchLabels:
       {{- include "oml4py.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}

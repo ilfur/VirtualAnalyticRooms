@@ -4,7 +4,7 @@ metadata:
   name:  {{ include "graph_server.fullname" . }}
 spec:
   selector:
-    app: graphserver
+   {{- include "cloudbeaver.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8080

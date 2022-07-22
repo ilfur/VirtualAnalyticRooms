@@ -4,7 +4,6 @@ metadata:
   name:  {{ include "oas.fullname" . }}
 spec:
   selector:
-    matchLabels:
       {{- include "oas.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.consoleport }}

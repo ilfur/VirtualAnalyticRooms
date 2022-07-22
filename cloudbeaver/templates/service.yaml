@@ -4,7 +4,6 @@ metadata:
   name:  {{ include "cloudbeaver.fullname" . }}
 spec:
   selector:
-    matchLabels:
       {{- include "cloudbeaver.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}

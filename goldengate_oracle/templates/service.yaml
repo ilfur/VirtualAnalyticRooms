@@ -4,7 +4,6 @@ metadata:
   name:  {{ include "ggate.fullname" . }}
 spec:
   selector:
-    matchLabels:
       {{- include "ggate.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}
