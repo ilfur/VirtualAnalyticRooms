@@ -16,7 +16,7 @@ description: Apache Kafka is a distributed streaming platform designed to build 
   pipelines and can be used as a message broker or as a replacement for a log aggregation
   solution for big data applications.
 home: https://github.com/bitnami/charts/tree/master/bitnami/kafka
-icon: https://ilfur.github.com/VirtualAnalyticRooms/kafka_logo.png
+icon: https://ilfur.github.io/VirtualAnalyticRooms/kafka_logo.png
 keywords:
 - kafka
 - zookeeper
