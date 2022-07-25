@@ -28,19 +28,19 @@ spec:
             - name: u03
               mountPath: /u03
           imagePullPolicy: IfNotPresent
-      env:
-        - name: OGG_DEPLOYMENT
-          value: {{ .Values.ogg.deployment }}
-        - name: OGG_ADMIN
-          valueFrom:
-             secretKeyRef:
-                name: {{ include "ggate.fullname" . }}-secret
-                key: oggadmin
-        - name: OGG_ADMIN_PWD
-          valueFrom:
-             secretKeyRef:
-                name: {{ include "ggate.fullname" . }}-secret
-                key: oggadminpwd
+          env:
+            - name: OGG_DEPLOYMENT
+              value: {{ .Values.ogg.deployment }}
+            - name: OGG_ADMIN
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ include "ggate.fullname" . }}-secret
+                    key: oggadmin
+            - name: OGG_ADMIN_PWD
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ include "ggate.fullname" . }}-secret
+                    key: oggadminpwd
       volumes:
         - name: u01
           persistentVolumeClaim:
