@@ -1,3 +1,5 @@
+<!--- app-name: Oracle ORDS -->
+
 ##Oracle REST Data Services 
 #Description
 This container will start a server instance with ORDS (Oracle Rest Data Services) and APEX (Oracle Application Express). At startup the container will install or upgrade ORDS and APEX in the specified database. The target default database pool for ORDS is specified in a file (conn_string.txt) that the container reads at startup. The database connection string is necessary to install/upgrade the database components. The file is deleted during the startup process. Although the container is intended to be removed when the container stops the ORDS and APEX database components will remain in the database available for other ORDS instances.
