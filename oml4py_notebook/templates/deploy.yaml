@@ -17,7 +17,7 @@ spec:
       containers:
         - name: app
           image: docker.io/ilfur/oml4pyuc:1.0
-          command: ["jupyter"]
+          command: ["/opt/oracle/python/bin/jupyter"]
           args: ["notebook","--ip=0.0.0.0","--port=8888","--no-browser","--allow-root"]
           ports:
             - containerPort: 8888

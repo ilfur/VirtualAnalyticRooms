@@ -3,7 +3,6 @@ replicaCount: 1
 connString: "user/password@hostname:port/service_name"
 
 image:
-  repository: "container-registry.oracle.com/database/ords:latest"
   pullPolicy: IfNotPresent
 
 service:
