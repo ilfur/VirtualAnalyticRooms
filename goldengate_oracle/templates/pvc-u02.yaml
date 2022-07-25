@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: ogg-u01-pvc
+  name: ogg-u02-pvc
 spec:
   storageClassName: default-nfs
   accessModes:
