@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: ogg-u02-pvc
 spec:
-  storageClassName: default-nfs
   accessModes:
     - ReadWriteMany
   resources:
