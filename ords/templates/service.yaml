@@ -4,7 +4,7 @@ metadata:
   name:  {{ include "ords.fullname" . }}
 spec:
   selector:
-      {{- include "oas.selectorLabels" . | nindent 6 }}
+      {{- include "ords.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.port }}
       targetPort: 8181
