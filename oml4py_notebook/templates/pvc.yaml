@@ -3,7 +3,6 @@ kind: PersistentVolumeClaim
 metadata:
   name: oml4py-pvc
 spec:
-  storageClassName: ""
   accessModes:
     - ReadWriteMany
   resources:

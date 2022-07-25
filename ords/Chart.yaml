@@ -22,4 +22,4 @@ version: 1.0.0
 # follow Semantic Versioning. They should reflect the version the application is using.
 # It is recommended to use it with quotes.
 appVersion: "22.2.0"
-icon: "https://ilfur.github.io/AnalyticDataRooms/ords_logo.png"
+icon: "https://ilfur.github.io/VirtualAnalyticRooms/ords_logo.png"
