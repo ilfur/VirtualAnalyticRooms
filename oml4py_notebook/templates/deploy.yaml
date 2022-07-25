@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: docker.io/ilfur/oml4py:1.0
+          image: docker.io/ilfur/oml4pyuc:1.0
           ports:
             - containerPort: 8888
               name: oml4py
