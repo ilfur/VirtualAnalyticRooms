@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: {{ .Values.image.repository }}
+          image: docker.io/ilfur/graphserver:1.0
           ports:
             - containerPort: 8080
               name: graphserver
@@ -33,13 +33,13 @@ spec:
       volumes:
         - name: storagegv
           persistentVolumeClaim:
-            claimName: graph-pvc
+            claimName: graph-pvc01
         - name: storagerdf
           persistentVolumeClaim:
-            claimName: graph-pvc
+            claimName: graph-pvc02
         - name: storagegserv
           persistentVolumeClaim:
-            claimName: graph-pvc
+            claimName: graph-pvc03
 
 
 

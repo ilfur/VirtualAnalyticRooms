@@ -1,7 +1,6 @@
 replicaCount: 1
 
 image:
-  repository: "docker.io/ilfur/graphserver:1.0"
   pullPolicy: IfNotPresent
 
 service:
