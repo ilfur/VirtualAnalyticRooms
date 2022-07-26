@@ -25,12 +25,12 @@ spec:
             - name: storage
               mountPath: /projects
           imagePullPolicy: IfNotPresent
-      env:
-        - name: ORAPWD
-          valueFrom:
-             secretKeyRef:
-                name: {{ include "sqlcl.fullname" . }}-secret
-                key: orapwd
+          env:
+            - name: ORAPWD
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ include "sqlcl.fullname" . }}-secret
+                    key: orapwd
       volumes:
         - name: storag
           persistentVolumeClaim:
