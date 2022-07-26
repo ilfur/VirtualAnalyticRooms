@@ -32,7 +32,7 @@ spec:
                     name: {{ include "sqlcl.fullname" . }}-secret
                     key: orapwd
       volumes:
-        - name: storag
+        - name: storage
           persistentVolumeClaim:
             claimName: sqlcl-pvc
 
