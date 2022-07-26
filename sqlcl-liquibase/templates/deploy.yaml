@@ -1,0 +1,42 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "sqlcl.fullname" . }}
+  labels:
+    {{- include "sqlcl.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "sqlcl.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "sqlcl.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: app
+          image: docker.io/ilfur/sqlcl-liquibase:21.3.0.0.0
+          ports:
+            - containerPort: 8080
+              name: console
+          imagePullPolicy: IfNotPresent
+          volumeMounts:
+            - name: storage
+              mountPath: /projects
+          imagePullPolicy: IfNotPresent
+      env:
+        - name: ORAPWD
+          valueFrom:
+             secretKeyRef:
+                name: {{ include "sqlcl.fullname" . }}-secret
+                key: orapwd
+      volumes:
+        - name: storag
+          persistentVolumeClaim:
+            claimName: sqlcl-pvc
+
+
+
+
+

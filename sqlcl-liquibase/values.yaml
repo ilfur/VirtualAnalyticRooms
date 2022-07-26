@@ -1,0 +1,9 @@
+oraclepwd: oraclepwd
+
+image:
+  pullPolicy: IfNotPresent
+
+service:
+  type: LoadBalancer
+  consoleport: 8080
+
