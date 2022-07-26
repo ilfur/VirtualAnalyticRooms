@@ -1,10 +1,10 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name:  {{ include "oas.fullname" . }}
+  name:  {{ include "sqlcl.fullname" . }}
 spec:
   selector:
-      {{- include "oas.selectorLabels" . | nindent 6 }}
+      {{- include "sqlcl.selectorLabels" . | nindent 6 }}
   ports:
     - port: {{ .Values.service.consoleport }}
       targetPort: 8080
