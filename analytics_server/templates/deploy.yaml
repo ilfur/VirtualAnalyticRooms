@@ -24,6 +24,8 @@ spec:
               name: dv
           imagePullPolicy: IfNotPresent
       env:
+        - name: BI_CONFIG_RCU_DB_PREFIX
+          value: {{ .Values.bi.bi_rcu_prefix }}
         - name: BI_CONFIG_RCU_DBSTRING
           value: {{ .Values.bi.bi_rcu_dbconnect }}
         - name: BI_CONFIG_RCU_PWD

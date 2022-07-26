@@ -3,6 +3,7 @@ bi:
   bi_admin_pwd: CplxPwd123##
   bi_rcu_dbconnect: 192.168.120.80:1521:orclpdb1
   bi_rcu_sys_pwd: YourSysPwd
+  bi_rcu_prefix: oas640
 
 replicaCount: 1
 
