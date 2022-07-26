@@ -3,7 +3,7 @@ entries:
   analytics-server:
   - apiVersion: v2
     appVersion: 6.4.0
-    created: "2022-07-25T15:26:58.008594268Z"
+    created: "2022-07-26T07:08:15.097749327Z"
     description: Oracle Analytics Server
     digest: 352482318e02621d0d6231af3b249b4b5c4b8a96345a062fa4ad5f8d7c74e8b7
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oas_logo.png
@@ -15,7 +15,7 @@ entries:
   cloudbeaver:
   - apiVersion: v2
     appVersion: 21.3.3
-    created: "2022-07-25T15:26:58.008944028Z"
+    created: "2022-07-26T07:08:15.098446235Z"
     description: DBeaver Web UI Community Edition
     digest: 3a21b2ea3a2de5ad82da2ad0a25477e1a79f0a321ba1514513fbf50564b18225
     icon: https://ilfur.github.io/VirtualAnalyticRooms/cloudbeaver_logo.png
@@ -27,7 +27,7 @@ entries:
   goldengate-bigdata:
   - apiVersion: v2
     appVersion: 21.4.0.0.3
-    created: "2022-07-25T15:26:58.009431471Z"
+    created: "2022-07-26T07:08:15.1003814Z"
     description: Oracle GoldenGate Microservices for BigData
     digest: 35377270ee6475054cbfb31bfcab96d3a754f9a3a1698a0fddd97d8ed9e8bfd6
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -39,7 +39,7 @@ entries:
   goldengate-mssql:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-25T15:26:58.009813644Z"
+    created: "2022-07-26T07:08:15.101186283Z"
     description: Oracle GoldenGate Microservices for MS SQL Server
     digest: 60203b4173647d194a3face7c67a2b63e89b2b9f8192a2c7f07a985575c6d7d4
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -51,7 +51,7 @@ entries:
   goldengate-mysql:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-25T15:26:58.010279156Z"
+    created: "2022-07-26T07:08:15.101586706Z"
     description: Oracle GoldenGate Microservices for MySQL
     digest: 0710038b71c24d58d64894bce8e5abedf349f4df63715e6a80df6380f8e92374
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -63,7 +63,7 @@ entries:
   goldengate-oracle:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-25T15:26:58.010668908Z"
+    created: "2022-07-26T07:08:15.102036997Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: a244ae56546db40e8f4b9658cc3a2e58dd8fcf244b0e50c90e4b8d4a2d09afbb
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -75,7 +75,7 @@ entries:
   goldengate-postgres:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2022-07-25T15:26:58.011070934Z"
+    created: "2022-07-26T07:08:15.102444012Z"
     description: Oracle GoldenGate Microservices for Postgres
     digest: c2c6126e76d1a15c63f07e5157779f971147efac57764ba90ebfa644413efbda
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -87,7 +87,7 @@ entries:
   graph-server:
   - apiVersion: v2
     appVersion: 22.2.0.0.0
-    created: "2022-07-25T15:26:58.011407682Z"
+    created: "2022-07-26T07:08:15.102785534Z"
     description: Oracle Graph & RDF Server with UI
     digest: 7db5badab495e2a19eb8defe369081b20361c95fd165f2a66069462c1844fb4d
     icon: https://ilfur.github.io/VirtualAnalyticRooms/graph_logo.png
@@ -101,7 +101,7 @@ entries:
       category: MachineLearning
     apiVersion: v2
     appVersion: 1.5.0
-    created: "2022-07-25T15:26:58.0267379Z"
+    created: "2022-07-26T07:08:15.117782329Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -136,7 +136,7 @@ entries:
       category: Infrastructure
     apiVersion: v2
     appVersion: 3.2.0
-    created: "2022-07-25T15:26:58.037493065Z"
+    created: "2022-07-26T07:08:15.12810243Z"
     dependencies:
     - condition: zookeeper.enabled
       name: zookeeper
@@ -172,9 +172,9 @@ entries:
   oml4py-notebook:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2022-07-25T15:26:58.037844998Z"
+    created: "2022-07-26T07:08:15.128466874Z"
     description: Oracle Machine Learning 4 Python Jupyter Notebook
-    digest: c30ee373caf9f298e0ee4235d2fb8960dfcb44f207a172ec40ae1dc9cd7d1a13
+    digest: 4aaab0c97c5f9141a83f21dae4cea86c37758fd51934a29ae723a250dbdb9c2b
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oml4py_logo.png
     name: oml4py-notebook
     type: application
@@ -184,7 +184,7 @@ entries:
   ords:
   - apiVersion: v2
     appVersion: 22.2.0
-    created: "2022-07-25T15:26:58.038274658Z"
+    created: "2022-07-26T07:08:15.128813787Z"
     description: Oracle Apex, SQL Developer Web and REST Gateway
     digest: 40d4b7933019a5fad91d49684cde3269473beea734ec887013e58d85f0622877
     icon: https://ilfur.github.io/VirtualAnalyticRooms/ords_logo.png
@@ -193,4 +193,4 @@ entries:
     urls:
     - ords-1.0.0.tgz
     version: 1.0.0
-generated: "2022-07-25T15:26:58.007856567Z"
+generated: "2022-07-26T07:08:15.095868754Z"
