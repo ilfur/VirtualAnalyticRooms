@@ -14,6 +14,8 @@ spec:
       labels:
         {{- include "sqlcl.selectorLabels" . | nindent 8 }}
     spec:
+      securityContext:
+        fsGroup: 54322
       containers:
         - name: app
           image: docker.io/ilfur/sqlcl-liquibase:21.3.0.0.0
