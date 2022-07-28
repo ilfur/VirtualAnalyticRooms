@@ -1,0 +1,3 @@
+Please wait 2 minutes or look at container log for installation to complete.
+The application will have an initial admin user name, osaadmin, with the password osaadmin.
+
