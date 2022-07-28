@@ -32,8 +32,8 @@ spec:
           persistentVolumeClaim:
             claimName: ords-pvc
         - name: secretords
-          configMap:
-            name: ords-secrets
+          secret:
+            name: {{ .Values.ords.secret.secretName }}
 
 
 

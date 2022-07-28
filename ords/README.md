@@ -15,6 +15,16 @@ Each image uses Oracle Linux with a specific version of ORDS and APEX. When an i
 
 22.2.0 - ORDS 22.2.0 and APEX 22.1.0
 
+# Before Running the ORDS container
+First, create a secret in the target namespace containing the connect string, username and password to the target database service.
+The secret should be of type "opaque", contain a key named "conn_string.txt" and it's value should be in the form "user/password@hostname:port/service_name". A user with SYSDBA privilege is required, like SYS. Enter the name of the secret in the values.yaml.
+
+Installation of APEX/ORDS may fail due to a strong password verification policy in the database.
+If that happens (by looking into the container'S /tmp/ords_logs/install_logs_DB/* files),
+temporarily switch off strong password protection in the Oracle Database by running the following SQL command as SYS or SYSTEM:
+alter profile default limit password_verify_function null;
+Then kill the pod, it will restart and re-try.
+
 # Using an ORDS configuration volume.
 You can set a configuration mount with your ORDS configurations pointing to /etc/ords/config and the container will try to start the service with configurations on the mount point.
 
@@ -27,13 +37,6 @@ If the container detects the certificate and key files it will start the ORDS se
 If you need to run a custom script on the container you can add a volume with shell scripts pointing to /ords-entrypoint.d.
 
 The ontainer will install/upgrade APEX and ORDS and before start the ORDS service will run alphabetically all the shell scripts on /ords-entrypoint.d.
-
-# Before Running the ORDS container
-Installation of APEX/ORDS may fail due to a strong password verification policy.
-If that happens (by looking into the container'S /tmp/ords_logs/install_logs_DB/* files),
-temporarily switch off strong password protection in the Oracle Database by running the following SQL command as SYS or SYSTEM:
-alter profile default limit password_verify_function null;
-Then kill the pod, it will restart and re-try.
 
 # Login to APEX
 Open browser on localhost with the mapped port by docker (http://localhost:8181/ords) and use below credentials:

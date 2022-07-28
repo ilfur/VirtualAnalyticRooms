@@ -21,6 +21,8 @@ spec:
             - containerPort: 9080
               name: osa
           env:
+            - name: OSA_CONN
+              value:  {{ .Values.osa.connection }}
             - name: OSA_PWD
               valueFrom:
                  secretKeyRef:

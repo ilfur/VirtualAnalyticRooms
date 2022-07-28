@@ -1,6 +1,9 @@
 replicaCount: 1
 
-connString: "user/password@hostname:port/service_name"
+ords:
+  secret:
+    secretName: ords-secret
+    connString_key:  conn_string.txt
 
 image:
   pullPolicy: IfNotPresent

@@ -4,11 +4,11 @@ osa:
   # instead of entering passwords directly, please provide the name of a 
   # pre-defined secret and the key names to the passwords stored there.:
   secret:
-    secretName: osasecret
-    newdbuserKey: newdbuserKey
-    newdbpasswordKey: newdbpasswordKey
-    dbsysuserKey: dbsysuserKey
-    dbsyspasswordKey: dbsyspasswordKey
+    secretName: osa-secret
+    newdbuserKey: newdbuser
+    newdbpasswordKey: newdbpassword
+    dbsysuserKey: dbsysuser
+    dbsyspasswordKey: dbsyspassword
 
 image:
   pullPolicy: IfNotPresent
