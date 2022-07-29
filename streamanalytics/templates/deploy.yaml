@@ -33,7 +33,7 @@ spec:
                  secretKeyRef:
                     name: {{ .Values.osa.secret.secretName }}
                     key: {{ .Values.osa.secret.dbsyspasswordKey }}
-            - name: OSA_USR
+            - name: OSA_USER
               valueFrom:
                  secretKeyRef:
                     name: {{ .Values.osa.secret.secretName }}
