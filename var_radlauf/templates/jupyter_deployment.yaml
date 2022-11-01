@@ -1,0 +1,44 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "var.fullname" . }}-jupyter
+  labels:
+    {{- include "var.labels" . | nindent 4 }}      
+    component: jupyter
+spec:
+  selector:
+    matchLabels:
+      {{- include "var.selectorLabels" . | nindent 6 }}
+      component: jupyter
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+        component: jupyter
+    spec:
+      containers:
+        - name: jupyter
+          image: docker.io/ilfur/oml4pyuc:latest
+          command: ["/bin/bash" , "-c" , "pip uninstall -y -r /notebooks/requirements-remove.txt && pip install -r /notebooks/requirements.txt && jupyter notebook --ip='0.0.0.0' --port=8889 --no-browser --allow-root --notebook-dir=/notebooks"]
+          ports:
+            - containerPort: 8889
+              name: jupyter
+          volumeMounts:
+            - name: notebooks
+              mountPath: /notebooks
+          imagePullPolicy: IfNotPresent
+      initContainers:
+        - name: volume-mount-permissions
+          image: docker.io/ilfur/oml4pyuc:latest
+          command: ["/bin/bash" , "-c" , "curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements.txt -o /notebooks/requirements.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements-remove.txt -o /notebooks/requirements-remove.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/VAR.ipynb -o /notebooks/VAR.ipynb && chmod -R 777 /notebooks" ]
+          volumeMounts:
+          - name: notebooks
+            mountPath: /notebooks
+      volumes:
+        - name: notebooks
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-notebooks-pvc
+
+
+
