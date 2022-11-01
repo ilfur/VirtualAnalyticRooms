@@ -1,0 +1,4 @@
+database:
+  hostname: oml4pydb-service
+  initialpwd: oml4pypwd
+
