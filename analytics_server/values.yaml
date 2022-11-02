@@ -1,9 +1,11 @@
 bi:
-  bi_admin_user: weblogic
-  bi_admin_pwd: CplxPwd123##
   bi_rcu_dbconnect: 192.168.120.80:1521:orclpdb1
-  bi_rcu_sys_pwd: YourSysPwd
-  bi_rcu_prefix: oas640
+  bi_rcu_prefix: oas
+  bi_admin_user: weblogic
+  secret:
+    secret_name: oas-secret
+    bi_admin_pwd_key: bi_admin_pwd
+    bi_rcu_sys_pwd_key: bi_rcu_sys_pwd
 
 replicaCount: 1
 

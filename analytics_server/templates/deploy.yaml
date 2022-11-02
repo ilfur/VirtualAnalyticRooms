@@ -31,21 +31,20 @@ spec:
             - name: BI_CONFIG_RCU_PWD
               valueFrom:
                  secretKeyRef:
-                    name: {{ include "oas.fullname" . }}-secret
-                    key: bi_sys_pwd
+                    name: {{ .Values.bi.secret.secret_name }}
+                    key: {{ .Values.bi.secret.bi_sys_pwd_key }}
             - name: BI_CONFIG_RCU_NEW_DB_PWD
               valueFrom:
                  secretKeyRef:
-                    name: {{ include "oas.fullname" . }}-secret
-                    key: bi_admin_pwd
+                    name: {{ .Values.bi.secret.secret_name }}
+                    key: {{ .Values.bi.secret.bi_admin_pwd_key }}
             - name: BI_CONFIG_ADMIN_USER
               value: {{ .Values.bi.bi_admin_user }}
             - name: BI_CONFIG_ADMIN_PWD
               valueFrom:
                  secretKeyRef:
-                    name: {{ include "oas.fullname" . }}-secret
-                    key: bi_admin_pwd
-
+                    name: {{ .Values.bi.secret.secret_name }}
+                    key: {{ .Values.bi.secret.bi_admin_pwd_key }}
 
 
 
