@@ -1,6 +1,6 @@
 apiVersion: v2
-name: var_radlaufstellen
-description: stack of DB, analysis data, tool
+name: radlaufstellen
+description: Analysis stack of DB, masked data, analysis tool
 
 # A chart can be either an 'application' or a 'library' chart.
 #

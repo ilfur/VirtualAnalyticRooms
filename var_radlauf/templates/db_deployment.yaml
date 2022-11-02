@@ -8,14 +8,14 @@ metadata:
 spec:
   selector:
     matchLabels:
-      {{- include "var.selectorLabels" . | nindent 4 }}      
+      {{- include "var.selectorLabels" . | nindent 6 }}      
       component: db
   replicas: 1
   template:
     metadata:
       labels:
         {{- include "var.selectorLabels" . | nindent 8 }}
-      component: db
+        component: db
     spec:
       containers:
         - name: db
