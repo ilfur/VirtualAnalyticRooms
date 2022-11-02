@@ -1,0 +1,5 @@
+seaborn==0.11.2
+statsmodels==0.13.0
+lightgbm==3.3.2
+skforecast==0.4.3
+ipython-sql==0.4.1
