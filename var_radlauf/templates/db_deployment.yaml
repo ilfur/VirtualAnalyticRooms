@@ -55,10 +55,16 @@ spec:
       initContainers:
         - name: volume-mount-permissions
           image: busybox
-          command: ["sh", "-c", "chown -R 54321:54322 /opt/oracle"]
+          command: ["sh", "-c", "chown -R 54321:54322 /opt/oracle" , "&&" , 
+            "cp /scripts/01_setPassword.sh /opt/oracle/scripts/setup" , "&&" ,
+            "cp /scripts/02_setupOML.sh /opt/oracle/scripts/setup" , "&&" ,
+            "chown 54321:54322 /opt/oracle/scripts/setup/*" , "&&" , 
+            "chmod 770 /opt/oracle/scripts/setup/*"]
           volumeMounts:
           - name: oradata
             mountPath: /opt/oracle/oradata
+          - name: scripts
+            mountPath: /scripts
       volumes:
         - name: oradata
           persistentVolumeClaim:
