@@ -28,8 +28,6 @@ spec:
               mountPath: /opt/oracle/oradata
             - name: scripts
               mountPath: /scripts
-            - name: setup
-              mountPath: /opt/oracle/scripts/setup
           imagePullPolicy: IfNotPresent
           env:
             - name: DB_SID
@@ -72,9 +70,6 @@ spec:
         - name: scripts
           configMap:
             name: {{ include "var.fullname" . }}-scripts-config
-        - name: setup
-          configMap:
-            name: {{ include "var.fullname" . }}-setup-config
 
 
 
