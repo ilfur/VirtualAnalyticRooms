@@ -1,6 +1,6 @@
 apiVersion: v2
 name: radlaufstellen
-description: Analysis stack of DB, masked data, analysis tool
+description: analytic software stack of machine learning database, masked data, analysis tool
 
 # A chart can be either an 'application' or a 'library' chart.
 #
