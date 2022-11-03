@@ -5,7 +5,7 @@ metadata:
   labels:
     {{- include "var.labels" . | nindent 4 }}
 spec:
-  backoffLimit: 4
+  backoffLimit: 10
   template:
     spec:
       restartPolicy: Never

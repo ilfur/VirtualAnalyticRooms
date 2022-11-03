@@ -31,7 +31,7 @@ spec:
       initContainers:
         - name: volume-mount-permissions
           image: docker.io/ilfur/oml4pyuc:latest
-          command: ["/bin/bash" , "-c" , "curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements.txt -o /notebooks/requirements.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements-remove.txt -o /notebooks/requirements-remove.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/VAR.ipynb.template -o /notebooks/VAR.ipynb && sed -i '/s/YOURHOSTNAME/{{ .Values.database.hostname }}' /notebooks/VAR.ipynb && chmod -R 777 /notebooks" ]
+          command: ["/bin/bash" , "-c" , "curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements.txt -o /notebooks/requirements.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/requirements-remove.txt -o /notebooks/requirements-remove.txt && curl https://raw.githubusercontent.com/ilfur/VirtualAnalyticRooms/main/VARdata/VAR.ipynb.template -o /notebooks/VAR.ipynb && sed -i '/s/YOURHOSTNAME/{{ .Values.database.hostname }}/' /notebooks/VAR.ipynb && chmod -R 777 /notebooks" ]
           volumeMounts:
           - name: notebooks
             mountPath: /notebooks
