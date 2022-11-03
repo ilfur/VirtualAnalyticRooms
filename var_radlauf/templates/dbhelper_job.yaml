@@ -47,9 +47,9 @@ spec:
               mountPath: /scripts
           env:
             - name: DB_PASSWORD
-              valueFrom:
+              valueFrom: 
                 secretKeyRef:
-                  name: oml4py-secret
+                  name: {{ include "var.fullname" . }}-secret
                   key: DB_PASSWORD
       volumes:
         - name: scripts
