@@ -55,7 +55,7 @@ spec:
       initContainers:
         - name: volume-mount-permissions
           image: busybox
-          command: ["sh", "-c", "echo $DB_PASSWORD >/opt/oracle/oradata/tmppwd.txt" , "&&" , "chown -R 54321:54322 /opt/oracle" ]
+          command: ["sh", "-c", "echo $DB_PASSWORD >/opt/oracle/oradata/tmppwd.txt ; chown -R 54321:54322 /opt/oracle" ]
           env:
             - name: DB_PASSWORD
               valueFrom: 
