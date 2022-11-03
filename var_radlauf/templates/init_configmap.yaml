@@ -3,6 +3,12 @@ apiVersion: v1
 metadata:
   name: {{ include "var.fullname" . }}-scripts-config
 data:
+    testconn.sh: "/opt/oracle/sqlcl/bin/sql /nolog << EOF\n
+      whenever sqlerror exit failure;\n
+      connect sys/$DB_PASSWORD@{{ .Values.database.hostname }}:1521/orclpdb1 as sysdba\n
+      select * from dual;\n
+      exit;\nEOF\n
+      if [ $? -eq 0 ] ; then echo \"connect successful\" ; else echo \"DB connect failed, waiting and exiting...\" ; sleep 60 ; exit 5 ; fi "
     InitAll.sh: "/bin/bash /scripts/InitSchema-01.sh\n /bin/bash /scripts/InitSchema-02.sh\n /bin/bash /scripts/InitSchema-03.sh\n /bin/bash /scripts/InitSchema-04.sh\n"
     InitSchema-01.sh: "/opt/oracle/sqlcl/bin/sql sys/\"$DB_PASSWORD\"@{{ .Values.database.hostname }}/ORCLPDB1:1521
       as sysdba << EOF\necho Initialisieren des Schemas\necho ==========================\n\necho

@@ -38,6 +38,19 @@ spec:
                 secretKeyRef:
                   name: {{ include "var.fullname" . }}-secret
                   key: DB_PASSWORD
+      initContainers:
+        - name: dbcheck
+          image: docker.io/ilfur/oml4pydbhelper:latest
+          command: [ "/bin/bash", "/scripts/testconn.sh" ]
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+          env:
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: oml4py-secret
+                  key: DB_PASSWORD
       volumes:
         - name: scripts
           configMap:
