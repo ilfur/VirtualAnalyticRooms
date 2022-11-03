@@ -1,0 +1,16 @@
+kind: ConfigMap
+apiVersion: v1
+metadata:
+  name: {{ include "var.fullname" . }}-setup-config
+data:
+    01_setPassword.sh: "#!/bin/bash\nexport DB_PASSWORD=$(cat /opt/oracle/oradata/tmppwd.txt)\nsqlplus / AS SYSDBA << EOF\n
+      ALTER USER SYS IDENTIFIED BY \"$DB_PASSWORD\";\n
+      ALTER USER SYSTEM IDENTIFIED BY \"$DB_PASSWORD\";\n
+      ALTER SESSION SET CONTAINER=ORCLPDB1;\n
+      ALTER USER PDBADMIN IDENTIFIED BY \"$DB_PASSWORD\";\n
+      exit;\nEOF\n"
+    02_setupOML.sh: "#!/bin/bash\nexport DB_PASSWORD=$(cat /opt/oracle/oradata/tmppwd.txt)\nsqlplus sys/$DB_PASSWORD@127.0.0.1/ORCLPDB1:1521 as sysdba << EOF \n
+     ALTER PROFILE DEFAULT LIMIT PASSWORD_VERIFY_FUNCTION NULL; \n
+     @/opt/oracle/product/21c/dbhome_1/oml4py/server/pyqcfg.sql \n
+     exit;\nEOF\n"
+    03_cleanup.sh: "#!/bin/bash\nrm/opt/oracle/oradata/tmppwd.txt\n"
