@@ -1,0 +1,78 @@
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: {{ .Release.Name }}-meta
+  namespace: {{ .Release.Namespace }}
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRoleBinding
+metadata:
+  name: {{ .Release.Name }}-meta-rolebinding
+subjects:
+- kind: ServiceAccount
+  name: {{ .Release.Name }}-meta
+  namespace: {{ .Release.Namespace }}
+roleRef:
+  kind: ClusterRole
+  name: {{ .Release.Name }}-meta-role
+  apiGroup: ""
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: {{ .Release.Name }}-meta-role
+rules:
+- apiGroups:
+  - ""
+  resources:
+  - namespaces
+  - services
+  - configmaps
+  - secrets
+  - pods
+  verbs:
+  - '*'
+- apiGroups:
+  - "apps"
+  resources:
+  - deployments
+  verbs:
+  - '*'
+- apiGroups:
+  - "catalog.cattle.io"
+  resources:
+  - apps
+  verbs:
+  - '*'
+---
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: {{ .Release.Name }}-meta-component
+  namespace: {{ .Release.Namespace }}
+spec:
+  workload:
+    apiVersion: oam.verrazzano.io/v1alpha1
+    kind: VerrazzanoHelidonWorkload
+    metadata:
+      name: {{ .Release.Name }}-meta-workload
+      labels:
+        app: {{ .Release.Name }}-meta
+        version: v1
+    spec:
+      deploymentTemplate:
+        metadata:
+          name: {{ .Release.Name }}-meta-deployment
+        podSpec:
+          containers:
+            - name: {{ .Release.Name }}-meta-container
+              image: docker.io/ilfur/helm-meta:1.0
+              imagePullPolicy: Always
+              ports:
+                - containerPort: 8888
+                  name: http
+          serviceAccount: {{ .Release.Name }}-meta
+          serviceAccountName: {{ .Release.Name }}-meta
+#          imagePullSecrets:
+#              - name: docker.io
+

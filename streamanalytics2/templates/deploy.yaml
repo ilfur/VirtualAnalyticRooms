@@ -1,0 +1,50 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "osa.fullname" . }}
+  labels:
+    {{- include "osa.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "osa.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "osa.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: app
+          image: docker.io/ilfur/streamanalytics:19.1.0.0.6.3
+          ports:
+            - containerPort: 9080
+              name: osa
+          env:
+            - name: OSA_CONN
+              value:  {{ .Values.osa.connection }}
+            - name: OSA_PWD
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.osa.secret.secretName }}
+                    key: {{ .Values.osa.secret.newdbpasswordKey }}
+            - name: DBSYSPWD
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.osa.secret.secretName }}
+                    key: {{ .Values.osa.secret.dbsyspasswordKey }}
+            - name: OSA_USER
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.osa.secret.secretName }}
+                    key: {{ .Values.osa.secret.newdbuserKey }}
+            - name: DBSYSUSR
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.osa.secret.secretName }}
+                    key: {{ .Values.osa.secret.dbsysuserKey }}
+
+          imagePullPolicy: IfNotPresent
+
+
+
