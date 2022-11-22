@@ -48,7 +48,7 @@ rules:
 apiVersion: core.oam.dev/v1alpha2
 kind: Component
 metadata:
-  name: {{ .Release.Name }}-meta-component
+  name: {{ .Release.Name }}-rest-component
   namespace: {{ .Release.Namespace }}
 spec:
   workload:

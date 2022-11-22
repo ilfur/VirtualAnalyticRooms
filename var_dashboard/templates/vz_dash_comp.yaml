@@ -1,7 +1,7 @@
 apiVersion: core.oam.dev/v1alpha2
 kind: Component
 metadata:
-  name: {{ .Release.Name }}-component
+  name: {{ .Release.Name }}-dash-component
   namespace: {{ .Release.Namespace }}
 spec:
   workload:

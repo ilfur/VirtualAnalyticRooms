@@ -10,7 +10,7 @@ metadata:
     description: "Virtual Analytic Rooms Dashboard app"
 spec:
   components:
-    - componentName: {{ .Release.Name }}-component
+    - componentName: {{ .Release.Name }}-rest-component
       traits:
         - trait:
             apiVersion: oam.verrazzano.io/v1alpha1
@@ -27,7 +27,7 @@ spec:
                 - paths:
                     - path: "/k8s/meta"
                       pathType: Prefix
-    - componentName: helm-meta-dash-component
+    - componentName: {{ .Release.Name }}-dash-component
       traits:
         - trait:
             apiVersion: oam.verrazzano.io/v1alpha1
