@@ -2,6 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name:  {{ include "ggate.fullname" . }}
+  annotations:
+    var/component: Oracle GoldenGate UI
+    var/name: Oracle GoldenGate for MS SQL Server
+    var/shortdesc: 'Oracle GoldenGate Umgebung, um Daten mit einer MSSQL Datenbank auszutauschen'
 spec:
   selector:
       {{- include "ggate.selectorLabels" . | nindent 6 }}

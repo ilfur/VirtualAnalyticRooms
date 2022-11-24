@@ -17,6 +17,10 @@ metadata:
     {{- include "common.tplvalues.render" ( dict "value" .Values.commonAnnotations "context" $ ) | nindent 4 }}
     {{- end }}
   {{- end }}
+    var/component: Kafka cluster
+    var/name: Kafka
+    var/shortdesc: 'Vollständiges Kafka-Cluster mit Kubernetes-internem Zugang
+    für Test, Enwicklung und Betrieb'
 spec:
   type: {{ .Values.service.type }}
   {{- if and .Values.service.clusterIP (eq .Values.service.type "ClusterIP") }}

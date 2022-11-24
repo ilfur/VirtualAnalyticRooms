@@ -15,6 +15,10 @@ metadata:
     {{- if .Values.hub.service.annotations }}
     {{- include "common.tplvalues.render" (dict "value" .Values.hub.service.annotations "context" $) | nindent 4 }}
     {{- end }}
+    var/component: Jupyterhub Browser Zugang
+    var/name: Jupyter Hub
+    var/shortdesc: 'Jupyter Hub Umgebung mit Browser Zugang.
+    Ein Hub ist in der Lage, mehrere analytische Notebooks einzurichten und zu verwalten'
 spec:
   type: {{ .Values.hub.service.type }}
   {{- if and .Values.hub.service.clusterIP (eq .Values.hub.service.type "ClusterIP") }}

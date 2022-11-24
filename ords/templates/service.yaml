@@ -2,6 +2,12 @@ apiVersion: v1
 kind: Service
 metadata:
   name:  {{ include "ords.fullname" . }}
+  annotations:
+    var/component: APEX Browser UI
+    var/name: Oracle REST Data Services
+    var/shortdesc: 'Oracle REST Services für Datenbank,
+    SQL*Developer Web Zugang und Application Express/APEX Entwicklungsumgebung mit Runtime'
+
 spec:
   selector:
       {{- include "ords.selectorLabels" . | nindent 6 }}

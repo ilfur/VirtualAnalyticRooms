@@ -2,6 +2,10 @@ apiVersion: v1
 kind: Service
 metadata:
   name:  {{ include "cloudbeaver.fullname" . }}
+  annotations:
+    var/component: CloudBeaver UI
+    var/name: CloudBeaver
+    var/shortdesc: 'OpenSource SQL Werkzeug für zahlreiche Datenbanken'
 spec:
   selector:
       {{- include "cloudbeaver.selectorLabels" . | nindent 6 }}
