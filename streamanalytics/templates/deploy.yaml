@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
         - name: app
-          image: docker.io/ilfur/streamanalytics:19.1.0.0.6.3
+          image: fra.ocir.io/frul1g8cgfam/pub_streamanalytics:19.1.0.0.6.3
           ports:
             - containerPort: 9080
               name: osa
