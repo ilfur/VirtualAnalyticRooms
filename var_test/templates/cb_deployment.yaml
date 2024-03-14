@@ -1,0 +1,63 @@
+{{- if eq .Values.verrazzano.OAMdeploy false }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "var.fullname" . }}-cloudbeaver
+  labels:
+    {{- include "var.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "var.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+        - name: cloudbeaver
+          image: "docker.io/dbeaver/cloudbeaver"
+          ports:
+            - containerPort: 8978
+              name: cloudbeaver
+          volumeMounts:
+            - name: storagebv
+              mountPath: /opt/cloudbeaver/workspace
+          imagePullPolicy: IfNotPresent
+      volumes:
+        - name: storagebv
+          persistentVolumeClaim:
+            claimName:  {{ include "var.fullname" . }}-cloudbeaver-pvc
+{{- else }}
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: {{ include "var.fullname" . }}-cloudbeaver-comp
+spec:
+  workload:
+    apiVersion: oam.verrazzano.io/v1alpha1
+    kind: VerrazzanoHelidonWorkload
+    metadata:
+      name:  {{ include "var.fullname" . }}-cloudbeaver-workload
+      labels:
+        {{- include "var.labels" . | nindent 8 }}
+    spec:
+      deploymentTemplate:
+        metadata:
+          name:  {{ include "var.fullname" . }}-cloudbeaver-deployment
+        podSpec:
+          containers:
+            - name: cloudbeaver
+              image: "docker.io/dbeaver/cloudbeaver"
+              ports:
+                - containerPort: 8978
+                  name: http
+              volumeMounts:
+                - name: storagebv
+                  mountPath: /opt/cloudbeaver/workspace
+              imagePullPolicy: IfNotPresent
+          volumes:
+            - name: storagebv
+              persistentVolumeClaim:
+                claimName:  {{ include "var.fullname" . }}-cloudbeaver-pvc
+{{- end }}

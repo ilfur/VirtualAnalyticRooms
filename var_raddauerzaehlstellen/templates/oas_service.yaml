@@ -1,0 +1,20 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ include "var.fullname" . }}-oas
+  annotations:
+    var/url: "https://sustoac3-oractdemeabdmnative-fr.analytics.ocp.oraclecloud.com/ui/dv/?pageid=visualAnalyzer&reportmode=full&reportpath=%2F%40Catalog%2Fshared%2FSustainability%2FCO%E2%82%82%20Emissions%20in%20Production%20Chains%20-%20Demo%2012-2022%20-%20uncached"
+    var/component: oracle analytics
+    var/name: raddauerzaehlstellen
+    var/shortdesc: 'Anwendungs-Stack mit Datenbank, Analysedaten und Analysewerkzeug,
+      hier: Fahrrad-Durchlaufzahlen'
+  creationTimestamp: "2023-01-26T09:46:36Z"
+spec:
+  selector:
+      {{- include "var.selectorLabels" . | nindent 6 }}
+      component: oas
+  ports:
+    - port: 443
+      targetPort: 443
+      name: analyticsport
+

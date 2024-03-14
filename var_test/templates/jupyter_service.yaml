@@ -1,0 +1,22 @@
+{{- if eq .Values.verrazzano.OAMdeploy false }}
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ include "var.fullname" . }}-jupyter
+  annotations:
+    var/component: jupyter notebook
+    var/name: raddauerzaehlstellen
+    var/shortdesc: 'Anwendungs-Stack mit Datenbank, Analysedaten und Analysewerkzeug,
+      hier: Fahrrad-Durchlaufzahlen'
+  creationTimestamp: "2022-11-03T20:59:10Z"
+spec:
+  selector:
+      {{- include "var.selectorLabels" . | nindent 6 }}
+      component: jupyter
+  ports:
+    - port: 8889
+      targetPort: 8889
+      name: jupyter
+  type: LoadBalancer
+{{- end }}
+

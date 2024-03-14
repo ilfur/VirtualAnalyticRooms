@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "var.fullname" . }}-db      
+  labels:
+    {{- include "var.labels" . | nindent 4 }}
+    component: db
+spec:
+  selector:
+    matchLabels:
+      {{- include "var.selectorLabels" . | nindent 6 }}      
+      component: db
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+        component: db
+        sidecar.istio.io/inject: "false"
+    spec:
+      containers:
+        - name: db
+          image: fra.ocir.io/frul1g8cgfam/mri_oml4pydb:latest
+          ports:
+            - containerPort: 1521
+              name: dblistener
+          volumeMounts:
+            - name: oradata
+              mountPath: /opt/oracle/oradata
+            - name: scripts
+              mountPath: /scripts
+            - name: setup
+              mountPath: /opt/oracle/scripts/setup
+            - name: dataloads
+              mountPath: /dataloads
+              readOnly: true
+          imagePullPolicy: Always
+          env:
+            - name: DB_SID
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_SID
+            - name: DB_PDB
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PDB
+            - name: DB_MEMORY
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_MEMORY
+            - name: DB_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PASSWORD
+      initContainers:
+        - name: volume-mount-permissions
+          image: busybox
+          command: ["sh", "-c", "echo $DB_PASSWORD >/opt/oracle/oradata/tmppwd.txt ; chown -R 54321:54322 /opt/oracle" ]
+          env:
+            - name: DB_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PASSWORD
+          volumeMounts:
+          - name: oradata
+            mountPath: /opt/oracle/oradata
+      volumes:
+        - name: oradata
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-oradata-pvc
+        - name: scripts
+          configMap:
+            name: {{ include "var.fullname" . }}-scripts-config
+        - name: setup
+          configMap:
+            name: {{ include "var.fullname" . }}-setup-config
+        - name: dataloads
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-dbhelper-pvc

@@ -1,0 +1,83 @@
+{{- if eq .Values.verrazzano.OAMdeploy false }}
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "var.fullname" . }}-jupyter
+  labels:
+    {{- include "var.labels" . | nindent 4 }}      
+    component: jupyter
+spec:
+  selector:
+    matchLabels:
+      {{- include "var.selectorLabels" . | nindent 6 }}
+      component: jupyter
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+        component: jupyter
+    spec:
+      containers:
+        - name: jupyter
+          image: fra.ocir.io/frul1g8cgfam/pub_oml4pyuc:latest
+          command: ["/bin/bash" , "-c" , "pip uninstall -y -r /notebooks/requirements-remove.txt && pip install -r /notebooks/requirements.txt && jupyter notebook --ip='0.0.0.0' --port=8889 --no-browser --allow-root --notebook-dir=/notebooks"]
+          ports:
+            - containerPort: 8889
+              name: jupyter
+          volumeMounts:
+            - name: notebooks
+              mountPath: /notebooks
+          imagePullPolicy: IfNotPresent
+      initContainers:
+        - name: volume-mount-permissions
+          image: fra.ocir.io/frul1g8cgfam/pub_oml4pyuc:latest
+          command: ["/bin/bash" , "-c" , "curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/requirements.txt -o /notebooks/requirements.txt && curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/requirements-remove.txt -o /notebooks/requirements-remove.txt && curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/VAR.ipynb -o /notebooks/VAR.ipynb && sed -i 's/YOURHOSTNAME/oml4pydb-service/' /notebooks/VAR.ipynb && chmod -R 777 /notebooks" ]
+          volumeMounts:
+          - name: notebooks
+            mountPath: /notebooks
+      volumes:
+        - name: notebooks
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-notebooks-pvc
+{{- else }}
+apiVersion: core.oam.dev/v1alpha2
+kind: Component
+metadata:
+  name: {{ include "var.fullname" . }}-jupyter-comp
+spec:
+  workload:
+    apiVersion: oam.verrazzano.io/v1alpha1
+    kind: VerrazzanoHelidonWorkload
+    metadata:
+      name:  {{ include "var.fullname" . }}-jupyter-workload
+      labels:
+        {{- include "var.labels" . | nindent 8 }}
+    spec:
+      deploymentTemplate:
+        metadata:
+          name:  {{ include "var.fullname" . }}-jupyter-deployment
+        podSpec:
+          containers:
+            - name: jupyter
+              image: fra.ocir.io/frul1g8cgfam/pub_oml4pyuc:latest
+              command: ["/bin/bash" , "-c" , "pip uninstall -y -r /notebooks/requirements-remove.txt && pip install -r /notebooks/requirements.txt && jupyter notebook --ip='0.0.0.0' --port=8889 --no-browser --allow-root --notebook-dir=/notebooks"]
+              ports:
+                - containerPort: 8889
+                  name: http
+              volumeMounts:
+                - name: notebooks
+                  mountPath: /notebooks
+              imagePullPolicy: IfNotPresent
+          initContainers:
+            - name: volume-mount-permissions
+              image: fra.ocir.io/frul1g8cgfam/pub_oml4pyuc:latest
+              command: ["/bin/bash" , "-c" , "curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/requirements.txt -o /notebooks/requirements.txt && curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/requirements-remove.txt -o /notebooks/requirements-remove.txt && curl https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/VARdata/VAR.ipynb -o /notebooks/VAR.ipynb && sed -i 's/YOURHOSTNAME/oml4pydb-service/' /notebooks/VAR.ipynb && chmod -R 777 /notebooks" ]
+              volumeMounts:
+              - name: notebooks
+                mountPath: /notebooks
+          volumes:
+            - name: notebooks
+              persistentVolumeClaim:
+                claimName: {{ include "var.fullname" . }}-notebooks-pvc
+{{- end }}
+

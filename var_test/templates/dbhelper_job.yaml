@@ -1,0 +1,67 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name:  {{ include "var.fullname" . }}-job
+  labels:
+    {{- include "var.labels" . | nindent 4 }}
+spec:
+  backoffLimit: 10
+  template:
+    metadata:
+      labels:
+        sidecar.istio.io/inject: "false"
+    spec:
+      restartPolicy: Never
+      containers:
+        - name: dbhelper
+          image: fra.ocir.io/frul1g8cgfam/mri_oml4pydbhelper:latest
+          command: [ "/bin/bash" , "/scripts/InitAll.sh" ]
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: dataloads
+              mountPath: /dataloads  
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: DB_SID
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_SID
+            - name: DB_PDB
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PDB
+            - name: DB_MEMORY
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_MEMORY
+            - name: DB_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PASSWORD
+      initContainers:
+        - name: dbcheck
+          image: fra.ocir.io/frul1g8cgfam/mri_oml4pydbhelper:latest
+          command: [ "/bin/bash", "/scripts/testconn.sh", "chmod 777 -R /dataloads" ]
+          volumeMounts:
+            - name: scripts
+              mountPath: /scripts
+            - name: dataloads
+              mountPath: /dataloads
+          env:
+            - name: DB_PASSWORD
+              valueFrom: 
+                secretKeyRef:
+                  name: {{ include "var.fullname" . }}-secret
+                  key: DB_PASSWORD
+      volumes:
+        - name: scripts
+          configMap:
+            name:  {{ include "var.fullname" . }}-scripts-config
+        - name: dataloads
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-dbhelper-pvc

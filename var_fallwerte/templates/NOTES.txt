@@ -1,0 +1,4 @@
+Final NOTES:
+
+Please look at the jupyter notebook logs for a login token,
+check the jupyter service for the IP address to point Your browser to.

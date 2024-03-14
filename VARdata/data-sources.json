@@ -1,0 +1,53 @@
+{
+	"folders": {},
+	"connections": {
+		"postgresql-template-1": {
+			"provider": "postgresql",
+			"driver": "postgres-jdbc",
+			"name": "PostgreSQL (Template)",
+			"template": true,
+			"read-only": true,
+			"configuration": {
+				"host": "localhost",
+				"port": "5432",
+				"database": "postgres",
+				"url": "jdbc:postgresql://localhost:5432/postgres",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-show-non-default-db@": "false"
+				}
+			}
+		},
+		"oracle_thin-186ead8cd98-218d0a7ac50e043d": {
+			"provider": "oracle",
+			"driver": "oracle_thin",
+			"name": "Oracle@oml4pydb-service",
+			"save-password": true,
+			"configuration": {
+				"host": "oml4pydb-service",
+				"port": "1521",
+				"database": "ORCLPDB1",
+				"url": "jdbc:oracle:thin:@//oml4pydb-service:1521/ORCLPDB1",
+				"configurationType": "MANUAL",
+				"type": "dev",
+				"provider-properties": {
+					"@dbeaver-sid-service@": "SERVICE",
+					"oracle.logon-as": "Normal"
+				},
+				"auth-model": "oracle_native"
+			}
+		}
+	},
+	"connection-types": {
+		"dev": {
+			"name": "Development",
+			"color": "255,255,255",
+			"description": "Regular development database",
+			"auto-commit": true,
+			"confirm-execute": false,
+			"confirm-data-change": false,
+			"auto-close-transactions": false
+		}
+	}
+}
