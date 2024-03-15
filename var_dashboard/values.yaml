@@ -1,6 +1,9 @@
-# Default values for ords_selfservice.
-# This is a YAML-formatted file.
-# Declare variables to be passed into your templates.
-
-
+# This app requires istio to be installed as prerequisite.
+# There should also be an istio gateway set up that can be refereced here.
+#
+istio:
+  gw: istio-system/http-istio-gateway
+#
+# the virtual host is an IP name that should resolve to the istio gateway's external IP address
+  virtualhost: vardash.141.147.33.9.nip.io
 

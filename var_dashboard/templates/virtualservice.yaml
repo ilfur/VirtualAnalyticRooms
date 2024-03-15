@@ -1,0 +1,31 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ .Release.Name }}-virtservice
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+spec:
+  gateways:
+  - {{ .Values.istio.gw }}
+  hosts:
+  - {{ .Values.istio.virtualhost }}
+  http:
+  - match:
+    - uri:
+        prefix: /k8s/meta 
+    route:
+    - destination:
+        host: {{ .Release.Name }}-rest-service
+        port:
+          number: 30080
+  - match:
+    - uri:
+        prefix: /ui
+    route:
+    - destination:
+        host: {{ .Release.Name }}-ui-service
+        port:
+          number: 30090
+
+

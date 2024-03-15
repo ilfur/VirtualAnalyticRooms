@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ .Release.Name }}-deployment
+  namespace: {{ .Release.Namespace }}
+  labels:
+    app: {{ .Release.Name }}-app
+  annotations:
+    version: v1.0.0
+    description: "Virtual Analytic Rooms Dashboard app"
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: {{ .Release.Name }}-app
+  template:
+    metadata:
+      labels:
+        app: {{ .Release.Name }}-app
+    spec:
+      containers:
+        - name: {{ .Release.Name }}-meta-container
+          image: fra.ocir.io/frul1g8cgfam/pub_helm-meta:1.5
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8888
+              name: http
+        - name: {{ .Release.Name }}-dash-container
+          image: fra.ocir.io/frul1g8cgfam/pub_var_dashboard:1.0
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8080
+              name: http
+      serviceAccount: {{ .Release.Name }}-meta
+      serviceAccountName: {{ .Release.Name }}-meta
+
