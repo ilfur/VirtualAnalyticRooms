@@ -2,6 +2,7 @@ database:
   hostname: oml4pydb-service
   initialpwd: oml4pypwd
 
-verrazzano:
-  OAMdeploy: true
+istio:
+  use_istio: true
+  gw: istio-system/http-istio-gateway
   domainsuffix: 141.144.197.116.nip.io

@@ -1,4 +1,3 @@
-{{- if eq .Values.verrazzano.OAMdeploy false }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -17,6 +16,29 @@ spec:
     - port: 8889
       targetPort: 8889
       name: jupyter
-  type: LoadBalancer
+  type: ClusterIP
+
+{{- if eq .Values.istio.use_istio true }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "var.fullname" . }}-jup-virtservice
+spec:
+  gateways:
+  - {{ .Values.istio.gw }}
+  hosts:
+  - {{ include "var.fullname" . }}.jupyter.{{ .Values.istio.domainsuffix }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ include "var.fullname" . }}-jupyter
+        port:
+          number: 8889
+
 {{- end }}
+
 

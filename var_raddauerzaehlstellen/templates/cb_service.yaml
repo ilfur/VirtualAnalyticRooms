@@ -1,4 +1,3 @@
-{{- if eq .Values.verrazzano.OAMdeploy false }}
 apiVersion: v1
 kind: Service
 metadata:
@@ -8,12 +7,32 @@ metadata:
     var/name: raddauerzaehlstellen
     var/shortdesc: 'Anwendungs-Stack mit Datenbank, Analysedaten und Analysewerkzeug,
       hier: Fahrrad-Durchlaufzahlen'
-  creationTimestamp: "2022-11-03T20:59:10Z"
 spec:
   selector:
       {{- include "var.selectorLabels" . | nindent 6 }}
   ports:
     - port: 8080
       targetPort: 8978
-  type: LoadBalancer
+  type: ClusterIP
+{{- if eq .Values.istio.use_istio true }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "var.fullname" . }}-cb-virtservice
+spec:
+  gateways:
+  - {{ .Values.istio.gw }}
+  hosts:
+  - {{ include "var.fullname" . }}.cb.{{ .Values.istio.domainsuffix }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ include "var.fullname" . }}-cloudbeaver
+        port:
+          number: 8080
+
 {{- end }}
