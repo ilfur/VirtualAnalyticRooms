@@ -23,7 +23,6 @@ spec:
           volumeMounts:
             - name: storageords
               mountPath: /etc/ords/config
-          volumeMounts:
             - name: secretords
               mountPath: /opt/oracle/variables
           imagePullPolicy: IfNotPresent
@@ -33,7 +32,7 @@ spec:
             claimName: ords-pvc
         - name: secretords
           secret:
-            name: {{ .Values.ords.secret.secretName }}
+            secretName: {{ .Values.ords.secret.secretName }}
 
 
 
