@@ -21,15 +21,15 @@ spec:
             - containerPort: 8181
               name: ords
           volumeMounts:
-            - name: storageords
-              mountPath: /etc/ords/config
+                  #- name: storageords
+                  #mountPath: /etc/ords/config
             - name: secretords
               mountPath: /opt/oracle/variables
           imagePullPolicy: IfNotPresent
       volumes:
-        - name: storageords
-          persistentVolumeClaim:
-            claimName: ords-pvc
+              #- name: storageords
+              #persistentVolumeClaim:
+              #claimName: ords-pvc
         - name: secretords
           secret:
             secretName: {{ .Values.ords.secret.secretName }}
