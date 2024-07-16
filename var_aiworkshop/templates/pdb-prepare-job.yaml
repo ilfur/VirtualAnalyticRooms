@@ -46,7 +46,7 @@ spec:
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
-                  key: sysadmin_pwd
+                  key: sys_pwd
                   name: {{ include "var.fullname" . }}-pdb-secret
           image: 'fra.ocir.io/frul1g8cgfam/database/aidemo:23.4'
           imagePullPolicy: IfNotPresent
