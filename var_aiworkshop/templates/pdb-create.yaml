@@ -8,7 +8,7 @@ spec:
   cdbResName: {{ .Values.cdb.cdbResourceName }}
   cdbNamespace: {{ .Values.cdb.namespace }}
   cdbName: {{ .Values.cdb.cdbName }}
-  pdbName: {{ include ".Chart.Name" . }}
+  pdbName: {{ include "var.name" . }}
   adminName:
     secret:
       secretName: {{ include "var.fullname" . }}-pdb-secret
