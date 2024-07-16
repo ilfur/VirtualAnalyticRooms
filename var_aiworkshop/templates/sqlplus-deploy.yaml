@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: {{ include "var.fullname" . }}-instantclient
+  name: {{ include "var.fullname" . }}-instantclient
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "var.fullname" . }}-instantclient
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app.kubernetes.io/name: {{ include "var.fullname" . }}-instantclient
+    spec:
+      containers:
+      - name: app
+        env:
+        - name: HOST_NAME
+          value: db23ai.privatek8snet.k8snet.oraclevcn.com
+        - name: PDB_NAME
+          value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+        - name: USER
+          value: vector
+        - name: PASSWD
+          value: vector
+        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
+        imagePullPolicy: Always
+        name: app
+        ports:
+        - containerPort: 8080
+          name: console
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /projects
+          name: storage
+        - mountPath: /scripts
+          name: scripts
+      initContainers:
+      - name: get-files
+        command:
+          - /bin/bash
+          - /scripts/getfiles.sh
+        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
+        imagePullPolicy: Always
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /projects
+          name: storage
+      securityContext:
+        fsGroup: 54322
+      volumes:
+        - name: storage
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-instantclient-pvc
+        - name: scripts
+          configMap:
+            defaultMode: 420
+            name: {{ include "var.fullname" . }}-scripts-config
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: {{ include "var.fullname" . }}-instantclient-pvc
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 1Gi

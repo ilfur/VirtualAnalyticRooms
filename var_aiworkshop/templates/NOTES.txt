@@ -1,0 +1,8 @@
+Final NOTES:
+
+Please wait about 2 Minutes for the database to be completely up and loaded.
+You can already try out Your sqlplus command line by using this URL in Your browser:
+https://{{ include "var.fullname" . }}-sqlcl{{ .Values.netzwerk.suffix }}
+
+Have fun !
+

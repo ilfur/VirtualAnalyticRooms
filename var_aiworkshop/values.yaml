@@ -1,0 +1,17 @@
+# Pflichtangabe - der Name der Anwendung bzw. Umgebung!
+# Bitte tragen Sie einen eindeutigen, möglichst kurzen Namen ein
+# bitte verwenden Sie Kleinbuchstaben und Bindestriche. Zahlen sind erlaubt, aber nur am Ende des Namens
+# 
+
+
+# optionale Angaben. Normalerweise nicht ändern bitte
+#
+netzwerk:
+  gateway: istio-system/http-istio-gateway
+  suffix: .141.147.33.9.nip.io
+
+cdb:
+  namespace: 23aidemo
+  cdbResourceName: ai23-cloud-cdb
+  cdbName: DB23ai
+

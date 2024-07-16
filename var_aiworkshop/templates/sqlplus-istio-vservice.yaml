@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  annotations:
+  name: {{ include "var.fullname" . }}-instantclient-vs
+spec:
+  gateways:
+  - {{ .Values.netzwerk.gateway }}
+  hosts:
+  - {{ include "var.fullname" . }}-sqlcl{{ .Values.netzwerk.suffix }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ include "var.fullname" . }}-instantclient-svc
+        port:
+          number: 8080

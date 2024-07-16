@@ -1,0 +1,24 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "var.fullname" . }}-pdb-prepare-config
+data:
+  prepare.sh: |-
+    #!/bin/bash 
+    curl https://raw.githubusercontent.com/ilfur/OraOperatorDBWithApp/sidbpluscdb/dbscripts/01_embedding/01_create_user_vector.sql -o /opt/vecdump/01_create_user_vector.sql
+    curl https://raw.githubusercontent.com/ilfur/OraOperatorDBWithApp/sidbpluscdb/dbscripts/02_rag/05_setup_network_acl.sql -o /opt/vecdump/05_setup_network_acl.sql
+    cd /opt/vecdump
+    sqlplus sys/$DB_PASSWORD@$DB_HOST:1521/$DB_SERVICE as sysdba << EOF 
+    ADMINISTER KEY MANAGEMENT SET KEY USING TAG 'rotate_key' FORCE KEYSTORE IDENTIFIED BY $DB_PASSWORD WITH BACKUP USING 'backup_key';
+    @01_create_user_vector.sql
+    @05_setup_network_acl.sql
+    exit; 
+    EOF
+  testconn.sh: |-
+    #!/bin/bash 
+     sqlplus sys/$DB_PASSWORD@$DB_HOST:1521/$DB_SERVICE as sysdba << EOF 
+     whenever sqlerror exit failure; 
+     select * from dual; 
+     exit; 
+     EOF
+     if [ $? -eq 0 ] ; then echo "connect successful" ; else echo "DB connect failed, waiting 3 min and exiting..." ; sleep 180 ; exit 5 ; fi 

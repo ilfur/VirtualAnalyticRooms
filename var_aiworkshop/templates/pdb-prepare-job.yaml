@@ -1,0 +1,61 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+  labels:
+  name: {{ include "var.fullname" . }}-pdb-prepare-job
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        job-name: {{ include "var.fullname" . }}-pdb-prepare-job
+    spec:
+      #restartPolicy: Never
+      restartPolicy: OnFailure
+      containers:
+        - command:
+            - /bin/bash
+            - /scripts/prepare.sh
+          env:
+            - name: DB_HOST
+              value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
+            - name: DB_SERVICE
+              value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: sysadmin_pwd
+                  name: {{ include "var.fullname" . }}-pdb-secret
+          image: 'fra.ocir.io/frul1g8cgfam/database/aidemo:23.4'
+          imagePullPolicy: IfNotPresent
+          name: dbhelper
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+      initContainers:
+        - command:
+            - /bin/bash
+            - /scripts/testconn.sh
+          env:
+            - name: DB_HOST
+              value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
+            - name: DB_SERVICE
+              value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+            - name: DB_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  key: sysadmin_pwd
+                  name: {{ include "var.fullname" . }}-pdb-secret
+          image: 'fra.ocir.io/frul1g8cgfam/database/aidemo:23.4'
+          imagePullPolicy: IfNotPresent
+          name: dbcheck
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: {{ include "var.fullname" . }}-pdb-prepare-config
+          name: scripts

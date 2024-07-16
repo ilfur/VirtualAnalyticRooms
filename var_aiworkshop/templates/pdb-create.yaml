@@ -1,0 +1,45 @@
+apiVersion: database.oracle.com/v1alpha1
+kind: PDB
+metadata:
+  name: {{ include "var.fullname" . }}-pdb
+  labels:
+    cdb: {{ .Values.cdb.cdbResourceName }}
+spec:
+  cdbResName: {{ .Values.cdb.cdbResourceName }}
+  cdbNamespace: {{ .Values.cdb.namespace }}
+  cdbName: {{ .Values.cdb.cdbName }}
+  pdbName: {{ include "var.fullname" . }}pdb
+  adminName:
+    secret:
+      secretName: {{ include "var.fullname" . }}-pdb-secret
+      key: "sysadmin_user"
+  adminPwd:
+    secret:
+      secretName: {{ include "var.fullname" . }}-pdb-secret
+      key: "sysadmin_pwd"
+  webServerPwd:
+    secret:
+      key: webserver_pwd
+      secretName: aicdb-secret
+  webServerUser:
+    secret:
+      key: webserver_user
+      secretName: aicdb-secret
+  fileNameConversions: NONE
+  totalSize: "1G"
+  tempSize: "100M"
+  action: "Create"
+  #action: "Delete"
+  #dropAction: "INCLUDING"
+  pdbTlsCat:
+    secret:
+      secretName: "db-ca"
+      key: "ca.crt"
+  pdbTlsCrt:
+    secret:
+      secretName: "db-tls"
+      key: "tls.crt"
+  pdbTlsKey:
+    secret:
+      secretName: "db-tls"
+      key: "tls.key"
