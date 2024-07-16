@@ -22,7 +22,7 @@ spec:
             - name: DB_HOST
               value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
             - name: DB_SERVICE
-              value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+              value: {{ include "var.chart" . }}pdb.privatek8snet.k8snet.oraclevcn.com
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -42,7 +42,7 @@ spec:
             - name: DB_HOST
               value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
             - name: DB_SERVICE
-              value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+              value: {{ include "var.chart" . }}pdb.privatek8snet.k8snet.oraclevcn.com
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
