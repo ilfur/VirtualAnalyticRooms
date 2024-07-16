@@ -21,7 +21,7 @@ spec:
         - name: HOST_NAME
           value: db23ai.privatek8snet.k8snet.oraclevcn.com
         - name: PDB_NAME
-          value: {{ include "var.fullname" . }}pdb.privatek8snet.k8snet.oraclevcn.com
+          value: {{ include ".Chart.Name" . }}.privatek8snet.k8snet.oraclevcn.com
         - name: USER
           value: vector
         - name: PASSWD
