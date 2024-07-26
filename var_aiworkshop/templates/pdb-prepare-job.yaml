@@ -20,9 +20,9 @@ spec:
             - /scripts/prepare.sh
           env:
             - name: DB_HOST
-              value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
+              value: {{ .Values.cdb.cdbName }}.{{ .Values.cdb.suffix }}
             - name: DB_SERVICE
-              value: {{ .Release.Name }}.privatek8snet.k8snet.oraclevcn.com
+              value: {{ .Release.Name }}.{{ .Values.cdb.suffix }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:
@@ -40,9 +40,9 @@ spec:
             - /scripts/testconn.sh
           env:
             - name: DB_HOST
-              value: {{ .Values.cdb.cdbName }}.privatek8snet.k8snet.oraclevcn.com
+              value: {{ .Values.cdb.cdbName }}.{{ .Values.cdb.suffix }}
             - name: DB_SERVICE
-              value: {{ .Release.Name }}.privatek8snet.k8snet.oraclevcn.com
+              value: {{ .Release.Name }}.{{ .Values.cdb.suffix }}
             - name: DB_PASSWORD
               valueFrom:
                 secretKeyRef:

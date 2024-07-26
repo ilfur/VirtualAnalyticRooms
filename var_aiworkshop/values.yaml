@@ -8,10 +8,11 @@
 #
 netzwerk:
   gateway: istio-system/http-istio-gateway
-  suffix: .141.147.33.9.nip.io
+  suffix: .130.61.137.234.nip.io
 
 cdb:
-  namespace: 23aidemo
+  namespace: 23aicdb
   cdbResourceName: ai23-cloud-cdb
   cdbName: DB23ai
+  suffix: subbb3fff175.quickcluster.oraclevcn.com
 

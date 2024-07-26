@@ -19,9 +19,9 @@ spec:
       - name: app
         env:
         - name: HOST_NAME
-          value: db23ai.privatek8snet.k8snet.oraclevcn.com
+          value: db23ai.{{ .Values.cdb.suffix }}
         - name: PDB_NAME
-          value: {{ .Release.Name }}.privatek8snet.k8snet.oraclevcn.com
+          value: {{ .Release.Name }}.{{ .Values.cdb.suffix }}
         - name: USER
           value: vector
         - name: PASSWD
