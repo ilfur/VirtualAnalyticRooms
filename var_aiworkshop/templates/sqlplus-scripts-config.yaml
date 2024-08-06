@@ -5,8 +5,13 @@ metadata:
 data:
   getfiles.sh: |-
     #!/bin/bash 
+    cd ~
+    mkdir .ssh
+    cp /ssh/* .ssh
+    chmod 600 .ssh/*
     cd /tmp
-    git clone -b sidbpluscdb --single-branch https://github.com/ilfur/OraOperatorDBWithApp
-    cp -R OraOperatorDBWithApp/dbscripts/* /projects
-    rm -rf OraOperatorDBWithApp
+    git clone ssh://devops.scmservice.eu-frankfurt-1.oci.oraclecloud.com/namespaces/oractdemeabdmnative/projects/aiworkshop/repositories/aiworkshop-scripts
+    #git clone -b sidbpluscdb --single-branch https://github.com/ilfur/OraOperatorDBWithApp
+    #cp -R OraOperatorDBWithApp/dbscripts/* /projects
+    cp -R aiworkshop-scripts/dbscripts/* /projects
 

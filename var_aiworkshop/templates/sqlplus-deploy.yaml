@@ -50,6 +50,8 @@ spec:
           name: scripts
         - mountPath: /projects
           name: storage
+        - mountPath: /ssh
+          name: ssh
       securityContext:
         fsGroup: 54322
       volumes:
@@ -60,6 +62,10 @@ spec:
           configMap:
             defaultMode: 420
             name: {{ include "var.fullname" . }}-scripts-config
+        - name: ssh
+          secret:
+            defaultMode: 420
+            secretName: git-ssh-secret
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
