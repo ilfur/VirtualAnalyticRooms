@@ -27,7 +27,7 @@ spec:
         - name: PASSWD
           value: vector
         image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         name: app
         ports:
         - containerPort: 8080
@@ -44,7 +44,7 @@ spec:
           - /bin/bash
           - /scripts/getfiles.sh
         image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
-        imagePullPolicy: Always
+        imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /scripts
           name: scripts
