@@ -12,6 +12,17 @@ data:
     ADMINISTER KEY MANAGEMENT SET KEY USING TAG 'rotate_key' FORCE KEYSTORE IDENTIFIED BY $DB_PASSWORD WITH BACKUP USING 'backup_key';
     @01_create_user_vector.sql
     @05_setup_network_acl.sql
+    BEGIN
+      ORDS.enable_schema(
+        p_enabled             => TRUE,
+        p_schema              => 'VECTOR',
+        p_url_mapping_type    => 'BASE_PATH',
+        p_url_mapping_pattern => 'vector',
+        p_auto_rest_auth      => FALSE
+      );
+    COMMIT;
+    END;
+    /
     exit; 
     EOF
   testconn.sh: |-
