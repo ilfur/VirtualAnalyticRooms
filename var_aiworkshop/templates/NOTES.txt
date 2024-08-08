@@ -10,7 +10,7 @@ https://{{ include "var.fullname" . }}-jupyter{{ .Values.netzwerk.suffix }}
 Just enter the password "vector" when asked and look into Your "work" directory for more.
 
 Once the PDB is ready, You can access it through sqldeveloper-web:
-https://dbactions{{ .Values.netzwerk.suffix }}/ords/{{ .Release.Name }}/sql-developer
+https://dbactions{{ .Values.netzwerk.suffix }}/ords/{{ .Release.Name }}/vector/_sdw/
 Just type in user "vector" and password "vector" for the login.
 
 Have fun !
