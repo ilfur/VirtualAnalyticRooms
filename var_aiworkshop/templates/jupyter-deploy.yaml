@@ -1,0 +1,72 @@
+kind: Deployment
+metadata:
+  name: {{ include "var.fullname" . }}-jupyter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "var.fullname" . }}-jupyter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "var.fullname" . }}-jupyter
+    spec:
+      containers:
+        #- image: 'container-registry.oracle.com/database/ords-developer:latest'
+        - name: app
+          image: quay.io/jupyter/scipy-notebook:2024-05-27
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: HOST_NAME
+              value: db23ai.{{ .Values.cdb.suffix }}
+            - name: PDB_NAME
+              value: "michael.subbb3fff175.quickcluster.oraclevcn.com"
+            - name: USER
+              value: vector
+            - name: PASSWD
+              value: vector
+            - name: DOCKER_STACKS_JUPYTER_CMD
+              value: notebook
+            - name: LD_LIBRARY_PATH
+              value:  "/home/jovyan/.jupyter/instantclient_23_5"
+          ports:
+            - containerPort: 8888
+              name: jupyter
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+            - mountPath: /home/jovyan/work
+              name: work
+            - mountPath: /home/jovyan/.jupyter
+              name: notebook-volume
+      volumes:
+        - name: scripts
+          configMap:
+            defaultMode: 420
+            name: jupyter-marcel-scripts-config
+        - name: notebook-volume
+          emptyDir: {}
+        - name: work
+          emptyDir: {}
+        - name: ssh
+          secret:
+            defaultMode: 420
+            secretName: git-ssh-secret
+      initContainers:
+      - name: get-config
+        command:
+          - /bin/bash
+          - /scripts/getfiles.sh
+        image: quay.io/jupyter/scipy-notebook:2024-05-27
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /home/jovyan/.jupyter
+          name: notebook-volume
+        - mountPath: /home/jovyan/work
+          name: work
+        - mountPath: /ssh
+          name: ssh
+

@@ -1,0 +1,19 @@
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "var.fullname" . }}-jupyter-vs
+spec:
+  gateways:
+  - {{ .Values.netzwerk.gateway }}
+  hosts:
+  - {{ include "var.fullname" . }}-jupyter{{ .Values.netzwerk.suffix }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host: {{ include "var.fullname" . }}-jupyter-service
+        port:
+          number: 8080
+
