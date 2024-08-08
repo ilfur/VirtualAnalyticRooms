@@ -12,6 +12,7 @@ data:
     ADMINISTER KEY MANAGEMENT SET KEY USING TAG 'rotate_key' FORCE KEYSTORE IDENTIFIED BY $DB_PASSWORD WITH BACKUP USING 'backup_key';
     @01_create_user_vector.sql
     @05_setup_network_acl.sql
+    GRANT INHERIT PRIVILEGES ON USER VECTOR TO PUBLIC;
     BEGIN
       ORDS.enable_schema(
         p_enabled             => TRUE,
