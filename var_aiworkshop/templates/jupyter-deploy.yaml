@@ -21,7 +21,7 @@ spec:
             - name: HOST_NAME
               value: db23ai.{{ .Values.cdb.suffix }}
             - name: PDB_NAME
-              value: "michael.subbb3fff175.quickcluster.oraclevcn.com"
+              value: {{ .Release.Name }}.{{ .Values.cdb.suffix }}
             - name: USER
               value: vector
             - name: PASSWD
