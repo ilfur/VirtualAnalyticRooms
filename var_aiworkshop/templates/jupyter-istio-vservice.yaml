@@ -6,11 +6,13 @@ spec:
   gateways:
   - {{ .Values.netzwerk.gateway }}
   hosts:
-  - {{ include "var.fullname" . }}-jupyter{{ .Values.netzwerk.suffix }}
+  - var{{ .Values.netzwerk.suffix }}
   http:
   - match:
     - uri:
-        prefix: /
+        prefix: /jupyter/{{ .Release.Name }}/
+    rewrite:
+      uri: /
     route:
     - destination:
         host: {{ include "var.fullname" . }}-jupyter-service

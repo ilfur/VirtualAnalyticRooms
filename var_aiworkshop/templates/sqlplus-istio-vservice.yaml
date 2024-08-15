@@ -7,11 +7,13 @@ spec:
   gateways:
   - {{ .Values.netzwerk.gateway }}
   hosts:
-  - {{ include "var.fullname" . }}-sqlcl{{ .Values.netzwerk.suffix }}
+  - var{{ .Values.netzwerk.suffix }}
   http:
   - match:
     - uri:
-        prefix: /
+        prefix: /sqlplus/{{ .Release.Name }}
+    rewrite:
+      uri: /
     route:
     - destination:
         host: {{ include "var.fullname" . }}-instantclient-svc

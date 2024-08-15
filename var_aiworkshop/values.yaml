@@ -8,7 +8,7 @@
 #
 netzwerk:
   gateway: istio-system/http-istio-gateway
-  suffix: .130.61.137.234.nip.io
+  suffix: .130-61-137-234.nip.io
 
 cdb:
   namespace: 23aicdb
