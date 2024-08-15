@@ -11,8 +11,6 @@ spec:
   - match:
     - uri:
         prefix: /jupyter/{{ .Release.Name }}/
-    rewrite:
-      uri: /
     route:
     - destination:
         host: {{ include "var.fullname" . }}-jupyter-service
