@@ -3,10 +3,10 @@ Final NOTES:
 Please wait about 2 Minutes for the database to be completely up and loaded.
 
 You can already try out Your sqlplus command line by using this URL in Your browser:
-https://{{ include "var.fullname" . }}-sqlcl{{ .Values.netzwerk.suffix }}/vnc.html
+https://var{{ .Values.netzwerk.suffix }}/sqlplus/{{ .Release.Name }}/vnc.html
 
 Alternatively, have a look at Your personal jupyter notebook:
-https://{{ include "var.fullname" . }}-jupyter{{ .Values.netzwerk.suffix }}
+https://var{{ .Values.netzwerk.suffix }}/jupyter/{{ .Release.Name }}
 Just enter the password "vector" when asked and look into Your "work" directory for more.
 
 Once the PDB is ready, You can access it through sqldeveloper-web:
