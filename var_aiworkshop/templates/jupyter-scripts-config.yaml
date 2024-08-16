@@ -9,7 +9,8 @@ data:
      from jupyter_server.auth import passwd
      password = passwd('vector')
      c.NotebookApp.password = password
-     c.NotebookApp.base_url = '/jupyter/{{ .Release.Name }}'" >> /home/jovyan/.jupyter/jupyter_server_config.py
+     c.NotebookApp.base_url = '/jupyter/{{ .Release.Name }}/'
+     " >> /home/jovyan/.jupyter/jupyter_server_config.py
      wget https://download.oracle.com/otn_software/linux/instantclient/2350000/instantclient-basic-linux.x64-23.5.0.24.07.zip
      unzip instantclient-basic-linux.x64-23.5.0.24.07.zip -d /home/jovyan/.jupyter
      cp /scripts/libaio.so.1 /home/jovyan/.jupyter/instantclient_23_5

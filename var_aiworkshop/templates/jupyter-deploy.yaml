@@ -45,7 +45,7 @@ spec:
         - name: scripts
           configMap:
             defaultMode: 420
-            name: jupyter-marcel-scripts-config
+            name: {{ include "var.fullname" . }}-jupyter-scripts-config
         - name: notebook-volume
           emptyDir: {}
         - name: work
