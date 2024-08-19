@@ -26,7 +26,7 @@ spec:
           value: vector
         - name: PASSWD
           value: vector
-        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
+        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_vncnginx
         imagePullPolicy: IfNotPresent
         name: app
         ports:
@@ -38,12 +38,21 @@ spec:
           name: storage
         - mountPath: /scripts
           name: scripts
+        - mountPath: /etc/nginx/nginx.conf
+          name: scripts
+          subPath: nginx.conf
+        - mountPath: /usr/share/novnc/app/ui.js
+          name: scripts
+          subPath: ui.js
+        - mountPath: /usr/share/novnc/vnc_lite.html
+          name: scripts
+          subPath: vnc_lite.html
       initContainers:
       - name: get-files
         command:
           - /bin/bash
           - /scripts/getfiles.sh
-        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_novnc
+        image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_vncnginx
         imagePullPolicy: IfNotPresent
         volumeMounts:
         - mountPath: /scripts
@@ -56,8 +65,9 @@ spec:
         fsGroup: 54322
       volumes:
         - name: storage
-          persistentVolumeClaim:
-            claimName: {{ include "var.fullname" . }}-instantclient-pvc
+          emptyDir: {}
+        #  persistentVolumeClaim:
+        #    claimName: {{ include "var.fullname" . }}-instantclient-pvc
         - name: scripts
           configMap:
             defaultMode: 420
@@ -67,13 +77,13 @@ spec:
             defaultMode: 420
             secretName: git-ssh-secret
 ---
-apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  name: {{ include "var.fullname" . }}-instantclient-pvc
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 1Gi
+#apiVersion: v1
+#kind: PersistentVolumeClaim
+#metadata:
+#  name: {{ include "var.fullname" . }}-instantclient-pvc
+#spec:
+#  accessModes:
+#    - ReadWriteOnce
+#  resources:
+#    requests:
+#      storage: 1Gi

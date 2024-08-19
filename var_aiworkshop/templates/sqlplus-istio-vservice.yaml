@@ -12,8 +12,6 @@ spec:
   - match:
     - uri:
         prefix: /sqlplus/{{ .Release.Name }}
-    rewrite:
-      uri: /
     route:
     - destination:
         host: {{ include "var.fullname" . }}-instantclient-svc
