@@ -33,4 +33,4 @@ data:
      select * from dual; 
      exit; 
      EOF
-     if [ $? -eq 0 ] ; then echo "connect successful" ; sleep 10 ; else echo "DB connect failed, waiting 3 min and exiting..." ; sleep 180 ; exit 5 ; fi 
+     if [ $? -eq 0 ] ; then echo "connect successful" ; sleep 20 ; else echo "DB connect failed, waiting 1 min and exiting..." ; sleep 60 ; exit 5 ; fi 
