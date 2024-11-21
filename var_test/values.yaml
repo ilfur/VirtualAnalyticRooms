@@ -1,6 +1,0 @@
-database:
-  hostname: oml4pydb-service
-  initialpwd: oml4pypwd
-verrazzano:
-  OAMdeploy: true
-  domainsuffix: 89.168.64.208.nip.io

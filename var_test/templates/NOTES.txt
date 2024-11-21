@@ -1,5 +1,0 @@
-Final NOTES:
-
-Please wait about 25 Minutes for the database to be completely up and loaded.
-Please look at the jupyter notebook logs for a login token,
-check the jupyter service for the IP address to point Your browser to.
