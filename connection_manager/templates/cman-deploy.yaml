@@ -1,0 +1,86 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "cman.fullname" . }}-cman
+  labels: 
+    {{- include "cman.labels" . | nindent 4 }}
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "cman.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "cman.selectorLabels" . | nindent 8 }}
+    spec:
+      initContainers:
+      - name: init-config
+        image: {{ .Values.cman-image.repository }}
+        imagePullPolicy: {{ .Values.cman-image.pullPolicy }}
+        command:
+        - /bin/bash
+        - /scripts/setup.sh
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+          {{- end }}
+{{- if eq .Values.cman-storage.conf.toPVC true }}
+        - mountPath: /u01/app/oracle/product/23ai/client_1/network/admin
+          name: config
+{{- end }}
+        - mountPath: /wallet
+          name: wallet
+      containers:
+      - name: app
+        image: {{ .Values.cman-image.repository }}
+        imagePullPolicy: {{ .Values.cman-image.pullPolicy }}
+        env:
+        - name: USER_CMAN_FILE
+          value: "/scripts/cman.ora"
+        - name: PUBLIC_HOSTNAME
+          value: {{ include "cman.fullname" . }}-svc
+        - name: DOMAIN
+          value: {{ .Release.Namespace }}.svc.cluster.local
+        ports:
+        - containerPort: 1521
+          name: net8-cman
+          protocol: TCP
+          #- containerPort: 1830
+          #name: https-cman
+          #protocol: TCP
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+{{- if eq .Values.cman-storage.log.toPVC true }}
+        - mountPath: /u01/app/oracle/diag/netcman
+          name: logs
+{{- end }}
+{{- if eq .Values.cman-storage.conf.toPVC true }}
+        - mountPath: /u01/app/oracle/product/23ai/client_1/network/admin
+          name: config
+{{- end }}
+        - mountPath: /wallet
+          name: wallet
+      securityContext:
+        fsGroup: 54321
+      imagePullSecrets:
+      - name: {{ .Values.cman-image.pullSecretName }}
+      volumes:
+      - name: scripts
+        configMap:
+          defaultMode: 420
+          name: {{ include "cman.fullname" . }}-config
+{{- if eq .Values.cman-storage.log.toPVC true }}
+      - name: logs
+        persistentVolumeClaim:
+          claimName: {{ include "cman.fullname" . }}-log-pvc
+{{- end }}
+{{- if eq .Values.cman-storage.conf.toPVC true }}
+      - name: config
+        persistentVolumeClaim:
+          claimName: {{ include "cman.fullname" . }}-config-pvc
+{{- end }}
+      - name: wallet
+        emptyDir: {}
+
