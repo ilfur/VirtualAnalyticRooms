@@ -1,4 +1,4 @@
-apiVersion: apps/v1
+apiVersion: apps/v1/
 kind: Deployment
 metadata:
   name: {{ include "cman.fullname" . }}-cman
@@ -16,16 +16,15 @@ spec:
     spec:
       initContainers:
       - name: init-config
-        image: {{ .Values.cman-image.repository }}
-        imagePullPolicy: {{ .Values.cman-image.pullPolicy }}
+        image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         command:
         - /bin/bash
         - /scripts/setup.sh
         volumeMounts:
         - mountPath: /scripts
           name: scripts
-          {{- end }}
-{{- if eq .Values.cman-storage.conf.toPVC true }}
+{{- if eq .Values.storage.config.toPVC true }}
         - mountPath: /u01/app/oracle/product/23ai/client_1/network/admin
           name: config
 {{- end }}
@@ -33,8 +32,8 @@ spec:
           name: wallet
       containers:
       - name: app
-        image: {{ .Values.cman-image.repository }}
-        imagePullPolicy: {{ .Values.cman-image.pullPolicy }}
+        image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
         env:
         - name: USER_CMAN_FILE
           value: "/scripts/cman.ora"
@@ -52,11 +51,11 @@ spec:
         volumeMounts:
         - mountPath: /scripts
           name: scripts
-{{- if eq .Values.cman-storage.log.toPVC true }}
+{{- if eq .Values.storage.log.toPVC true }}
         - mountPath: /u01/app/oracle/diag/netcman
           name: logs
 {{- end }}
-{{- if eq .Values.cman-storage.conf.toPVC true }}
+{{- if eq .Values.storage.config.toPVC true }}
         - mountPath: /u01/app/oracle/product/23ai/client_1/network/admin
           name: config
 {{- end }}
@@ -65,18 +64,18 @@ spec:
       securityContext:
         fsGroup: 54321
       imagePullSecrets:
-      - name: {{ .Values.cman-image.pullSecretName }}
+      - name: {{ .Values.image.pullSecretName }}
       volumes:
       - name: scripts
         configMap:
           defaultMode: 420
           name: {{ include "cman.fullname" . }}-config
-{{- if eq .Values.cman-storage.log.toPVC true }}
+{{- if eq .Values.storage.log.toPVC true }}
       - name: logs
         persistentVolumeClaim:
           claimName: {{ include "cman.fullname" . }}-log-pvc
 {{- end }}
-{{- if eq .Values.cman-storage.conf.toPVC true }}
+{{- if eq .Values.storage.config.toPVC true }}
       - name: config
         persistentVolumeClaim:
           claimName: {{ include "cman.fullname" . }}-config-pvc

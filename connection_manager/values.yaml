@@ -1,7 +1,7 @@
 # Please provide a docker registry type secret and enter its name
 # if needed, download the container image to Your location and specify that location here
 
-cman-image:
+image:
   repository: container-registry.oracle.com/database/cman:23.5.0.0
   pullPolicy: IfNotPresent
   pullSecretName: oraregistry-secret
@@ -9,13 +9,13 @@ cman-image:
 # For external access, if You have a LoadBalancer implementation installed, use the LoadBalancer type.
 # Optionally, specify ClusterIP as type and configure Your Gateway to forward TCP traffic to the ClusterIP service.
 # CMAN traffic is non-http, so please do not use an Ingress .
-cman-service:
+service:
   type: LoadBalancer
   port: 1521
 
 # if the toPVC param is set to false, no PVC is created and config and logs are gone on container restart.
 # ideally, use an NFS type strage class for external shared acess and manipulation.
-cman-storage:
+storage:
   log:
     toPVC: true
     storageClass: rook-ceph-block
@@ -27,7 +27,7 @@ cman-storage:
 
 # the initial configuration is copied to a cConfigMap.
 # The NAME of the cman configuration is auto-generated, please do not specify that here.
-cman-inital-config: |-
+initalConfig: |-
   (configuration=
     (address=(protocol=tcp)(host=0.0.0.0)(port=1521))
     (parameter_list =

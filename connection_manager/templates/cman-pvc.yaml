@@ -1,27 +1,27 @@
-{{- if eq .Values.cman-storage.log.toPVC true }}
+{{- if eq .Values.storage.log.toPVC true }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "cman.fullname" . }}-log-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName: {{ .Values.cman-storage.log.storageClass }}
+  - ReadWriteOnce
+  storageClassName: {{ .Values.storage.log.storageClass }}
   resources:
     requests:
-      storage:  {{ .Values.cman-storage.log.storage }}
+      storage:  {{ .Values.storage.log.storage }}
 ---
 {{- end }}
-{{- if eq .Values.cman-storage.conf.toPVC true }}
+{{- if eq .Values.storage.config.toPVC true }}
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: {{ include "cman.fullname" . }}-config-pvc
 spec:
   accessModes:
-    - ReadWriteOnce
-  storageClassName:  {{ .Values.cman-storage.conf.storageClass }}
+  - ReadWriteOnce
+  storageClassName:  {{ .Values.storage.config.storageClass }}
   resources:
     requests:
-      storage:  {{ .Values.cman-storage.conf.storage }}
+      storage:  {{ .Values.storage.config.storage }}
 {{- end }}
