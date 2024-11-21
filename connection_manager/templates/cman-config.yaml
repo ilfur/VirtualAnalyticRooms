@@ -6,7 +6,7 @@ data:
   cman.ora: |-
     ## Configuration uschacht5a
     cman_{{ include "cman.fullname" . }}-svc.{{ .Release.Namespace }}.svc.cluster.local =
-    {{- .Values.initialConfig | toYaml | indent 4 }}
+    {{- .Values.initialConfig | indent 4 }}
 
   sqlnet.ora: |-
     # sqlnet.ora Network Configuration File: /u01/app/oracle/product/23ai/client_1/network/admin/sqlnet.ora
