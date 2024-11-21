@@ -27,7 +27,7 @@ storage:
 
 # the initial configuration is copied to a cConfigMap.
 # The NAME of the cman configuration is auto-generated, please do not specify that here.
-initalConfig: |-
+initalConfig: |
   (configuration=
     (address=(protocol=tcp)(host=0.0.0.0)(port=1521))
     (parameter_list =
