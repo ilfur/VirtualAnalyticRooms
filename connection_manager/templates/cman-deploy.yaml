@@ -83,4 +83,6 @@ spec:
 {{- end }}
       - name: wallet
         emptyDir: {}
+      serviceAccount: {{ .Release.Name }}-sa
+      serviceAccountName: {{ .Release.Name }}-sa
 
