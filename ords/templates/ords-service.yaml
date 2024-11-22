@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "ords.fullname" . }}-ords-svc
+spec:
+  ports:
+  - name: {{if eq .Values.service.useSSL true }}https-ords{{ else }}http-ords{{ end }}
+    port: {{ .Values.service.port }}
+    protocol: TCP
+    targetPort: {{ if eq .Values.service.useSSL true }}8443{{  else }}8080{{ end }}
+  selector:
+    {{- include "ords.selectorLabels" . | nindent 4 }}
+  sessionAffinity: None
+  type: {{ .Values.service.type }}

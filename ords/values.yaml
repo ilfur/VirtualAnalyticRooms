@@ -1,14 +1,48 @@
+## number of containers to start, very often 1 is enough
 replicaCount: 1
 
-ords:
-  secret:
-    secretName: ords-secret
-    connString_key:  conn_string.txt
+## container needs database access data, stored in a secret for better security
+## please specify the name of the secret and which keys contain passwords, hostnames and so on.
+## example values for the secret would be:
+##
+## apiVersion: v1
+## kind: Secret
+## stringData:
+##   admin_pwd: myComplexPwd123
+##   admin_user: sys
+##   db_host: my.db.host.org
+##   db_port: "1521"
+##   db_servicename: FREEPDB1
+##   proxy_pwd: oracle
+
+secret:
+  secretName: ords-secret
+  adminUserKey: admin_user
+  adminPwdKey: admin_pwd
+  proxyUserPwdKey: proxy_pwd
+  dbHostKey: db_host
+  dbPortKey: db_port
+  dbServiceKey: db_servicename
+
+## at the moment this chart was created, the current version of ORDS was 24.3.0
+## You could use container-registry.oracle.com/database/ords:42.3.0 or any other version here
 
 image:
+  repository: container-registry.oracle.com/database/ords:latest
   pullPolicy: IfNotPresent
 
+## The network reachability of ORDS
+## If you only need to call REST services from inside Your cluster, just use ClusterIP service type.
+## If You have an ingress Gateway like istio or nginx, stay with ClusterIP but generate an Ingress
+## If You would like to have ORDS to be directly addressed from outside, use LoadBalancer service type and no Ingress
+## When using SSL, please specify a secret name which contains tls.crt and tls.key entries. 
+## The tls.key MUST be PKCS8 format, the certificate can be X509.
+## Please do not forget to use a Virtual Host Name that fits to Your certificate ! 
 service:
+  useSSL: false
+  tlsSecretName: ords-ssl
+  virtualHostName: ords.111.222.333.444.nip.io
   type: ClusterIP
   port: 8080
-
+  createIngress: true
+  ingressClass: nginx

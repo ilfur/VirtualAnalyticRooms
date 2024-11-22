@@ -1,0 +1,98 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "ords.fullname" . }}-ords
+  labels:
+    {{- include "ords.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+      {{- include "ords.selectorLabels" . | nindent 6 }}
+  replicas: {{ .Values.replicaCount }}
+  template:
+    metadata:
+      labels:
+        {{- include "ords.selectorLabels" . | nindent 8 }}
+    spec:
+      initContainers:
+      - name: set-config
+        env:
+        - name: ADMIN_USER
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.adminUserKey }}
+                name: {{ .Values.secret.secretName }}
+        - name: ADMIN_PWD
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.adminPwdKey }}
+                name: {{ .Values.secret.secretName }}
+        - name: PROXY_PWD
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.proxyUserPwdKey }}
+                name: {{ .Values.secret.secretName }}
+        - name: DB_HOST
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.dbHostKey }}
+                name: {{ .Values.secret.secretName }}
+        - name: DB_PORT
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.dbPortKey }}
+                name: {{ .Values.secret.secretName }}
+        - name: DB_SERVICENAME
+          valueFrom:
+             secretKeyRef:
+                key: {{ .Values.secret.dbServiceKey }}
+                name: {{ .Values.secret.secretName }}
+        command:
+          - /bin/bash
+          - /scripts.setup.sh
+        image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /etc.config
+          name: config
+{{- if eq .Values.service.useSSL true }}
+        - mountPath: /ssl
+          name: ssl
+{{- end }}
+      containers:
+      - image: {{ .Values.image.repository }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: app
+        ports:
+{{- if eq .Values.service.useSSL false }}
+        - containerPort: 8080
+          name: http-ords
+          protocol: TCP
+{{- else }}
+        - containerPort: 8443
+          name: https-ords
+          protocol: TCP
+{{- end }}
+        volumeMounts:
+        - mountPath: /etc.config
+          name: config
+{{- if eq .Values.service.useSSL true }}
+        - mountPath: /ssl
+          name: ssl
+{{- end }}
+      volumes:
+      - name: scripts
+        configMap:
+          defaultMode: 420
+          name: {{ include "ords.fullname" . }}-ords-config
+      - name: config
+        emptyDir: {}
+{{- if eq .Values.service.useSSL true }}
+      - name: ssl
+        secret:
+          defaultMode: 420
+          secretName: {{ .Values.service.tlsSecretName }}
+{{- end }}
+

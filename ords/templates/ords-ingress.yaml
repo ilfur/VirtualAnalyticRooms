@@ -1,0 +1,33 @@
+{{- if eq .Values.service.createIngress true }}
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ords.fullname" . }}-ords-ingress
+spec:
+  ingressClassName: {{ .Values.service.ingressClass }}
+  rules:
+  - host: {{ .Values.service.virtualHostName }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name: {{ include "ords.fullname" . }}-ords-svc
+            port:
+              number: 8888
+{{- if eq .Values.service.useSSL true }}
+{{- if eq .Values.service.ingressClass "istio" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "ords.fullname" . }}-https-destrule
+spec:
+  host: {{ include "ords.fullname" . }}-ords-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- end }}
+{{- end }}
