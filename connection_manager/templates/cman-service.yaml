@@ -3,8 +3,8 @@ kind: Service
 metadata:
   name:  {{ include "cman.fullname" . }}-svc
 {{- if eq .Values.service.type "LoadBalancer" }}
-annotations:
-  oci.oraclecloud.com/load-balancer-type: nlb
+  annotations:
+    oci.oraclecloud.com/load-balancer-type: nlb
 {{- end }}
 spec:
   ports:
