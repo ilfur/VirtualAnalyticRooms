@@ -61,6 +61,7 @@ spec:
 {{- end }}
         - mountPath: /wallet
           name: wallet
+      priorityClassName: high-priority-nonpreempting
       securityContext:
         fsGroup: 54321
       imagePullSecrets:
