@@ -17,11 +17,11 @@ service:
 ## ideally, use an NFS type strage class for external shared acess and manipulation.
 storage:
   log:
-    toPVC: true
+    toPVC: false
     storageClass: rook-ceph-block
     storage: 50Gi
   config:
-    toPVC: true
+    toPVC: false
     storage: 1Gi
     storageClass: rook-ceph-block
 
