@@ -25,7 +25,7 @@ spec:
         - name: DOCKER_STACKS_JUPYTER_CMD
           value: notebook
         - name: LD_LIBRARY_PATH
-          value: /home/jovyan/.jupyter/instantclient_23_5
+          value: /home/jovyan/.jupyter/instantclient_23_6
 {{- if eq .Values.services.internal.jupyter.ssl "selfsigned" }}
         - name: GEN_CERT
           value: yes

@@ -22,7 +22,10 @@ GRAPH_URL={{- if ne .Values.services.internal.graph.ssl "off" }}
 
 
 In jupyter, the Oracle instant client and sqlplus are preinstalled, so You can open a shell in the Jupyter UI
-and try to connect to Your database with sqlplus too.
+and try to connect to Your database with sqlplus too: 
+(Menu File-> New -> Terminal)
+Then, in the terminal, cd into the directory /home/jovyan/.jupyter/instantclient_23_6
+and run ./sqlplus
 
 Have fun !
 
