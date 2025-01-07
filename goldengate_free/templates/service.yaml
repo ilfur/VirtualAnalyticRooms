@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ include "ggate.fullname" . }}
+  annotations:
+    var/component: Oracle GoldenGate UI
+    var/name: Oracle GoldenGate for Oracle
+    var/shortdesc: 'Oracle GoldenGate Umgebung, um Daten mit einer Oracle Datenbank auszutauschen'
+spec:
+  selector:
+      {{- include "ggate.selectorLabels" . | nindent 6 }}
+  ports:
+    - port: {{ .Values.service.port }}
+      targetPort: 443
+  type: {{ .Values.service.type }}

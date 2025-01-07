@@ -1,7 +1,7 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: {{ include "graph_server.fullname" . }}-graph
+  name: {{ include "graph_server.fullname" . }}-jupyter
 spec:
   replicas: 1
   selector:
