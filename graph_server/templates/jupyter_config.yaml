@@ -10,12 +10,12 @@ data:
     c.NotebookApp.password = password
     c.NotebookApp.base_url = '/jupyter/'
     " >> /home/jovyan/.jupyter/jupyter_server_config.py
-    wget https://download.oracle.com/otn_software/linux/instantclient/2350000/instantclient-basic-linux.x64-23.6.0.24.10.zip
+    wget https://download.oracle.com/otn_software/linux/instantclient/2360000/instantclient-basic-linux.x64-23.6.0.24.10.zip
     wget https://download.oracle.com/otn_software/linux/instantclient/2360000/instantclient-sqlplus-linux.x64-23.6.0.24.10.zip
     unzip instantclient-basic-linux.x64-23.6.0.24.10.zip -d /home/jovyan/.jupyter
     unzip instantclient-sqlplus-linux.x64-23.6.0.24.10.zip -d /home/jovyan/.jupyter
     cp /scripts/libaio.so.1 /home/jovyan/.jupyter/instantclient_23_6
-    cd /home/jovyan
+    cd /home/jovyan/work
     git clone {{ .Values.git.jupyterRepo }}
 
 kind: ConfigMap
