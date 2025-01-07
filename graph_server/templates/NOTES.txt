@@ -1,0 +1,28 @@
+Final NOTES:
+
+The graph server is pointing to this database:
+{{ .Values.database.connection }}
+
+When entering a database user and password, please be aware that this database user must have the GRAPH_DEVELOPER role granted plus standard roles to connect and select data.
+
+You should be able to reach Your graph server through this URL:
+https://graph.{{ .Values.services.external.suffix }}/dash/
+
+The Jupyter container should be reachable through this similar URL:
+https://graph.{{ .Values.services.external.suffix }}/jupyter/
+
+The Jupyter container uses environment variables JDBC_URL and GRAPH_URL, pointing to the database and the graph server:
+
+JDBC_URL={{ .Values.database.connection }}
+GRAPH_URL={{- if ne .Values.services.internal.graph.ssl "off" }}
+          https://graph.{{ .Values.services.external.suffix }}
+{{- else }}
+          http://{{ include "graph_server.fullname" . }}-svc:7007
+{{- end }}
+
+
+In jupyter, the Oracle instant client and sqlplus are preinstalled, so You can open a shell in the Jupyter UI
+and try to connect to Your database with sqlplus too.
+
+Have fun !
+

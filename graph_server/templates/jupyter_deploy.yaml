@@ -1,0 +1,85 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "graph_server.fullname" . }}-graph
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "graph_server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "graph_server.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - env:
+        - name: JDBC_URL
+          value: {{ .Values.database.connection }}
+        - name: GRAPH_URL
+{{- if ne .Values.services.internal.graph.ssl "off" }}
+          value: https://graph.{{ .Values.services.external.suffix }}
+{{- else }}
+          value: http://{{ include "graph_server.fullname" . }}-svc:7007
+{{- end }}
+        - name: DOCKER_STACKS_JUPYTER_CMD
+          value: notebook
+        - name: LD_LIBRARY_PATH
+          value: /home/jovyan/.jupyter/instantclient_23_5
+{{- if eq .Values.services.internal.jupyter.ssl "selfsigned" }}
+        - name: GEN_CERT
+          value: yes
+{{- end }}
+        image:  {{ .Values.image.jupyter }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: app
+        ports:
+        - containerPort: 8888
+          name: jupyter
+          protocol: TCP
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /home/jovyan/work
+          name: work
+        - mountPath: /home/jovyan/.jupyter
+          name: notebook-volume
+{{- if ne .Values.git.type "public" }}
+        - mountPath: /home/jovyan/.ssh
+          name: ssh
+{{- end }}
+
+      initContainers:
+      - command:
+        - /bin/bash
+        - /scripts/getfiles.sh
+        image:  {{ .Values.image.jupyter }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+        name: get-config
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /home/jovyan/.jupyter
+          name: notebook-volume
+        - mountPath: /home/jovyan/work
+          name: work
+{{- if ne .Values.git.type "public" }}
+        - mountPath: /home/jovyan/.ssh
+          name: ssh
+{{- end }}
+      volumes:
+      - configMap:
+          defaultMode: 420
+          name: {{ include "graph_server.fullname" . }}-config
+        name: scripts
+      - emptyDir: {}
+        name: notebook-volume
+      - emptyDir: {}
+        name: work
+{{- if ne .Values.git.type "public" }}
+      - name: ssh
+        secret:
+          defaultMode: 600
+          secretName: {{ .Values.git.sshKeySecretName }}
+{{- end }}
+

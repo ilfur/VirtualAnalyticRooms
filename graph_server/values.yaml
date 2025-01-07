@@ -1,9 +1,42 @@
-replicaCount: 1
-
 image:
   pullPolicy: IfNotPresent
+  graph: fra.ocir.io/frul1g8cgfam/pub_graphserver:24.4.0
+  jupyter: quay.io/jupyter/scipy-notebook:2024-05-27
 
-service:
-  type: LoadBalancer
-  port: 8080
+services:
+  ### a clusterIP type service will be created for graph and jupyter UIs.
+  ### You can choose to create an istio virtualservice or an ingress in front of it
+  ### with a virtual host name of graph.<suffix> 
+  external:
+    ### set type to either ingress or virtualservice
+    type: ingress
+    ### typical ingressClasses are nginx and istio
+    ingressClass: nginx
+    ### ignored if type is not virtualservice
+    vserviceGateway: istio-system/http-istio-gateway
+    suffix: 141.147.33.9.nip.io
+  internal:
+    graph:
+      ### graph server can run with no ssl (ssl: off) or with self-signed certificates (ssl: selfsigned)or with external certificates(ssl: secret).
+      ssl: "off"
+      ### should container tls.cert and tls.key entries, but is ignored when ssl is off or selfsigned.
+      tlsSecretName: graph-tls
+    jupyter:
+      ### currently, only ssl: off and ssl: selfsigned are working, but will in the near future
+      ssl: "off"
+      ### should container tls.cert and tls.key entries, but is ignored when ssl is off or selfsigned.
+      tlsSecretName: graph-tls
 
+database:
+  ## The database user must have at least GRAPH_DEVELOPER role
+  connection: "jdbc:oracle:thin:@db23c.sidb23c:1521/FREEPDB1"
+
+git:
+  ## use this https repository for samples, better use ssh repositories for Your own purposes
+  jupyterRepo: "https://github.com/ilfur/pgx_samples"
+  type: public
+  ## sshKey is ignored if repo type is public. no push possible then.
+  sshKeySecretName: git-ssh
+
+jupyter:
+  password: jupyter

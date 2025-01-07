@@ -1,0 +1,56 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "graph_server.fullname" . }}-graph
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      {{- include "graph_server.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "graph_server.selectorLabels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: app
+        env:
+        - name: JDBC_URL
+          value: {{ .Values.database.connection }}
+        command:
+        - sh
+        - -c
+        - |
+          echo starting &&
+          sed -i "s|<REPLACE-WITH-DATABASE-URL-TO-USE-FOR-AUTHENTICATION>|${JDBC_URL}|" /etc/oracle/graph/pgx.conf  &&
+{{- if eq .Values.services.internal.graph.ssl "secret" }}
+          sed -i "s|<request-scheme>://localhost:<request-port>|https://graph.{{ .Values.services.external.suffix }}:7007|" /etc/oracle/graph/pgx.conf  &&
+          cp /etc/oracle/graph/server_ssl.conf /etc/oracle/graph/server.conf &&
+{{- end }}
+{{- if eq .Values.services.internal.graph.ssl "selfsigned" }}
+          sed -i "s|<request-scheme>://localhost:<request-port>|https://localhost:7007|" /etc/oracle/graph/pgx.conf  &&
+{{- end }}
+{{- if eq .Values.services.internal.graph.ssl "off" }}
+          sed -i "s|<request-scheme>://localhost:<request-port>|http://localhost:7007|" /etc/oracle/graph/pgx.conf  &&
+          sed -i "s|\"enable_tls\": true,|\"enable_tls\": false,|" /etc/oracle/graph/server.conf  &&
+{{- end }}
+          /bin/sh /opt/oracle/graph/pgx/bin/start-server
+        image: {{ .Values.image.graph }}
+        imagePullPolicy: {{ .Values.image.pullPolicy }}
+{{- if eq .Values.services.internal.graph.ssl "secret" }}
+        volumeMounts:
+        - mountPath: /cert
+          name: ssl
+{{- end }}
+        ports:
+        - containerPort: 7007
+          name: http-graph
+          protocol: TCP
+{{- if eq .Values.services.internal.graph.ssl "secret" }}
+      volumes:
+      - name: ssl
+        secret:
+          defaultMode: 420
+          secretName: {{ .Values.services.internal.graph.tlsSecretName }}
+{{- end }}
+

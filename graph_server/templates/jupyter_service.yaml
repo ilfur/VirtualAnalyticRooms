@@ -1,0 +1,81 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: {{ include "graph_server.fullname" . }}-jup-svc
+spec:
+  ports:
+  - name: jupyter
+    port: 8080
+    protocol: TCP
+    targetPort: 8888
+  selector:
+   {{- include "graph_server.selectorLabels" . | nindent 6 }}
+  type: ClusterIP
+{{- if eq .Values.services.external.type "virtualservice" }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "graph_server.fullname" . }}-jup-vsvc
+spec:
+  gateways:
+  - {{ .Values.services.external.vserviceGateway }}
+  hosts:
+  - graph.{{ .Values.services.external.suffix }}
+  http:
+  - match:
+    - uri:
+        prefix: /jupyter/
+    route:
+    - destination:
+        host: {{ include "graph_server.fullname" . }}-jup-svc
+        port:
+          number: 8080
+{{- if ne .Values.services.internal.jupyter.ssl "off" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "graph_server.fullname" . }}-jup-https-destrule
+spec:
+  host: {{ include "graph_server.fullname" . }}-jup-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- end }}
+{{- if eq .Values.services.external.type "ingress" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "graph_server.fullname" . }}-jup-ingress
+spec:
+  ingressClassName: {{ .Values.services.external.ingressClass }}
+  rules:
+  - host: graph.{{ .Values.services.external.suffix }}
+    http:
+      paths:
+      - path: /jupyter/
+        pathType: Prefix
+        backend:
+          service:
+            name:  {{ include "graph_server.fullname" . }}-jup-svc
+            port:
+              number: 8080
+{{- if ne .Values.services.internal.jupyter.ssl "off" }}
+{{- if eq .Values.service.ingressClass "istio" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "ords.fullname" . }}-jup-https-destrule
+spec:
+  host: {{ include "ords.fullname" . }}-jup-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- end }}
+
+{{- end }}
