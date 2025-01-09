@@ -11,6 +11,7 @@ spec:
   selector:
    {{- include "graph_server.selectorLabels" . | nindent 6 }}
   type: ClusterIP
+{{- if ne .Values.services.external.type "none" }}
 {{- if eq .Values.services.external.type "virtualservice" }}
 ---
 apiVersion: networking.istio.io/v1beta1
@@ -77,5 +78,5 @@ spec:
       mode: SIMPLE
 {{- end }}
 {{- end }}
-
+{{- end }}
 {{- end }}
