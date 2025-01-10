@@ -40,3 +40,5 @@ git:
 
 jupyter:
   password: jupyter
+  deployJupyter: true
+
