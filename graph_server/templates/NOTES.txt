@@ -5,11 +5,28 @@ The graph server is pointing to this database:
 
 When entering a database user and password, please be aware that this database user must have the GRAPH_DEVELOPER role granted plus standard roles to connect and select data.
 
-You should be able to reach Your graph server through this URL:
+{{- if eq .Values.services.external.type "none" }}
+You decided not to have an ingress or virtualservice configured.
+So currently, Your graph server and jupyter are reachable only from within the kubernetes cluster, using these names and ports:
+{{- if ne .Values.services.internal.graph.ssl "off" }}
+          https://{{ include "graph_server.fullname" . }}-svc:7007
+{{- else }}
+          http://{{ include "graph_server.fullname" . }}-svc:7007
+{{- end }}
+{{- if ne .Values.services.internal.jupyter.ssl "off" }}
+          https://{{ include "graph_server.fullname" . }}-jup-svc:8080
+{{- else }}
+          http://{{ include "graph_server.fullname" . }}-jup-svc:8080
+{{- end }}
+
+
+{{- else  }}
+You should be able to reach Your graph server through this external URL:
 https://graph.{{ .Values.services.external.suffix }}/dash/
 
 The Jupyter container should be reachable through this similar URL:
 https://graph.{{ .Values.services.external.suffix }}/jupyter/
+{{- end  }}
 
 The Jupyter container uses environment variables JDBC_URL and GRAPH_URL, pointing to the database and the graph server:
 
