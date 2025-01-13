@@ -1,14 +1,35 @@
+### specify the name of an existing secret that contains the ogg admin username and password
 ogg:
-  oggusername: oggadmin
-  oggpassword: oggadmin123
-  oggdeployment: local
+  adminSecret: ogg-admin-secret
+  usernameKey: oggusername
+  passwordKey: oggpassword
+  ## the name of an OGG deployment, mostly "local", or ogg-east, ogg-west, ...
+  deploymentName: local
 
-replicaCount: 1
+## request sizes of some PVCs, beware that there can be many   big trail files ...
+storage:
+  configSize: 1Gi
+  logSize: 10Gi
+  trailSize: 50Gi
 
 image:
   pullPolicy: IfNotPresent
+  imageName: container-registry.oracle.com/goldengate/goldengate-free:23.5.0.24.07-oracle
 
-service:
-  type: LoadBalancer
-  port: 8080
+services:
+  ### a clusterIP type service will be created for graph and jupyter UIs.
+  ### You can choose to create an istio virtualservice or an ingress in front of it
+  ### with a virtual host name of ggate.<suffix>
+  external:
+    ### set type to either ingress , virtualservice or none if You need something customized
+    type: ingress
+    ### typical ingressClasses are nginx and istio
+    ingressClass: nginx
+    ### ignored if type is not virtualservice
+    vserviceGateway: istio-system/http-istio-gateway
+    vhostName: ggate.141.147.33.9.nip.io
+  internal:
+    type: ClusterIP
+    port: 8080
+
 

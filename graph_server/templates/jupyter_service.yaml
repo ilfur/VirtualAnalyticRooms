@@ -23,7 +23,7 @@ spec:
   gateways:
   - {{ .Values.services.external.vserviceGateway }}
   hosts:
-  - graph.{{ .Values.services.external.suffix }}
+  - {{ .Values.services.external.vhostName }}
   http:
   - match:
     - uri:
@@ -55,7 +55,7 @@ metadata:
 spec:
   ingressClassName: {{ .Values.services.external.ingressClass }}
   rules:
-  - host: graph.{{ .Values.services.external.suffix }}
+  - host: {{ .Values.services.external.vhostName }}
     http:
       paths:
       - path: /jupyter/

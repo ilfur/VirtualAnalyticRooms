@@ -14,7 +14,7 @@ services:
     ingressClass: nginx
     ### ignored if type is not virtualservice
     vserviceGateway: istio-system/http-istio-gateway
-    suffix: 141.147.33.9.nip.io
+    vhostName: graph.141.147.33.9.nip.io
   internal:
     graph:
       ### graph server can run with no ssl (ssl: off) or with self-signed certificates (ssl: selfsigned)or with external certificates(ssl: secret).
