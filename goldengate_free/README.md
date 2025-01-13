@@ -1,4 +1,3 @@
-<!--- app-name: Apache Kafka -->
 
 # Oracle GoldenGate 21.3 Microservices Edition Container Images
 
@@ -10,7 +9,7 @@ These instructions apply to building container images for Oracle GoldenGate vers
 This project was tested with:
 
 * Oracle GoldenGate 23.4.0.0.0 Microservices for Oracle on Linux x86-64
-* Oracle GoldenGate 23.4.0.0.0 Microservices for Bigdata on Linux x86-64
+* Oracle GoldenGate FREE 23.5.6.0.0 Microservices for Oracle on Linux x86-64
 * Oracle GoldenGate 23.4.0.0.0 Microservices for MySQL on Linux x86-64
 * Oracle GoldenGate 23.4.0.0.0 Microservices for PostgreSQL on Linux x86-64
 

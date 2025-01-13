@@ -1,15 +1,79 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name:  {{ include "ggate.fullname" . }}
-  annotations:
-    var/component: Oracle GoldenGate UI
-    var/name: Oracle GoldenGate for Postgres
-    var/shortdesc: 'Oracle GoldenGate Umgebung, um Daten mit einer Postgres Datenbank auszutauschen'
+  name:  {{ include "ggate.fullname" . }}-svc
 spec:
-  selector:
-      {{- include "ggate.selectorLabels" . | nindent 6 }}
   ports:
-    - port: {{ .Values.service.port }}
-      targetPort: 443
-  type: {{ .Values.service.type }}
+  - port: {{ .Values.services.internal.port }}
+    targetPort: 443
+    name: http-ggate
+    protocol: TCP
+  selector:
+   {{- include "ggate.selectorLabels" . | nindent 6 }}
+  type: {{ .Values.services.internal.type }}
+{{- if ne .Values.services.external.type "none" }}
+{{- if eq .Values.services.external.type "virtualservice" }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "ggate.fullname" . }}-vsvc
+spec:
+  gateways:
+  - {{ .Values.services.external.vserviceGateway }}
+  hosts:
+  - {{ .Values.services.external.vhostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host:  {{ include "ggate.fullname" . }}-svc
+        port:
+          number: {{ .Values.services.internal.port }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "ggate.fullname" . }}-https-destrule
+spec:
+  host: {{ include "ggate.fullname" . }}-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- if eq .Values.services.external.type "ingress" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "ggate.fullname" . }}-ingress
+spec:
+  ingressClassName: {{ .Values.services.external.ingressClass }}
+  rules:
+  - host: {{ .Values.services.external.vhostName }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name:  {{ include "ggate.fullname" . }}-svc
+            port:
+              number: {{ .Values.services.internal.port }}
+{{- if eq .Values.services.external.ingressClass "istio" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "ggate.fullname" . }}-https-destrule
+spec:
+  host:  {{ include "ggate.fullname" . }}-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- end }}
+{{- end }}
+
