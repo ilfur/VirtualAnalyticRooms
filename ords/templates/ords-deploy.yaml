@@ -55,7 +55,7 @@ spec:
         volumeMounts:
         - mountPath: /scripts
           name: scripts
-        - mountPath: /etc.config
+        - mountPath: /etc/ords/config
           name: config
 {{- if eq .Values.service.useSSL true }}
         - mountPath: /ssl
@@ -76,7 +76,7 @@ spec:
           protocol: TCP
 {{- end }}
         volumeMounts:
-        - mountPath: /etc.config
+        - mountPath: /etc/ords/config
           name: config
 {{- if eq .Values.service.useSSL true }}
         - mountPath: /ssl
