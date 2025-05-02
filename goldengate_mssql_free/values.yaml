@@ -11,10 +11,11 @@ storage:
   configSize: 1Gi
   logSize: 10Gi
   trailSize: 50Gi
+  storageClass: rook-ceph-block
 
 image:
   pullPolicy: IfNotPresent
-  imageName: container-registry.oracle.com/goldengate/goldengate-sqlserver-free:23.7.1.25.02
+  imageName: container-registry.oracle.com/goldengate/goldengate-sqlserver-free:23.8.0.25.04
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.

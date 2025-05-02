@@ -15,7 +15,7 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: container-registry.oracle.com/goldengate/goldengate-mysql-free:23.8.0.25.04
+  imageName: container-registry.oracle.com/goldengate/goldengate-oracle-free:23.8.0.25.04
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.

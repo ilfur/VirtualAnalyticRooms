@@ -5,6 +5,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: {{ .Values.storage.storageClass }}
   resources:
     requests:
       storage: {{ .Values.storage.configSize }}
@@ -16,6 +17,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: {{ .Values.storage.storageClass }}
   resources:
     requests:
       storage: {{ .Values.storage.logSize }}
@@ -27,6 +29,7 @@ metadata:
 spec:
   accessModes:
     - ReadWriteOnce
+  storageClassName: {{ .Values.storage.storageClass }}
   resources:
     requests:
       storage: {{ .Values.storage.trailSize }}

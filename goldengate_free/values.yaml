@@ -11,6 +11,7 @@ storage:
   configSize: 1Gi
   logSize: 10Gi
   trailSize: 50Gi
+  storageClass: rook-ceph-block
 
 image:
   pullPolicy: IfNotPresent
