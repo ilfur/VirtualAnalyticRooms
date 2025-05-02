@@ -1,17 +1,19 @@
 
-# Oracle GoldenGate 21.3 Microservices Edition Container Images
+# Oracle GoldenGate Microservices Edition Container Images
 
 Sample container image build files to provide an installation of Oracle GoldenGate for DevOps users.
-These instructions apply to building container images for Oracle GoldenGate version 21c.
+These instructions apply to building container images for Oracle GoldenGate.
+Additional note: goldengate_free ist basically an older version of goldengate_oracle_free and includes goldengate_studio, which is now separate.
 
 ## Before You Start
 
 This project was tested with:
 
-* Oracle GoldenGate 23.4.0.0.0 Microservices for Oracle on Linux x86-64
-* Oracle GoldenGate FREE 23.5.6.0.0 Microservices for Oracle on Linux x86-64
-* Oracle GoldenGate 23.4.0.0.0 Microservices for MySQL on Linux x86-64
-* Oracle GoldenGate 23.4.0.0.0 Microservices for PostgreSQL on Linux x86-64
+* Oracle GoldenGate 23 Microservices for Oracle on Linux x86-64
+* Oracle GoldenGate FREE 23 Microservices for Oracle on Linux x86-64
+* Oracle GoldenGate 23 Microservices for MySQL on Linux x86-64
+* Oracle GoldenGate 23 Microservices for PostgreSQL on Linux x86-64
+* Oracle GoldenGate 23 Microservices for MS SqlServer on Linux x86-64
 
 Support for Oracle GoldenGate Classic Architecture is not provided.
 
