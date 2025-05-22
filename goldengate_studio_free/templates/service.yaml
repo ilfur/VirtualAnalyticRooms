@@ -4,8 +4,12 @@ metadata:
   name:  {{ include "ggate.fullname" . }}-svc
 spec:
   ports:
-  - port: {{ .Values.services.internal.port }}
+  - port: {{ .Values.services.internal.sslPort }}
     targetPort: 443
+    name: https-ggate
+    protocol: TCP
+  - port: {{ .Values.services.internal.plainPort }}
+    targetPort: 80
     name: http-ggate
     protocol: TCP
   selector:
@@ -51,6 +55,12 @@ metadata:
   name: {{ include "ggate.fullname" . }}-ingress
 spec:
   ingressClassName: {{ .Values.services.external.ingressClass }}
+{{- if eq .Values.services.external.ingressClass "nginx" }}  
+  tls:
+  - hosts:
+    - {{ .Values.services.external.vhostName }}
+    secretName: {{ .Values.services.external.tlsSecretName }}
+{{- end }}
   rules:
   - host: {{ .Values.services.external.vhostName }}
     http:
@@ -61,7 +71,11 @@ spec:
           service:
             name:  {{ include "ggate.fullname" . }}-svc
             port:
-              number: {{ .Values.services.internal.port }}
+{{- if eq .Values.services.external.ingressClass "istio" }}
+              number: {{ .Values.services.internal.sslPort }}
+{{- else }}
+              number: {{ .Values.services.internal.plainPort }}
+{{- end }}
 {{- if eq .Values.services.external.ingressClass "istio" }}
 ---
 apiVersion: networking.istio.io/v1alpha3

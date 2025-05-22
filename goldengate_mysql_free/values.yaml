@@ -18,7 +18,6 @@ image:
   imageName: container-registry.oracle.com/goldengate/goldengate-mysql-free:23.8.0.25.04
 
 services:
-  ### a clusterIP type service will be created for graph and jupyter UIs.
   ### You can choose to create an istio virtualservice or an ingress in front of it
   ### with a virtual host name of ggate.<suffix>
   external:
@@ -28,9 +27,12 @@ services:
     ingressClass: nginx
     ### ignored if type is not virtualservice
     vserviceGateway: istio-system/http-istio-gateway
+    ### uses default SSL certificate of gateway/controller or specify a custom tls-secret here
+    tlsSecretName: ggate-tls-secret
     vhostName: ggate.141.147.33.9.nip.io
   internal:
     type: ClusterIP
-    port: 8080
+    plainPort: 8080
+    sslPort: 8443
 
 

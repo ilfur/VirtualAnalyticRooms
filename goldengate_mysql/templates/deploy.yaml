@@ -19,7 +19,9 @@ spec:
           image: {{ .Values.image.imageName }}
           ports:
             - containerPort: 443
-              name: ggate
+              name: https-ggate
+            - containerPort: 80
+              name: http-ggate
           volumeMounts:
             - name: u01
               mountPath: /u01/ogg/scripts
