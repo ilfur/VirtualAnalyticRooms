@@ -1,6 +1,6 @@
 apiVersion: v2
 name: goldengate-sqlserver-free
-description: Oracle GoldenGate FREE for MS SQLserver
+description: Oracle GoldenGate Microservices FREE for MS SQLserver
 
 # A chart can be either an 'application' or a 'library' chart.
 #
