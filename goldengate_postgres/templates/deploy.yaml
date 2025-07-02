@@ -17,6 +17,13 @@ spec:
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
           ports:
             - containerPort: 443
               name: https-ggate

@@ -36,4 +36,11 @@ services:
     sslPort: 8443
     webuiPort: 8888
 
+resources:
+  requests:
+    cpu: "1"
+    memory: 2Gi
+  limits:
+    cpu: "2"
+    memory: 16Gi
 

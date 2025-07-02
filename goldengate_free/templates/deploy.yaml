@@ -17,12 +17,19 @@ spec:
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
           ports:
             - containerPort: 443
               name: ggate
           volumeMounts:
             - name: u01
-              mountPath: /u01/ogg/scripts
+              mountPath: /u01/oggf/certificate
             - name: u02
               mountPath: /u02
             - name: u03

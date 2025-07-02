@@ -17,6 +17,13 @@ spec:
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
           ports:
             - containerPort: 8443
               name: https-webui
@@ -25,6 +32,8 @@ spec:
             - containerPort: 80
               name: http-ggate
           volumeMounts:
+            - name: u01
+              mountPath: /u01/oggf/certificate
             - name: u02
               mountPath: /u02
             - name: u03
@@ -44,6 +53,9 @@ spec:
                     name: {{ .Values.ogg.adminSecret }}
                     key: {{ .Values.ogg.passwordKey }}
       volumes:
+        - name: u01
+          persistentVolumeClaim:
+            claimName: {{ include "ggate.fullname" . }}-u01-pvc
         - name: u02
           persistentVolumeClaim:
             claimName: {{ include "ggate.fullname" . }}-u02-pvc

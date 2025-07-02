@@ -35,4 +35,10 @@ services:
     plainPort: 8080
     sslPort: 8443
 
-
+resources:
+  requests:
+    cpu: "1"
+    memory: 2Gi
+  limits:
+    cpu: "2"
+    memory: 16Gi
