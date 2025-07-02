@@ -30,8 +30,6 @@ spec:
             - containerPort: 80
               name: http-ggate
           volumeMounts:
-            - name: u01
-              mountPath: /u01
             - name: u02
               mountPath: /u02
             - name: u03
@@ -51,9 +49,6 @@ spec:
                     name: {{ .Values.ogg.adminSecret }}
                     key: {{ .Values.ogg.passwordKey }}
       volumes:
-        - name: u01
-          persistentVolumeClaim:
-            claimName: {{ include "ggate.fullname" . }}-u01-pvc
         - name: u02
           persistentVolumeClaim:
             claimName: {{ include "ggate.fullname" . }}-u02-pvc

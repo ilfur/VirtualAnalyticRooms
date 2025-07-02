@@ -8,7 +8,6 @@ ogg:
 
 ## request sizes of some PVCs, beware that there can be many   big trail files ...
 storage:
-  configSize: 1Gi
   logSize: 10Gi
   trailSize: 50Gi
   storageClass: rook-ceph-block
