@@ -16,6 +16,9 @@ storage:
 image:
   pullPolicy: IfNotPresent
   imageName: container-registry.oracle.com/goldengate/goldengate-mongodb-migrations:23.8.0.25.05
+  ## please create a secret of type docker-registry that contains user and password for download.
+  ## put its name in the following field.
+  secretName: container-registry-secret
 
 services:
   ### You can choose to create an istio virtualservice or an ingress in front of it
