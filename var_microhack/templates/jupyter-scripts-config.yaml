@@ -14,7 +14,7 @@ data:
      wget https://download.oracle.com/otn_software/linux/instantclient/2350000/instantclient-basic-linux.x64-23.5.0.24.07.zip
      unzip instantclient-basic-linux.x64-23.5.0.24.07.zip -d /home/jovyan/.jupyter
      cp /scripts/libaio.so.1 /home/jovyan/.jupyter/instantclient_23_5
-     cd /home/jovyan
+     cd /home/jovyan/work
      git clone https://github.com/ilfur/gg_microhacks_scripts
 
 binaryData:
