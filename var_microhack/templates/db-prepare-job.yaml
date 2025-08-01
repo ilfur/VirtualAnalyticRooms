@@ -1,0 +1,98 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  annotations:
+  labels:
+  name: {{ include "var.fullname" . }}-db-prepare-job
+spec:
+  completions: 1
+  parallelism: 1
+  template:
+    metadata:
+      labels:
+        job-name: {{ include "var.fullname" . }}-db-prepare-job
+    spec:
+      #restartPolicy: Never
+      restartPolicy: OnFailure
+      containers:
+        - command:
+            - /bin/bash
+            - /scripts/prepare.sh
+          env:
+            - name: TNS_ADMIN
+              value: /projects
+            - name: GG_URL
+              value: http://{{ include "var.fullname" . }}-svc:8080
+            - name: SRC_URL
+              value: {{ include "var.fullname" . }}-db23ai:1521/FREEPDB1
+            - name: TRG_URL
+              value: {{ .Values.databases.trgConn }}
+            - name: SRC_SCHEMA
+              value: {{ .Values.databases.srcSchema }}
+            - name: TRG_SCHEMA
+              value: {{ .Values.databases.trgSchema }}
+            - name: ADMIN_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcAdminPwdKey }}
+            - name: SRC_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcGGPwdKey }}
+            - name: SRC_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcGGUserNameKey }}
+            - name: TRG_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.trgGGPwdKey }}
+            - name: TRG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.trgGGUserNameKey }}
+            - name: GG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ogg.adminSecret }}
+                  key: {{ .Values.ogg.usernameKey }}
+            - name: GG_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ogg.adminSecret }}
+                  key: {{ .Values.ogg.passwordKey }}
+
+          image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_vncnginx
+          imagePullPolicy: IfNotPresent
+          name: dbhelper
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+      initContainers:
+        - command:
+            - /bin/bash
+            - /scripts/testconn.sh
+          env:
+            - name: SRC_URL
+              value: {{ include "var.fullname" . }}-db23ai:1521/FREEPDB1
+            - name: ADMIN_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcAdminPwdKey }}
+          image: fra.ocir.io/frul1g8cgfam/pub_instantclient_sqlplus:23.4.0_vncnginx
+          imagePullPolicy: IfNotPresent
+          name: dbcheck
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+      volumes:
+        - configMap:
+            defaultMode: 420
+            name: {{ include "var.fullname" . }}-db-prepare-config
+          name: scripts

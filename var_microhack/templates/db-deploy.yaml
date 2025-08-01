@@ -1,0 +1,24 @@
+apiVersion: database.oracle.com/v4
+kind: SingleInstanceDatabase
+metadata:
+  name: {{ include "var.fullname" . }}-db23ai
+spec:
+  adminPassword:
+    keepSecret: true
+    secretKey:  {{ .Values.databases.adminSecret.srcAdminPwd }}
+    secretName: {{ .Values.databases.adminSecret.secretName }}
+  archiveLog: true
+  charset: AL32UTF8
+  edition: free
+  image:
+    pullFrom: {{ .Values.image.dbImageName }}
+    prebuiltDB: true
+  loadBalancer: false
+  pdbName: FREEPDB1
+  persistence:
+    accessMode: ReadWriteOnce
+    size: 100Gi
+    storageClass: {{ .Values.storage.storageClass }}
+  replicas: 1
+  sid: FREE
+

@@ -1,0 +1,16 @@
+Final NOTES:
+
+Please wait about 2 Minutes for the source database to be completely up and loaded.
+
+You can already try out Your sqlplus command line by using this URL in Your browser:
+https://{{ .Values.services.external.vhostName }}/sqlplus/vnc.html
+
+Alternatively, have a look at Your personal jupyter notebook:
+https://{{ .Values.services.external.vhostName }}/jupyter/
+Just enter the password "Welcome1234" when asked and then open the CPAT analysis notebook.
+
+Once the DB is ready, GOldenGate Sync should be set up too. Check it out right here:
+https://{{ .Values.services.external.vhostName }}
+
+Have fun !
+

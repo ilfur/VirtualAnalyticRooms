@@ -1,0 +1,116 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: {{ include "var.fullname" . }}-jupyter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: {{ include "var.fullname" . }}-jupyter
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: {{ include "var.fullname" . }}-jupyter
+    spec:
+      containers:
+        #- image: 'container-registry.oracle.com/database/ords-developer:latest'
+        - name: app
+{{- if eq .Values.gpu.runOnGPU true }}
+          image: quay.io/jupyter/pytorch-notebook:cuda12-notebook-7.2.2
+{{- else }}
+          image: quay.io/jupyter/scipy-notebook:2024-05-27
+{{- end }}
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: GG_URL
+              value: http://{{ include "var.fullname" . }}-svc:8080
+            - name: SRC_URL
+              value: {{ include "var.fullname" . }}-db23ai:1521/FREEPDB1
+            - name: TRG_URL
+              value: {{ .Values.databases.trgConn }}
+            - name: SRC_SCHEMA
+              value: {{ .Values.databases.srcSchema }}
+            - name: TRG_SCHEMA
+              value: {{ .Values.databases.trgSchema }}
+            - name: ADMIN_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcAdminPwdKey }}
+            - name: SRC_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcGGPwdKey }}
+            - name: SRC_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcGGUserNameKey }}
+            - name: TRG_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.trgGGPwdKey }}
+            - name: TRG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.trgGGUserNameKey }}
+            - name: GG_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ogg.adminSecret }}
+                  key: {{ .Values.ogg.usernameKey }}
+            - name: GG_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.ogg.adminSecret }}
+                  key: {{ .Values.ogg.passwordKey }}
+            - name: DOCKER_STACKS_JUPYTER_CMD
+              value: notebook
+            - name: LD_LIBRARY_PATH
+              value:  "/home/jovyan/.jupyter/instantclient_23_5"
+          ports:
+            - containerPort: 8888
+              name: jupyter
+              protocol: TCP
+          volumeMounts:
+            - mountPath: /scripts
+              name: scripts
+            - mountPath: /home/jovyan/work
+              name: work
+            - mountPath: /home/jovyan/.jupyter
+              name: notebook-volume
+      volumes:
+        - name: scripts
+          configMap:
+            defaultMode: 420
+            name: {{ include "var.fullname" . }}-jupyter-scripts-config
+        - name: notebook-volume
+          emptyDir: {}
+        - name: work
+          emptyDir: {}
+      initContainers:
+      - name: get-config
+        command:
+          - /bin/bash
+          - /scripts/getfiles.sh
+        image: quay.io/jupyter/scipy-notebook:2024-05-27
+        imagePullPolicy: IfNotPresent
+        volumeMounts:
+        - mountPath: /scripts
+          name: scripts
+        - mountPath: /home/jovyan/.jupyter
+          name: notebook-volume
+        - mountPath: /home/jovyan/work
+          name: work
+{{- if eq .Values.gpu.runOnGPU true }}
+      nodeSelector:
+        node.kubernetes.io/instance-type: {{ .Values.gpu.nodeSelector }}
+      tolerations:
+      - effect: NoSchedule
+        key: {{ .Values.gpu.toleration }}
+        operator: Exists
+{{- end }}
+
