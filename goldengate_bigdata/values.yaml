@@ -14,7 +14,8 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: fra.ocir.io/frul1g8cgfam/pub_gg_micro_bigdata:23.4.0
+  imageName: fra.ocir.io/frul1g8cgfam/pub_gg_micro_bigdata:23.4.0.24.06
+  secretName: container-registry-secret
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.
