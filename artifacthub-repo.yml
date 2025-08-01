@@ -23,3 +23,4 @@ ignore: # (optional, packages that should not be indexed by Artifact Hub)
   - name: cloudbeaver
   - name: jupyterhub
   - name: fallwerte
+  - name: goldengate-microhack-sample
