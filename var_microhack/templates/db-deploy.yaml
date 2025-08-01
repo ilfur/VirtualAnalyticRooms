@@ -5,7 +5,7 @@ metadata:
 spec:
   adminPassword:
     keepSecret: true
-    secretKey:  {{ .Values.databases.adminSecret.srcAdminPwd }}
+    secretKey:  {{ .Values.databases.adminSecret.srcAdminPwdKey }}
     secretName: {{ .Values.databases.adminSecret.secretName }}
   archiveLog: true
   charset: AL32UTF8
