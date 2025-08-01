@@ -17,7 +17,7 @@ spec:
 apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
-  name: {{ include "var.fullname" . }}-ingress
+  name: {{ include "var.fullname" . }}-jupyter-ingress
 spec:
   ingressClassName: {{ .Values.services.external.ingressClass }}
 {{- if eq .Values.services.external.ingressClass "nginx" }}
