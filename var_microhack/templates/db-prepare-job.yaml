@@ -31,11 +31,16 @@ spec:
               value: {{ .Values.databases.srcSchema }}
             - name: TRG_SCHEMA
               value: {{ .Values.databases.trgSchema }}
-            - name: ADMIN_PWD
+            - name: SRC_ADMIN_PWD
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.databases.adminSecret.secretName }}
                   key: {{ .Values.databases.adminSecret.srcAdminPwdKey }}
+            - name: TRG_ADMIN_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.trgAdminPwdKey }}
             - name: SRC_PWD
               valueFrom:
                 secretKeyRef:
