@@ -15,7 +15,7 @@ spec:
           service:
             name: {{ include "ords.fullname" . }}-ords-svc
             port:
-              number: 8888
+              number: {{ .Values.service.port }}
 {{- if eq .Values.service.useSSL true }}
 {{- if eq .Values.service.ingressClass "istio" }}
 ---
