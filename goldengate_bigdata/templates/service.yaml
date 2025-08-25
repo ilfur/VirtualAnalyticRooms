@@ -5,11 +5,11 @@ metadata:
 spec:
   ports:
   - port: {{ .Values.services.internal.sslPort }}
-    targetPort: 443
+    targetPort: 8443
     name: https-ggate
     protocol: TCP
   - port: {{ .Values.services.internal.plainPort }}
-    targetPort: 80
+    targetPort: 8080
     name: http-ggate
     protocol: TCP
   selector:
