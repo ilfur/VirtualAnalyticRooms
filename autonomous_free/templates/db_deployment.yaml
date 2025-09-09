@@ -32,7 +32,7 @@ spec:
           volumeMounts:
             - name: oradata
               mountPath: /u01/data
-          imagePullPolicy: IfNotExists
+          imagePullPolicy: IfNotPresent
           env:
             - name: WORKLOAD_TYPE
               value: "ATP"
