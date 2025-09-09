@@ -2,5 +2,5 @@ Final NOTES:
 
 Please wait some Minutes for the database to be completely up and loaded.
 Try ORDS and estate explorer access through this URL:
-{{ .Values.database.dbname }}.{{ .Values.ingress.domainsuffix }}/ords
+{{ .Values.database.dbname }}.{{ .Values.ingress.domainsuffix }}/ords/
 
