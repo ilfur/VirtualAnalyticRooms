@@ -1,0 +1,23 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "var.fullname" . }}-ingress
+spec:
+  ingressClassName: {{ .Values.ingress.ingressClass }}
+{{- if eq .Values.ingress.ingressClass "nginx" }}  
+  tls:
+  - hosts:
+    - {{ .Values.database.dbname }}.{{ .Values.ingress.domainsuffix }}
+{{- end }}
+  rules:
+  - host: {{ .Values.database.dbname }}.{{ .Values.ingress.domainsuffix }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name:  {{ .Values.database.dbname }}
+            port:
+              number: 8443
+

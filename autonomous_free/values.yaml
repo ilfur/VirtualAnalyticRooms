@@ -1,0 +1,8 @@
+database:
+  dbname: estate
+  initialpwd: Passw0rd1234#
+
+ingress:
+  useIngress: true
+  ingressClass: nginx
+  domainsuffix: .131.189.32.182.nip.io
