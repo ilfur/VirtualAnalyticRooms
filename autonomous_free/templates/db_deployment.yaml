@@ -17,6 +17,8 @@ spec:
         {{- include "var.selectorLabels" . | nindent 8 }}
         component: db
     spec:
+      securityContext:
+        fsGroup: 1001
       containers:
         - name: db
           image: container-registry.oracle.com/database/adb-free:latest-23ai
