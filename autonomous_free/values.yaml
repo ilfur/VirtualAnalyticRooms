@@ -5,4 +5,4 @@ database:
 ingress:
   useIngress: true
   ingressClass: nginx
-  domainsuffix: 131.189.32.182.nip.io
+  domainsuffix: xxx-xxx-xxx-xxx.nip.io
