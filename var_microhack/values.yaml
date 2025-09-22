@@ -33,7 +33,7 @@ storage:
 image:
   pullPolicy: IfNotPresent
   ggImageName: container-registry.oracle.com/goldengate/goldengate-oracle-free:23.8.0.25.04
-  dbImageName: container-registry.oracle.com/database/free:latest
+  dbImageName: container-registry.oracle.com/database/free:23.8.0.0
 
 services:
   ### You can choose to create an ingress in front of the service 
