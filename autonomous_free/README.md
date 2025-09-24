@@ -87,3 +87,22 @@ To change password for Admin user, use the following command
 
 adb-cli change-password --database-name "MYADW" --old-password "Welcome_1234" --new-password "Welc
 
+##Oracle Estate Explorer (OEE)
+Oracle Estate Explorer is a tool that enables customers to
+programmatically evaluate groups of Oracle databases for migration readiness to Oracle’s Autonomous Database (ADB). The output from OEE
+provides a high-level estate overview of the tested group of databases, ranks them according to their alignment with ADB pre-requisites and
+delivers a graded relative effort of any remediation required.
+
+The OEE APEX app is installed in the adb-free images and is available to use out-of-the-box
+
+Following steps are required to launch the OEE app:
+
+Login as Database admin and set a password for the MPACK_OEE user
+ALTER USER MPACK_OEE IDENTIFIED BY <password>
+Visit the APEX URL using https://localhost:8443/ords/apex
+
+Login to the MPACK_OEE APEX workspace using the password set in Step 1
+
+Change the MPACK_OEE’s APEX account password. A warning page will be displayed after changing the MPACK_OEE’s APEX account password, please ignore it and click on Application Builder to launch the OEE application.
+
+On the application home page, click “Run Application” to open the OEE app in a new browser tab.
