@@ -20,7 +20,8 @@ data:
     #!/bin/bash 
     export PATH=/opt/oracle/instantclient_23_4:$PATH
     export LD_LIBRARY_PATH=/opt/oracle/instantclient_23_4:$LD_LIBRARY_PATH
-    sleep 60
+    echo "Waiting 120secs for DB to be created, then trying a connect..."
+    sleep 120
      sqlplus system/$ADMIN_PWD@//$SRC_URL << EOF 
      whenever sqlerror exit failure; 
      select * from dual; 
