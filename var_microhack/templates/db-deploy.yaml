@@ -1,24 +1,46 @@
-apiVersion: database.oracle.com/v4
-kind: SingleInstanceDatabase
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: {{ include "var.fullname" . }}-db23ai
+  name:  {{ include "var.fullname" . }}-db
+  labels:
+    {{- include "var.labels" . | nindent 4 }}
+    component: db
 spec:
-  adminPassword:
-    keepSecret: true
-    secretKey:  {{ .Values.databases.adminSecret.srcAdminPwdKey }}
-    secretName: {{ .Values.databases.adminSecret.secretName }}
-  archiveLog: true
-  charset: AL32UTF8
-  edition: free
-  image:
-    pullFrom: {{ .Values.image.dbImageName }}
-    prebuiltDB: true
-  loadBalancer: false
-  pdbName: FREEPDB1
-  persistence:
-    accessMode: ReadWriteOnce
-    size: 100Gi
-    storageClass: {{ .Values.storage.storageClass }}
+  selector:
+    matchLabels:
+      {{- include "var.selectorLabels" . | nindent 6 }}
+      component: db
   replicas: 1
-  sid: FREE
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+        component: db
+    spec:
+      securityContext:
+        fsGroup: 54321
+      containers:
+        - name: db
+          image:  {{ .Values.image.dbImageName }}
+          ports:
+            - containerPort: 1521
+              name: listener
+          volumeMounts:
+            - name: oradata
+              mountPath: /opt/oracle/oradata
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: ENABLE_ARCHIVELOG
+              value: "true"
+            - name: FORCE_LOGGING
+              value: "true"
+            - name: ORACLE_PWD
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.databases.adminSecret.secretName }}
+                  key: {{ .Values.databases.adminSecret.srcAdminPwdKey }}
+      volumes:
+        - name: oradata
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-oradata-pvc
 
