@@ -16,6 +16,8 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.image.secretName }}
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
