@@ -18,6 +18,8 @@ spec:
         - name: {{ .Values.image.secretName }}
       securityContext:
         fsGroup: 1000
+        runAsUser: 1000
+        runAsGroup: 1000
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
