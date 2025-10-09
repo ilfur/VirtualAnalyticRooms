@@ -16,8 +16,6 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.image.secretName }}
-      securityContext:
-        fsGroup: 1000
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
@@ -35,7 +33,7 @@ spec:
               name: http-ggate
           volumeMounts:
             - name: u01
-              mountPath: /u01/ogg/scripts
+              mountPath: /u01
             - name: u02
               mountPath: /u02
             - name: u03
