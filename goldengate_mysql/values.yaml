@@ -14,7 +14,9 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: fra.ocir.io/frul1g8cgfam/pub_gg_micro_mysql:23.4.0
+  imageName: container-registry.oracle.com/goldengate/goldengate-mysql:23.9.2.25.08
+  secretName: container-registry-secret
+
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.
@@ -29,7 +31,7 @@ services:
     vserviceGateway: istio-system/http-istio-gateway
      ### uses default SSL certificate of gateway/controller or specify a custom tls-secret here
     tlsSecretName: ggate-tls-secret
-    vhostName: ggate.141.147.33.9.nip.io
+    vhostName: ggate.xxx.xxx.xxx.xxx.nip.io
   internal:
     type: ClusterIP
     plainPort: 8080
