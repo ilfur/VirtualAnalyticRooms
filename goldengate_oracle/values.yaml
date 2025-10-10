@@ -6,6 +6,9 @@ ogg:
   ## the name of an OGG deployment, mostly "local", or ogg-east, ogg-west, ...
   deploymentName: local
 
+statsdExporter:
+  enabled: false
+
 ## request sizes of some PVCs, beware that there can be many   big trail files ...
 storage:
   configSize: 1Gi
@@ -16,6 +19,7 @@ image:
   pullPolicy: IfNotPresent
   imageName: container-registry.oracle.com/goldengate/goldengate-oracle:23.9.2.25.08
   secretName: container-registry-secret
+  statsdExporterImage: docker.io/prom/statsd-exporter:latest
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.

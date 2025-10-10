@@ -1,0 +1,17 @@
+{{- if eq .Values.statsdExporter.enabled true }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ include "ggate.fullname" . }}-statsd-mapping-config
+data:
+  statsd-mapping.yaml: |+
+    mappings:
+    #- match: "statistics-replicat.*"
+    #  name: "gg_statistics_replicat"
+    #  labels:
+    #      type: "$1"
+    #- match: "receiver-service-stats.*"
+    #  name: "gg_statistics_recsrvc"
+    #  labels:
+    #      type: "$1"
+{{- end }}

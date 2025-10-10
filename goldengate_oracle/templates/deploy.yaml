@@ -18,9 +18,23 @@ spec:
         - name: {{ .Values.image.secretName }}
       securityContext:
         fsGroup: 1000
-        runAsUser: 1000
-        runAsGroup: 1000
       containers:
+{{- if eq .Values.statsdExporter.enabled true }}
+        - name: statsd-exporter
+          image: {{ .Values.image.statsdExporterImage }} 
+          imagePullPolicy: Always
+          args: ["--statsd.mapping-config", "/config/statsd-mapping.yaml", "--log.level", "debug"]
+          ports:
+          - containerPort: 9102
+            name: http
+            protocol: TCP
+          - containerPort: 9125
+            name: push
+            protocol: UDP
+          volumeMounts:
+          - mountPath: /config
+            name: statsd-config
+{{- end }}
         - name: app
           image: {{ .Values.image.imageName }}
           resources:
@@ -55,6 +69,12 @@ spec:
                     name: {{ .Values.ogg.adminSecret }}
                     key: {{ .Values.ogg.passwordKey }}
       volumes:
+{{- if eq .Values.statsdExporter.enabled true }}
+        - name: statsd-config
+          configMap:
+            defaultMode: 420
+            name: {{ include "ggate.fullname" . }}-statsd-mapping-config
+{{- end }}
         - name: u02
           persistentVolumeClaim:
             claimName: {{ include "ggate.fullname" . }}-u02-pvc
