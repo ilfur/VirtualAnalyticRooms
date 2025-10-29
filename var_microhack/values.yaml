@@ -14,6 +14,7 @@ databases:
   #for demo env, dont change the schema names. SH already exists in ADB, so we create another one.
   srcSchema: "SH"
   trgSchema: "SH2"
+  dumpFile: "https://objectstorage.eu-frankfurt-1.oraclecloud.com/p/AchwripxZjs7IxMRtWO2H_gkxFHU4d2uNDYKctfGmgsRodlHvaxxgjAKT0awXOxH/n/fre3ftc1iva4/b/export_bucket/o/SHBIG.dmp"
   adminSecret: 
     secretName: db-admin-secret
     srcAdminPwdKey: srcAdminPwd

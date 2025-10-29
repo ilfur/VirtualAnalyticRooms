@@ -31,6 +31,8 @@ spec:
               value: {{ .Values.databases.srcSchema }}
             - name: TRG_SCHEMA
               value: {{ .Values.databases.trgSchema }}
+            - name: DUMP_FILE
+              value: {{ .Values.databases.dumpFile }}
             - name: SRC_ADMIN_PWD
               valueFrom:
                 secretKeyRef:
