@@ -18,7 +18,7 @@ spec:
         - name: {{ .Values.image.secretName }}
       securityContext:
         fsGroup: 1000
-        runAsUser: 997
+        runAsUser: 994
       containers:
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter
