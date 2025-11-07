@@ -14,6 +14,8 @@ spec:
       labels:
         {{- include "var.selectorLabels" . | nindent 8 }}
     spec:
+      securityContext:
+        fsGroup: 1000
       containers:
         - name: app
           image: {{ .Values.image.ggImageName }}
