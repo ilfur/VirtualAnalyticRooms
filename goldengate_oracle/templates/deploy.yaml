@@ -19,14 +19,6 @@ spec:
       securityContext:
         fsGroup: 1000
       containers:
-        securityContext:
-          allowPrivilegeEscalation: false
-          capabilities:
-            drop:
-            - ALL
-          runAsNonRoot: true
-          seccompProfile:
-            type: RuntimeDefault
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter
           image: {{ .Values.image.statsdExporterImage }} 
@@ -45,6 +37,14 @@ spec:
 {{- end }}
         - name: app
           image: {{ .Values.image.imageName }}
+          securityContext:
+            allowPrivilegeEscalation: false
+            capabilities:
+              drop:
+              - ALL
+            runAsNonRoot: true
+            seccompProfile:
+              type: RuntimeDefault
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
