@@ -18,6 +18,20 @@ spec:
         - name: {{ .Values.image.secretName }}
       securityContext:
         fsGroup: 1000
+      initContainers:
+        - name: dependencies
+          image: {{ .Values.image.imageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+          command: ["/bin/bash" , "-c" , "cd /u01/ogg/opt/DependencyDownloader && ./onelake.sh && ./azure_blob_storage.sh && ./parquet.sh 1.16.0 && ./hadoop.sh 3.4.2 && cp -R dependencies/* /mnt/deps"]
+          volumeMounts:
+            - name: deps
+              mountPath: /mnt/deps
       containers:
         - name: app
           image: {{ .Values.image.imageName }}
@@ -34,8 +48,8 @@ spec:
             - containerPort: 80
               name: http-ggate
           volumeMounts:
-            - name: u01
-              mountPath: /u01/ogg/scripts
+            - name: deps
+              mountPath: /mnt/deps
             - name: u02
               mountPath: /u02
             - name: u03
@@ -54,10 +68,11 @@ spec:
                  secretKeyRef:
                     name: {{ .Values.ogg.adminSecret }}
                     key: {{ .Values.ogg.passwordKey }}
+            - name: DEP_CP
+              value: "/mnt/deps/onelake/*:/mnt/deps/hadoop_3.4.2/*:/mnt/deps/parquet_1.16.0/*:/mnt/deps/azure-storage-blob_12.25.3/*"
       volumes:
-        - name: u01
-          persistentVolumeClaim:
-            claimName: {{ include "ggate.fullname" . }}-u01-pvc
+        - name: deps
+          emptyDir: {}
         - name: u02
           persistentVolumeClaim:
             claimName: {{ include "ggate.fullname" . }}-u02-pvc
