@@ -32,7 +32,7 @@ spec:
               mountPath: /mnt/deps
       containers:
         - name: app
-          image: {{ .Values.image.imageName }}
+          image: {{ .Values.image.ggdaaImageName }}
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
