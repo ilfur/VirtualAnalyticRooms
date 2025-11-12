@@ -19,6 +19,8 @@ spec:
             - /bin/bash
             - /scripts/prepare.sh
           env:
+            - name: HACK_USER
+              value: {{ .Values.microhack.user }}
             - name: TNS_ADMIN
               value: /projects
             - name: GG_URL

@@ -1,3 +1,5 @@
+microhack:
+  user: user01
 ### specify the name of an existing secret that contains the ogg admin username and password
 ogg:
   adminSecret: ogg-admin-secret
