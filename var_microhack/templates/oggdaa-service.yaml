@@ -13,7 +13,8 @@ spec:
     name: http-ggate
     protocol: TCP
   selector:
-   {{- include "var.selectorLabels" . | nindent 6 }}
+    app.kubernetes.io/component: daa
+    {{- include "var.selectorLabels" . | nindent 4 }}
   type: {{ .Values.services.internal.type }}
 {{- if ne .Values.services.external.type "none" }}
 {{- if eq .Values.services.external.type "virtualservice" }}
