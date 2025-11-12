@@ -58,11 +58,11 @@ spec:
 {{- if eq .Values.services.external.ingressClass "nginx" }}  
   tls:
   - hosts:
-    - {{ .Values.services.external.vhostName }}
+    - daa{{ .Values.services.external.vhostName }}
     secretName: {{ .Values.services.external.tlsSecretName }}
 {{- end }}
   rules:
-  - host: {{ .Values.services.external.vhostName }}
+  - host: daa{{ .Values.services.external.vhostName }}
     http:
       paths:
       - path: /

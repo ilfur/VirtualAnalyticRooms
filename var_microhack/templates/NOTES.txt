@@ -9,8 +9,11 @@ Alternatively, have a look at Your personal jupyter notebook:
 https://{{ .Values.services.external.vhostName }}/jupyter/
 Just enter the password "Welcome1234" when asked and then open the CPAT analysis notebook.
 
-Once the DB is ready, GOldenGate Sync should be set up too. Check it out right here:
+Once the DB is ready, GoldenGate Sync should be set up too. Check it out right here:
 https://{{ .Values.services.external.vhostName }}
+
+...and for GoldenGate for Distributed Applications, check this host name:
+https://daa{{ .Values.services.external.vhostName }}
 
 Have fun !
 
