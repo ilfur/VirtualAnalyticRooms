@@ -1,0 +1,84 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name:  {{ include "var.fullname" . }}-daa
+  labels:
+    {{- include "var.labels" . | nindent 4 }}
+spec:
+  selector:
+    matchLabels:
+            {{- include "var.selectorLabels" . | nindent 6 }}
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        {{- include "var.selectorLabels" . | nindent 8 }}
+    spec:
+      securityContext:
+        fsGroup: 1000
+      initContainers:
+        - name: dependencies
+          image: {{ .Values.image.ggdaaImageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+          command: ["/bin/bash" , "-c" , "cd /u01/ogg/opt/DependencyDownloader && ./onelake.sh && ./azure_blob_storage.sh && ./parquet.sh 1.16.0 && ./hadoop.sh 3.4.2 && cp -R dependencies/* /mnt/deps"]
+          volumeMounts:
+            - name: deps
+              mountPath: /mnt/deps
+      containers:
+        - name: app
+          image: {{ .Values.image.imageName }}
+          resources:
+            limits:
+              cpu: {{ .Values.resources.limits.cpu }}
+              memory: {{ .Values.resources.limits.memory }}
+            requests:
+              cpu: {{ .Values.resources.requests.cpu }}
+              memory: {{ .Values.resources.requests.memory }}
+          ports:
+            - containerPort: 8443
+              name: https-ggate
+            - containerPort: 8080
+              name: http-ggate
+          volumeMounts:
+            - name: deps
+              mountPath: /mnt/deps
+            - name: u02
+              mountPath: /u02
+            - name: u03
+              mountPath: /u03
+          imagePullPolicy: IfNotPresent
+          env:
+            - name: OGG_DEPLOYMENT
+              value: {{ .Values.ogg.deploymentName }}
+            - name: OGG_ADMIN
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.ogg.adminSecret }}
+                    key: {{ .Values.ogg.usernameKey }}
+            - name: OGG_ADMIN_PWD
+              valueFrom:
+                 secretKeyRef:
+                    name: {{ .Values.ogg.adminSecret }}
+                    key: {{ .Values.ogg.passwordKey }}
+            - name: DEP_CP
+              value: "/mnt/deps/onelake/*:/mnt/deps/hadoop_3.4.2/*:/mnt/deps/parquet_1.16.0/*:/mnt/deps/azure-storage-blob_12.25.3/*"
+      volumes:
+        - name: deps
+          emptyDir: {}
+        - name: u02
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-daa-u02-pvc
+        - name: u03
+          persistentVolumeClaim:
+            claimName: {{ include "var.fullname" . }}-daa-u03-pvc
+
+
+
+
+

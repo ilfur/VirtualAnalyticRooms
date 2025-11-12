@@ -1,11 +1,10 @@
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "var.fullname" . }}-u02-pvc
+  name: {{ include "var.fullname" . }}-daa-u02-pvc
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storage.storageClass }}
   resources:
     requests:
       storage: {{ .Values.storage.logSize }}
@@ -13,11 +12,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: {{ include "var.fullname" . }}-u03-pvc
+  name: {{ include "var.fullname" . }}-daa-u03-pvc
 spec:
   accessModes:
     - ReadWriteOnce
-  storageClassName: {{ .Values.storage.storageClass }}
   resources:
     requests:
       storage: {{ .Values.storage.trailSize }}

@@ -1,0 +1,93 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name:  {{ include "var.fullname" . }}-daa-svc
+spec:
+  ports:
+  - port: {{ .Values.services.internal.sslPort }}
+    targetPort: 8443
+    name: https-ggate
+    protocol: TCP
+  - port: {{ .Values.services.internal.plainPort }}
+    targetPort: 8080
+    name: http-ggate
+    protocol: TCP
+  selector:
+   {{- include "var.selectorLabels" . | nindent 6 }}
+  type: {{ .Values.services.internal.type }}
+{{- if ne .Values.services.external.type "none" }}
+{{- if eq .Values.services.external.type "virtualservice" }}
+---
+apiVersion: networking.istio.io/v1beta1
+kind: VirtualService
+metadata:
+  name: {{ include "var.fullname" . }}-daa-vsvc
+spec:
+  gateways:
+  - {{ .Values.services.external.vserviceGateway }}
+  hosts:
+  - {{ .Values.services.external.vhostName }}
+  http:
+  - match:
+    - uri:
+        prefix: /
+    route:
+    - destination:
+        host:  {{ include "var.fullname" . }}-daa-svc
+        port:
+          number: {{ .Values.services.internal.sslPort }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "var.fullname" . }}-daa-https-destrule
+spec:
+  host: {{ include "var.fullname" . }}-daa-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- if eq .Values.services.external.type "ingress" }}
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: {{ include "var.fullname" . }}-daa-ingress
+spec:
+  ingressClassName: {{ .Values.services.external.ingressClass }}
+{{- if eq .Values.services.external.ingressClass "nginx" }}  
+  tls:
+  - hosts:
+    - {{ .Values.services.external.vhostName }}
+    secretName: {{ .Values.services.external.tlsSecretName }}
+{{- end }}
+  rules:
+  - host: {{ .Values.services.external.vhostName }}
+    http:
+      paths:
+      - path: /
+        pathType: Prefix
+        backend:
+          service:
+            name:  {{ include "var.fullname" . }}-daa-svc
+            port:
+{{- if eq .Values.services.external.ingressClass "istio" }}
+              number: {{ .Values.services.internal.sslPort }}
+{{- else }}
+              number: {{ .Values.services.internal.plainPort }}
+{{- end }}
+{{- if eq .Values.services.external.ingressClass "istio" }}
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: DestinationRule
+metadata:
+  name: {{ include "var.fullname" . }}-daa-https-destrule
+spec:
+  host:  {{ include "var.fullname" . }}-daa-svc
+  trafficPolicy:
+    tls:
+      mode: SIMPLE
+{{- end }}
+{{- end }}
+{{- end }}
+
