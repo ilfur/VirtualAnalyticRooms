@@ -22,7 +22,11 @@ spec:
             - name: TNS_ADMIN
               value: /projects
             - name: GG_URL
-              value: http://{{ include "var.fullname" . }}-svc:8080
+              value: {{ include "var.fullname" . }}-svc:8080
+            - name: GGFAB_URL
+              value: {{ include "var.fullname" . }}-daa-svc:8080
+            - name: GG_PROTOCOL
+              value: http
             - name: SRC_URL
               value: {{ include "var.fullname" . }}-db23ai:1521/FREEPDB1
             - name: TRG_URL

@@ -15,6 +15,7 @@ data:
     . ./init_targetdb_adb.sh
     . ./init_srcdb_23ai.sh
     . ./config_goldengate.sh
+    . ./config_goldengate_fabric.sh
 
   testconn.sh: |-
     #!/bin/bash 
