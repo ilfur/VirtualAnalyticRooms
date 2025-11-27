@@ -43,9 +43,9 @@ spec:
               cpu: {{ .Values.resources.requests.cpu }}
               memory: {{ .Values.resources.requests.memory }}
           ports:
-            - containerPort: 8443
+            - containerPort: 443
               name: https-ggate
-            - containerPort: 8080
+            - containerPort: 80
               name: http-ggate
           volumeMounts:
             - name: deps

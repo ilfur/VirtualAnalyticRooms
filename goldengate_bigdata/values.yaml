@@ -15,7 +15,7 @@ storage:
 image:
   pullPolicy: IfNotPresent
   #  imageName: fra.ocir.io/frul1g8cgfam/pub_gg_micro_bigdata:23.4.0.24.06
-  imageName: fra.ocir.io/frul1g8cgfam/pub_gg_micro_bigdata:23.8.4.25.08
+  imageName: container-registry.oracle.com/goldengate/goldengate-distributed-apps-and-analytics:23.10.1.25.11
   secretName: container-registry-secret
 
 services:

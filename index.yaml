@@ -3,10 +3,10 @@ entries:
   ai-workshop:
   - apiVersion: v2
     appVersion: 23.4.0
-    created: "2025-11-26T09:06:58.444773247Z"
+    created: "2025-11-27T09:24:27.953880677Z"
     description: software stack of 23ai PDB database, sample data, sample SQL scripts,
       sqlplus command line
-    digest: 7e87c13046fb2b7cf8dce1a81342d717ac0fe975b6dd861894f2a92af92cd5f6
+    digest: 02c6e3a986a479aa3f4141386fa16edb7d98d2ed408e605d87eb85fd276fb432
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oracle-analytic-logo2.jpg
     name: ai-workshop
     type: application
@@ -16,9 +16,9 @@ entries:
   analytics-server:
   - apiVersion: v2
     appVersion: 6.4.0
-    created: "2025-11-26T09:06:58.444933762Z"
+    created: "2025-11-27T09:24:27.954046771Z"
     description: Oracle Analytics Server
-    digest: 6ce05a5edadb67393dcdc9aba95213d9ea76de95c03eee90dcbdc660cc730874
+    digest: 9722ca985326bcc331da045931a11cc3b47b56e8470b3a3492c52ec10dc9f59f
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oas_logo.png
     name: analytics-server
     type: application
@@ -28,9 +28,9 @@ entries:
   autonomous-free:
   - apiVersion: v2
     appVersion: 24.11.4.2
-    created: "2025-11-26T09:06:58.445768697Z"
+    created: "2025-11-27T09:24:27.954434674Z"
     description: Oracle Autonomous Database FREE container
-    digest: 2c7b203279b03e7c6e00a894a702e4231aafd4c3ff95fb4c7f7a94abde55628e
+    digest: a898fd1149ef8326e3c093aae1bc8a94aed988187b81e5b8a679bc63da665106
     icon: https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/autonomous.png
     name: autonomous-free
     type: application
@@ -39,7 +39,7 @@ entries:
     version: 2.0.1
   - apiVersion: v2
     appVersion: 24.11.4.2
-    created: "2025-11-26T09:06:58.445444383Z"
+    created: "2025-11-27T09:24:27.954225815Z"
     description: Oracle Autonomous Database FREE container
     digest: 658366f7ba41d411cff3ddd6fa0db1e3fdd49b9af992199720e55ae9f4ac6c6e
     icon: https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/Radfahrer_Farben.png
@@ -51,9 +51,9 @@ entries:
   cloudbeaver:
   - apiVersion: v2
     appVersion: 21.3.3
-    created: "2025-11-26T09:06:58.446001864Z"
+    created: "2025-11-27T09:24:27.954600857Z"
     description: DBeaver Web UI Community Edition
-    digest: 0d802b536b2236e1838d8ee71919bb23ef8fae7d1ebcf607f3e21d20f6f5f45d
+    digest: a60f48f407b6816aad8763aa6f3639aa8d02e6e442dc9d307eb7e9e96ed8bc22
     icon: https://ilfur.github.io/VirtualAnalyticRooms/cloudbeaver_logo.png
     name: cloudbeaver
     type: application
@@ -63,9 +63,9 @@ entries:
   cman:
   - apiVersion: v2
     appVersion: 23.5.0.0
-    created: "2025-11-26T09:06:58.446367121Z"
+    created: "2025-11-27T09:24:27.954815116Z"
     description: Oracle Connection Manager
-    digest: f66cd9c5a8c21a4e748b14f30b5cfeea73568cc3fe2c04dcab3a13696430f466
+    digest: 8e50f4267b59bad618b1b01d99bb18f5e76a6615f05613038e1b5a42877f776a
     icon: https://ilfur.github.io/VirtualAnalyticRooms/cman.png
     name: cman
     type: application
@@ -75,10 +75,10 @@ entries:
   fallwerte:
   - apiVersion: v2
     appVersion: 21.3.0
-    created: "2025-11-26T09:06:58.446950652Z"
+    created: "2025-11-27T09:24:27.95496881Z"
     description: analytic software stack - data, O21c, Jupyter, Cloudbeaver, Oracle
       Analytics
-    digest: aa64b62f500bb9ab551226231ddaa1a882459c2f01d2a62697b3a81f2070ea08
+    digest: e49a8c4a09646aa089019c818217b2f7f283e6241c6cdfd6c47adadf29458233
     icon: https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/Asklepios.png
     name: fallwerte
     type: application
@@ -87,8 +87,19 @@ entries:
     version: 1.0.0
   goldengate-bigdata:
   - apiVersion: v2
+    appVersion: 23.10.1.25.11
+    created: "2025-11-27T09:24:27.956261215Z"
+    description: Oracle GoldenGate Microservices for Distributed Systems and Analytics
+    digest: cead601c734cc07e527ad008ecb918123e4e4f4f4b3d7a9b0ec74a1dbb82ac9a
+    icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
+    name: goldengate-bigdata
+    type: application
+    urls:
+    - goldengate-bigdata-2.0.6.tgz
+    version: 2.0.6
+  - apiVersion: v2
     appVersion: 23.4.0.24.06
-    created: "2025-11-26T09:06:58.447849246Z"
+    created: "2025-11-27T09:24:27.956052096Z"
     description: Oracle GoldenGate Microservices for Distributed Systems and Analytics
     digest: 20a83e1dc23becd80976c1f6048ed72ea92f4234ebcd015198a502fd782331ca
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -99,7 +110,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.447627046Z"
+    created: "2025-11-27T09:24:27.955838409Z"
     description: Oracle GoldenGate Microservices for Distributed Systems and Analytics
     digest: 320a0ff6f67f1d9c92bc7ea2fdf662b0405473ab8c56ef1e2c79f71dd7413f19
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -110,7 +121,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.44739438Z"
+    created: "2025-11-27T09:24:27.955597622Z"
     description: Oracle GoldenGate Microservices for Distributed Systems and Analytics
     digest: 92a904359bd8a0c2f52c91527c467f2b697c8f4d4c522a714774e3f071d70a2d
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -121,7 +132,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.447196228Z"
+    created: "2025-11-27T09:24:27.955372177Z"
     description: Oracle GoldenGate Microservices for Distributed Systems and Analytics
     digest: 0ebbb8cfbecdb8a5536802f71e82cd12c0c86ee27ea47f73967e8cb05050d3be
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -133,9 +144,9 @@ entries:
   goldengate-free:
   - apiVersion: v2
     appVersion: 23.5.0.24.07
-    created: "2025-11-26T09:06:58.448236527Z"
+    created: "2025-11-27T09:24:27.957100048Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
-    digest: 8103d7192fca04de94edab3685653e4ed94ed7be67103bc2afe429cc9bf404a9
+    digest: 65d273302312ea2597c2c140d1671f0bab5dbd8551283d5bb5bcd40721af2917
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-free
     type: application
@@ -144,7 +155,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.5.0.24.07
-    created: "2025-11-26T09:06:58.448042871Z"
+    created: "2025-11-27T09:24:27.956501152Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
     digest: d7d39cb469116cd70ef6d10372c6073265bdd43d554b1bf00f71705ddb72c329
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -156,9 +167,9 @@ entries:
   goldengate-microhack-sample:
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.45051114Z"
+    created: "2025-11-27T09:24:27.960222471Z"
     description: Oracle GoldenGate Sync between 23ai and ADB sample
-    digest: 1c13f813a3e2c2cbafb9b6274cd975cb26f8cdf04278b8e59ba15da304dcab55
+    digest: 93514b3046f772eb36211fe9b5421e912695140c2a40d6f6060d793c843fd37a
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-microhack-sample
     type: application
@@ -167,7 +178,7 @@ entries:
     version: 2.1.2
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.449749488Z"
+    created: "2025-11-27T09:24:27.959428527Z"
     description: Oracle GoldenGate Sync between 23ai and ADB sample
     digest: ad9d7de4b748325d8e19a6c69d4c3dd2da9f46b18298116aa73aaf92cc29c28b
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -178,7 +189,7 @@ entries:
     version: 2.1.1
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.448982947Z"
+    created: "2025-11-27T09:24:27.958652381Z"
     description: Oracle GoldenGate Sync between 23ai and ADB sample
     digest: 9f50c2827beea4cfd1e810a28da2a1c5d1f2cf17f8bc089707597b77f611ea98
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -190,9 +201,9 @@ entries:
   goldengate-mssql:
   - apiVersion: v2
     appVersion: 23.9.2.25.08
-    created: "2025-11-26T09:06:58.451881634Z"
+    created: "2025-11-27T09:24:27.961082235Z"
     description: Oracle GoldenGate Microservices for MS SQL Server
-    digest: 7f474fb333bfe1774b300feb549d45451143547692f657d9ae5332042b3d5bb4
+    digest: 5bf582600a428b775527c0a1af532469f8521acb05069cb5803114014cd48f5c
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-mssql
     type: application
@@ -201,7 +212,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.451465528Z"
+    created: "2025-11-27T09:24:27.960861878Z"
     description: Oracle GoldenGate Microservices for MS SQL Server
     digest: a466e5fa97655c8ee7686f7c548e6dc512e3f5f0fe4e39b507d818448da4e9d7
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -212,7 +223,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.450939435Z"
+    created: "2025-11-27T09:24:27.960658297Z"
     description: Oracle GoldenGate Microservices for MS SQL Server
     digest: 12724bad0fe56d81cddaf1a4153a136c42129b3021100461996dc816e5080e30
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -223,7 +234,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.450731457Z"
+    created: "2025-11-27T09:24:27.960451301Z"
     description: Oracle GoldenGate Microservices for MSSQL Database
     digest: 2aa8d2af76327cc401215597471cbe894bd88fd514486863b834c1db221f6642
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -235,9 +246,9 @@ entries:
   goldengate-mysql:
   - apiVersion: v2
     appVersion: 23.9.2.25.08
-    created: "2025-11-26T09:06:58.453258718Z"
+    created: "2025-11-27T09:24:27.961868087Z"
     description: Oracle GoldenGate Microservices for MySQL Database
-    digest: 33194e16c7ec717d7c231a84257eb165ac461f9cc6ac2a8d27c24e7492363de9
+    digest: c05a5fc0b8b7af6ea037e47d36d21e2a4a48718b9b3f43431ad2b4d494813bed
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-mysql
     type: application
@@ -246,7 +257,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.453056819Z"
+    created: "2025-11-27T09:24:27.961666248Z"
     description: Oracle GoldenGate Microservices for MySQL Database
     digest: c8998d71b2025cbc99233f0659a346861471f3543dcb27737c9ca0b71c3fc3f9
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -257,7 +268,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.452836983Z"
+    created: "2025-11-27T09:24:27.961461685Z"
     description: Oracle GoldenGate Microservices for MySQL Database
     digest: 606bf3d70ef77a337b32f4f57dfb097656a9079003b12b92ee7bb37740a1aaeb
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -268,7 +279,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.452224648Z"
+    created: "2025-11-27T09:24:27.961263702Z"
     description: Oracle GoldenGate Microservices for MySQL Database
     digest: 218809c5a306ed12929f87c38ffe5b5df53d5155b27ba202d7ddf78142b3c452
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -280,9 +291,9 @@ entries:
   goldengate-mysql-free:
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.453899917Z"
+    created: "2025-11-27T09:24:27.962459129Z"
     description: Oracle GoldenGate Microservices FREE for mysql
-    digest: cc634788c0709fc51dfa1bf414305061b01b7c3348470f86a16d17bb73e808fc
+    digest: fd521ae0b9a4c83973c2dd111680fac029b4f9fcc7a7ba61a42561f7351975f0
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-mysql-free
     type: application
@@ -291,7 +302,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.453700112Z"
+    created: "2025-11-27T09:24:27.962241787Z"
     description: Oracle GoldenGate Microservices FREE for mysql
     digest: bd61c076c0bd5f564ff3e9100b98357bbdc57539a855fb74890881e583185aef
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -302,7 +313,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.453496601Z"
+    created: "2025-11-27T09:24:27.962054001Z"
     description: Oracle GoldenGate FREE for mysql
     digest: 44fd789e15e1a639a1b2be2f2b35e02c8899dee6ee7ba02d08191d6133f40160
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -314,9 +325,9 @@ entries:
   goldengate-oracle:
   - apiVersion: v2
     appVersion: 23.4.1.24.05
-    created: "2025-11-26T09:06:58.454942529Z"
+    created: "2025-11-27T09:24:27.964957288Z"
     description: Oracle GoldenGate Microservices for Oracle Database
-    digest: 56ed01c1a68f7248c47735b0844302cae5d2cf05df612d71b12d4957419a7f3b
+    digest: c0f942a719e9a4836910179d26468da4c6116503200588fec8a152ff04fd05fc
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-oracle
     type: application
@@ -325,7 +336,7 @@ entries:
     version: 2.0.6
   - apiVersion: v2
     appVersion: 23.9.2.25.08
-    created: "2025-11-26T09:06:58.454728161Z"
+    created: "2025-11-27T09:24:27.964250398Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: bbbe3178ad23d08b04ad3ba141bfc0f5bac215a8f41a6259bcedbbca72e8a46b
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -336,7 +347,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.454493253Z"
+    created: "2025-11-27T09:24:27.963751856Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: dcee5e2b751ce9aae0753f2e8d813e87b3814c62ec6dcf250e1f331c054b1ff9
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -347,7 +358,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.454285235Z"
+    created: "2025-11-27T09:24:27.963290781Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: 4ec661586ccc6dc9a849c1b93462c36c2f1714fcfcacbb50e7f884e07bda07ac
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -358,7 +369,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.454100873Z"
+    created: "2025-11-27T09:24:27.962681921Z"
     description: Oracle GoldenGate Microservices for Oracle Database
     digest: 6b5456f3004ec67802197911e3805787532d9c5f9fb645bc01a5d602f27608b7
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -370,9 +381,9 @@ entries:
   goldengate-oracle-free:
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.455712225Z"
+    created: "2025-11-27T09:24:27.966126946Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
-    digest: b9286189c73b12f8342789db32240e275b60634afebfbcd9372c3e2be1ae2df4
+    digest: 6123bbf649892d6ba5f79cd89422e03b8a938fd6cdf5711363d26e26cd88c746
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-oracle-free
     type: application
@@ -381,7 +392,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.455511368Z"
+    created: "2025-11-27T09:24:27.965884466Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
     digest: f68be5141d39fd8e1a0f4b9a0bf6c12e090fd29845ad2c433871205e9b61c9ef
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -392,7 +403,7 @@ entries:
     version: 2.0.3
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.455306465Z"
+    created: "2025-11-27T09:24:27.96558634Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
     digest: a0b2b384f8b8247651212beb3f252e5312c8b86c5f56552f377afaf56b04d92c
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -403,7 +414,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.455122875Z"
+    created: "2025-11-27T09:24:27.9652986Z"
     description: Oracle GoldenGate Microservices FREE for Oracle Database
     digest: 79cc18bdc771108f0aae0bd17e092079d8fae7ff0469d023b5846cea387d90c4
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -415,9 +426,9 @@ entries:
   goldengate-postgres:
   - apiVersion: v2
     appVersion: 23.9.2.25.08
-    created: "2025-11-26T09:06:58.45646187Z"
+    created: "2025-11-27T09:24:27.966968503Z"
     description: Oracle GoldenGate Microservices for Postgres Database
-    digest: 1206e9fc51b987c412627db7b3e53bee0cedfae4f211de694f20e76fb1f0ef5f
+    digest: 18a66825d897d3dc40f864196ae3cc93fc563a8ae9ca9841632968a9c85e299e
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-postgres
     type: application
@@ -426,7 +437,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.456260593Z"
+    created: "2025-11-27T09:24:27.966745672Z"
     description: Oracle GoldenGate Microservices for Postgres Database
     digest: 0631dac21a272933dfdf4af25b3a8e9cb38a597631ef51bf4c3ba5ccee21230f
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -437,7 +448,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.456070252Z"
+    created: "2025-11-27T09:24:27.966542292Z"
     description: Oracle GoldenGate Microservices for Postgres Database
     digest: b56c55f463b0ea05bfa8673d7d11fae088b6ee38a025b3622d89b16984fe6cc9
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -448,7 +459,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.4.0.0.0
-    created: "2025-11-26T09:06:58.455887443Z"
+    created: "2025-11-27T09:24:27.966325279Z"
     description: Oracle GoldenGate Microservices for Postgres Database
     digest: 6735ed9088996235cf817e86d76d37f823a2346f8ef48e7d9650ae7118ee6a65
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -460,9 +471,9 @@ entries:
   goldengate-postgres-free:
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.457689695Z"
+    created: "2025-11-27T09:24:27.96760179Z"
     description: Oracle GoldenGate Microservices FREE for Postgres
-    digest: c8c877f48ea6b11ce3060eb4cd74f6b4831ecf3c113aadb833c18f095183d4b8
+    digest: 12cb18c7f6c2287796cdeaeebb02b3dee89d35749cae390701cba1e383ac84ba
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-postgres-free
     type: application
@@ -471,7 +482,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.45726085Z"
+    created: "2025-11-27T09:24:27.96736563Z"
     description: Oracle GoldenGate Microservices FREE for Postgres
     digest: 8d7c97139714dfcdf10feaf40ea2951ceb42132fbcd6bb284bad80e014ef6031
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -482,7 +493,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.456647283Z"
+    created: "2025-11-27T09:24:27.967153846Z"
     description: Oracle GoldenGate Microservices FREE for Postgres
     digest: c5560ccac4007815806b2468f9589c0aa425f75d8c92b636a451b46d18dcf771
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -494,9 +505,9 @@ entries:
   goldengate-sqlserver-free:
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.458842015Z"
+    created: "2025-11-27T09:24:27.968177731Z"
     description: Oracle GoldenGate Microservices FREE for MS SQLserver
-    digest: 0c17f3a4998504f0353276928acef179386c604f4836405e18e31767d4fd62b4
+    digest: aded4999421f1362623e2e4933afc2f15abec8ef31d8a4fce1c290bbdddc629b
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-sqlserver-free
     type: application
@@ -505,7 +516,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.458622369Z"
+    created: "2025-11-27T09:24:27.967982883Z"
     description: Oracle GoldenGate FREE for MS SQLserver
     digest: 39290c9ee8a0540ff8d1b06dbf42d70980a33a03dc596e54803b3f05ce1c1027
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -516,7 +527,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.8.0.25.04
-    created: "2025-11-26T09:06:58.458335662Z"
+    created: "2025-11-27T09:24:27.967789648Z"
     description: Oracle GoldenGate FREE for sqlserver
     digest: f495f7a6e994c0241bfed7390fce486c86c2b001f313265d47ebc58779a55e52
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -528,9 +539,9 @@ entries:
   goldengate-studio-free:
   - apiVersion: v2
     appVersion: 23.7.1.25.02
-    created: "2025-11-26T09:06:58.459514953Z"
+    created: "2025-11-27T09:24:27.968789947Z"
     description: Oracle GoldenGate Studio FREE
-    digest: 027c2af4d43498991f529202020c884db6d974b00ba8b55c80f0703beb294067
+    digest: 178b186cf95396226c69d291f7da4edc88758f48ba2d0676f81a76dcd897c5db
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-studio-free
     type: application
@@ -539,7 +550,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.7.1.25.02
-    created: "2025-11-26T09:06:58.459248265Z"
+    created: "2025-11-27T09:24:27.968584653Z"
     description: Oracle GoldenGate Studio FREE
     digest: 2ddb42d2eb3d39ffc8cdc8f9236468b49734333aa8cee7ad78ec8b93139fbb94
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -550,7 +561,7 @@ entries:
     version: 2.0.2
   - apiVersion: v2
     appVersion: 23.7.1.25.02
-    created: "2025-11-26T09:06:58.459027177Z"
+    created: "2025-11-27T09:24:27.968358307Z"
     description: Oracle GoldenGate Studio FREE
     digest: 62d82e4e9cd8f69b764048d00639e349d780a44c1f6fb6fe5f6de9c6cb14dff0
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -562,9 +573,9 @@ entries:
   goldengate-studio-mongodb:
   - apiVersion: v2
     appVersion: 23.8.0.25.05
-    created: "2025-11-26T09:06:58.460125726Z"
+    created: "2025-11-27T09:24:27.969785108Z"
     description: Oracle GoldenGate for MongoDB migrations
-    digest: ce3b14b3d0b6ef1569e75821403a48d7e0fb4fa9f146f67482bf5bbed01ec28d
+    digest: e7048859dd763b33b55e9336ced05f97b97f63217ff24dc0085eca98d109f454
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
     name: goldengate-studio-mongodb
     type: application
@@ -573,7 +584,7 @@ entries:
     version: 2.0.5
   - apiVersion: v2
     appVersion: 23.8.0.25.05
-    created: "2025-11-26T09:06:58.459923667Z"
+    created: "2025-11-27T09:24:27.969175646Z"
     description: Oracle GoldenGate for MongoDB migrations
     digest: 1ad4e2ab5f0bc4f8a3a403143ee574c6ffdbc4dfbbe7bd0a5707d5a91a82c0d7
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -584,7 +595,7 @@ entries:
     version: 2.0.4
   - apiVersion: v2
     appVersion: 23.8.0.25.05
-    created: "2025-11-26T09:06:58.459717152Z"
+    created: "2025-11-27T09:24:27.968976832Z"
     description: Oracle GoldenGate for MongoDB migrations
     digest: ee4c53ff4335095eacac7bccf819eb1daaa50c55e6249983ec707e44cbd85035
     icon: https://ilfur.github.io/VirtualAnalyticRooms/goldengate_logo.png
@@ -596,10 +607,10 @@ entries:
   graph-server:
   - apiVersion: v2
     appVersion: 24.4.0.0.0
-    created: "2025-11-26T09:06:58.460482361Z"
+    created: "2025-11-27T09:24:27.970572081Z"
     description: Oracle Graph & RDF Server with UI plus Jupyter notebook with graph
       client
-    digest: 9a79f997029380c91dd2575e88117fcd11452081e6df26b8ef0594cf6647f62a
+    digest: 443447fd80d3ba102bcbfef4d03ce205581a034799c26aba155a3051b5ef56dc
     icon: https://ilfur.github.io/VirtualAnalyticRooms/graph_logo.png
     name: graph-server
     type: application
@@ -611,7 +622,7 @@ entries:
       category: MachineLearning
     apiVersion: v2
     appVersion: 1.5.0
-    created: "2025-11-26T09:06:58.466358335Z"
+    created: "2025-11-27T09:24:27.976395793Z"
     dependencies:
     - condition: postgresql.enabled
       name: postgresql
@@ -625,7 +636,7 @@ entries:
     description: JupyterHub brings the power of notebooks to groups of users. It gives
       users access to computational environments and resources without burdening the
       users with installation and maintenance tasks.
-    digest: da3e4735b60d725eb658832e444a1154f90e7a864ecce41e9a97977f9712379a
+    digest: 901401e8b82993004c462fee2ea23fa86e9f6df36f558f26c96132bdf1968093
     home: https://jupyter.org/hub
     icon: https://ilfur.github.io/VirtualAnalyticRooms/jupyterhub_logo.png
     keywords:
@@ -644,9 +655,9 @@ entries:
   oml4py-notebook:
   - apiVersion: v2
     appVersion: "1.0"
-    created: "2025-11-26T09:06:58.466565431Z"
+    created: "2025-11-27T09:24:27.976703773Z"
     description: Oracle Machine Learning 4 Python Jupyter Notebook
-    digest: 4334dd3d29a9e2ead10c6f7a33b8b9be9f0428ba3d3a98eb590853f9b07b5645
+    digest: b00b93e8c54d85d6294495c804b0a49470de839f9480760956e7e97388e6c446
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oml4py_logo.png
     name: oml4py-notebook
     type: application
@@ -656,9 +667,9 @@ entries:
   ords:
   - apiVersion: v2
     appVersion: latest
-    created: "2025-11-26T09:06:58.466787591Z"
+    created: "2025-11-27T09:24:27.977092988Z"
     description: Oracle APEX, Database Actions and numerous REST services
-    digest: 92397edacce302a3d0a646efbbec893d5a50be607734ef81cbdf448d6ea49a05
+    digest: 7782dccf76d4490d861259b335b784d141a38dc3c3534cf911983784fb5bb23d
     icon: https://ilfur.github.io/VirtualAnalyticRooms/ords_logo.png
     name: ords
     type: application
@@ -668,10 +679,10 @@ entries:
   radlaufstellen:
   - apiVersion: v2
     appVersion: 21.3.0
-    created: "2025-11-26T09:06:58.467000035Z"
+    created: "2025-11-27T09:24:27.977769322Z"
     description: analytic software stack of machine learning database, masked data,
       analysis tool
-    digest: 1aac462110a519e0658f4397c78a400dbb5f88afcec4090af71b85c90b00dabc
+    digest: a06bff49a31fd4ff2733a43dd26abde391e3b9dd46608cf909f6257776ca1b49
     icon: https://ilfur.github.io/VirtualAnalyticRooms/oracle-analytic-logo2.jpg
     name: radlaufstellen
     type: application
@@ -681,9 +692,9 @@ entries:
   sqlcl-liquibase:
   - apiVersion: v2
     appVersion: 21.3.0.0.0
-    created: "2025-11-26T09:06:58.467145167Z"
+    created: "2025-11-27T09:24:27.977925241Z"
     description: Oracle sqlcl with liquibase integration
-    digest: 6b77f3e04da3d82e6cf0fec3e849616736241dd5ee7c9e435cb48dbf3a4e0b1e
+    digest: 1afeedcbf5c0b540ecad2963204eb2420242fd42ad8032b31505c19c3b7ab6d6
     icon: https://ilfur.github.io/VirtualAnalyticRooms/liquibase_logo.png
     name: sqlcl-liquibase
     type: application
@@ -693,9 +704,9 @@ entries:
   stream-analytics:
   - apiVersion: v2
     appVersion: 19.1.0.0.6.3
-    created: "2025-11-26T09:06:58.467296849Z"
+    created: "2025-11-27T09:24:27.978076993Z"
     description: Oracle GoldenGate Stream Analytics
-    digest: a32d440684f01efdb13ec9dc600836db364d6d45614628ba8caed9e2d949fdfa
+    digest: e9ec722eea8dcb3f2d301b01d471e8da211dfef97cdf1c03bd16d1398b432603
     icon: https://ilfur.github.io/VirtualAnalyticRooms/osa_logo.png
     name: stream-analytics
     type: application
@@ -705,9 +716,9 @@ entries:
   var_dashboard:
   - apiVersion: v2
     appVersion: 1.0.0
-    created: "2025-11-26T09:06:58.467920551Z"
+    created: "2025-11-27T09:24:27.97872899Z"
     description: Virtual Analytic Rooms Dashboard App
-    digest: cead21eb7dbfb6424ca2ddb264fd3cc2f774ba20d99c21574a99962a60cd87a1
+    digest: 362515363a204c16147b11b6ebfd220dbd427cbefcf52e3078f20e64844a092e
     icon: https://ilfur.github.io/VirtualAnalyticRooms/var_dashboard/oracledb_icon.png
     name: var_dashboard
     type: application
@@ -717,14 +728,14 @@ entries:
   varraddauerzaehlstellen:
   - apiVersion: v2
     appVersion: 21.3.0
-    created: "2025-11-26T09:06:58.468179506Z"
+    created: "2025-11-27T09:24:27.9789911Z"
     description: analytic software stack - data, O21c, Jupyter, Cloudbeaver, Oracle
       Analytics
-    digest: dcaaeed34f159658d9a4a070aff7dd6c1f09f62441a6c2e8fe34594e61a19164
+    digest: 5a5e1d34d380f551c2a64f5a316410d98404c09279898fa466649a9ea6c22159
     icon: https://raw.githubusercontent.com/DerRotMilan/VirtualAnalyticRooms/main/Radfahrer_Farben.png
     name: varraddauerzaehlstellen
     type: application
     urls:
     - varraddauerzaehlstellen-1.0.3.tgz
     version: 1.0.3
-generated: "2025-11-26T09:06:58.44383909Z"
+generated: "2025-11-27T09:24:27.953138783Z"
