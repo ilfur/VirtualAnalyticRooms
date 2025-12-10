@@ -19,7 +19,6 @@ spec:
       #securityContext:
         #fsGroup: 1000
         #runAsUser: 994
-      containers:
       initContainers:
       - command:
         - /bin/bash
@@ -35,6 +34,7 @@ spec:
           name: u02
         - mountPath: /u03
           name: u03
+      containers:
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter
           image: {{ .Values.image.statsdExporterImage }} 
