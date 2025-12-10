@@ -14,8 +14,11 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: container-registry.oracle.com/goldengate/goldengate-sqlserver:23.9.2.25.08
+  imageName: container-registry.oracle.com/goldengate/goldengate-sqlserver:23.10.3.25.11
   secretName: container-registry-secret
+
+statsdExporter:
+  enabled: false
 
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.
@@ -33,8 +36,6 @@ services:
     vhostName: ggate.xxx.xxx.xxx.xxx.nip.io
   internal:
     type: ClusterIP
-    plainPort: 8080
-    sslPort: 8443
 
 resources:
   requests:

@@ -18,6 +18,9 @@ image:
   imageName: container-registry.oracle.com/goldengate/goldengate-distributed-apps-and-analytics:23.10.1.25.11
   secretName: container-registry-secret
 
+statsdExporter:
+  enabled: false
+
 services:
   ### a clusterIP type service will be created for graph and jupyter UIs.
   ### You can choose to create an istio virtualservice or an ingress in front of it

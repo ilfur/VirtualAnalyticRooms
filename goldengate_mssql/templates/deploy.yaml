@@ -16,11 +16,51 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.image.secretName }}
-      securityContext:
-        fsGroup: 1000
+      #securityContext:
+        #fsGroup: 1000
+        #runAsUser: 994
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - chown 54321 /u02; chown 54321 /u03
+        image: {{ .Values.image.imageName }}
+        imagePullPolicy: IfNotPresent
+        name: setperms
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /u02
+          name: u02
+        - mountPath: /u03
+          name: u03
       containers:
+{{- if eq .Values.statsdExporter.enabled true }}
+        - name: statsd-exporter
+          image: {{ .Values.image.statsdExporterImage }} 
+          imagePullPolicy: Always
+          args: ["--statsd.mapping-config", "/config/statsd-mapping.yaml", "--log.level", "debug"]
+          ports:
+          - containerPort: 9102
+            name: http
+            protocol: TCP
+          - containerPort: 9125
+            name: push
+            protocol: UDP
+          volumeMounts:
+          - mountPath: /config
+            name: statsd-config
+{{- end }}
         - name: app
           image: {{ .Values.image.imageName }}
+          #securityContext:
+          #  allowPrivilegeEscalation: false
+          #  capabilities:
+          #    drop:
+          #    - ALL
+          #  runAsNonRoot: true
+          #  seccompProfile:
+          #    type: RuntimeDefault
           resources:
             limits:
               cpu: {{ .Values.resources.limits.cpu }}
@@ -34,8 +74,6 @@ spec:
             - containerPort: 80
               name: http-ggate
           volumeMounts:
-            - name: u01
-              mountPath: /u01/ogg/scripts
             - name: u02
               mountPath: /u02
             - name: u03
@@ -55,9 +93,12 @@ spec:
                     name: {{ .Values.ogg.adminSecret }}
                     key: {{ .Values.ogg.passwordKey }}
       volumes:
-        - name: u01
-          persistentVolumeClaim:
-            claimName: {{ include "ggate.fullname" . }}-u01-pvc
+{{- if eq .Values.statsdExporter.enabled true }}
+        - name: statsd-config
+          configMap:
+            defaultMode: 420
+            name: {{ include "ggate.fullname" . }}-statsd-mapping-config
+{{- end }}
         - name: u02
           persistentVolumeClaim:
             claimName: {{ include "ggate.fullname" . }}-u02-pvc

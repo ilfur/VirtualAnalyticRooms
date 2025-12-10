@@ -12,6 +12,14 @@ spec:
     targetPort: 80
     name: http-ggate
     protocol: TCP
+  - port: 8125
+    protocol: UDP
+    targetPort: 9125
+    name: push
+  - port: 9102
+    protocol: TCP
+    targetPort: 9102
+    name: http
   selector:
    {{- include "ggate.selectorLabels" . | nindent 6 }}
   type: {{ .Values.services.internal.type }}

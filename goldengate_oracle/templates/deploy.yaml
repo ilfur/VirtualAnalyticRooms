@@ -24,7 +24,7 @@ spec:
         - /bin/bash
         - -c
         - chown 54321 /u02; chown 54321 /u03
-        image: container-registry.oracle.com/goldengate/goldengate-oracle:23.10.3.25.11
+        image:  {{ .Values.image.imageName }}
         imagePullPolicy: IfNotPresent
         name: setperms
         securityContext:
@@ -34,6 +34,13 @@ spec:
           name: u02
         - mountPath: /u03
           name: u03
+        resources:
+          limits:
+            cpu: {{ .Values.resources.limits.cpu }}
+            memory: {{ .Values.resources.limits.memory }}
+          requests:
+            cpu: {{ .Values.resources.requests.cpu }}
+            memory: {{ .Values.resources.requests.memory }}
       containers:
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter

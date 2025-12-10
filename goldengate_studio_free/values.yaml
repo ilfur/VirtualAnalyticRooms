@@ -15,7 +15,7 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: container-registry.oracle.com/goldengate/goldengate-studio-free:23.7.1.25.02	
+  imageName: container-registry.oracle.com/goldengate/goldengate-studio-free:23.9.0.25.09
 
 services:
   ### You can choose to create an istio virtualservice or an ingress in front of it
@@ -32,8 +32,6 @@ services:
     vhostName: ggate.141.147.33.9.nip.io
   internal:
     type: ClusterIP
-    plainPort: 8080
-    sslPort: 8443
 
 resources:
   requests:
