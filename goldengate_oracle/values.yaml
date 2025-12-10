@@ -37,8 +37,6 @@ services:
     vhostName: ggate.xxx.xxx.xxx.xxx.nip.io
   internal:
     type: ClusterIP
-    plainPort: 8080
-    sslPort: 8443
 
 resources:
   requests:
@@ -51,8 +49,8 @@ resources:
 securityContext:
   forDeployment:
     enabled: false
-    fsGroup: 1000
-    runAsUser: 994
+    fsGroup: 54321
+    runAsUser: 54321
   forContainers:
     enabled: false
     allowPrivilegeEscalation: false

@@ -4,12 +4,12 @@ metadata:
   name:  {{ include "ggate.fullname" . }}-svc
 spec:
   ports:
-  - port: {{ .Values.services.internal.sslPort }}
-    targetPort: 8443
+  - port: 443
+    targetPort: 443
     name: https-ggate
     protocol: TCP
-  - port: {{ .Values.services.internal.plainPort }}
-    targetPort: 8080
+  - port: 80
+    targetPort: 80
     name: http-ggate
     protocol: TCP
   - port: 8125

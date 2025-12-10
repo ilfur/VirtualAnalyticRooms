@@ -20,6 +20,21 @@ spec:
         #fsGroup: 1000
         #runAsUser: 994
       containers:
+      initContainers:
+      - command:
+        - /bin/bash
+        - -c
+        - chown 54321 /u02; chown 54321 /u03
+        image: container-registry.oracle.com/goldengate/goldengate-oracle:23.10.3.25.11
+        imagePullPolicy: IfNotPresent
+        name: setperms
+        securityContext:
+          runAsUser: 0
+        volumeMounts:
+        - mountPath: /u02
+          name: u02
+        - mountPath: /u03
+          name: u03
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter
           image: {{ .Values.image.statsdExporterImage }} 
