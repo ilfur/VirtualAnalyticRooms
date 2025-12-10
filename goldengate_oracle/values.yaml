@@ -17,7 +17,7 @@ storage:
 
 image:
   pullPolicy: IfNotPresent
-  imageName: container-registry.oracle.com/goldengate/goldengate-oracle:23.9.2.25.08
+  imageName: container-registry.oracle.com/goldengate/goldengate-oracle:23.10.3.25.11
   secretName: container-registry-secret
   statsdExporterImage: docker.io/prom/statsd-exporter:latest
 
