@@ -48,3 +48,18 @@ resources:
     cpu: "2"
     memory: 16Gi
 
+securityContext:
+  forDeployment:
+    enabled: false
+    fsGroup: 1000
+    runAsUser: 994
+  forContainers:
+    enabled: false
+    allowPrivilegeEscalation: false
+    capabilities:
+      drop:
+      - ALL
+    runAsNonRoot: true
+    seccompProfile:
+      type: RuntimeDefault
+
