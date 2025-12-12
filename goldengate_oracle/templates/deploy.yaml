@@ -16,31 +16,9 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.image.secretName }}
-      #securityContext:
-        #fsGroup: 1000
+      securityContext:
+        fsGroup: 54321
         #runAsUser: 994
-      initContainers:
-      - command:
-        - /bin/bash
-        - -c
-        - chown 54321 /u02; chown 54321 /u03
-        image:  {{ .Values.image.imageName }}
-        imagePullPolicy: IfNotPresent
-        name: setperms
-        securityContext:
-          runAsUser: 0
-        volumeMounts:
-        - mountPath: /u02
-          name: u02
-        - mountPath: /u03
-          name: u03
-        resources:
-          limits:
-            cpu: {{ .Values.resources.limits.cpu }}
-            memory: {{ .Values.resources.limits.memory }}
-          requests:
-            cpu: {{ .Values.resources.requests.cpu }}
-            memory: {{ .Values.resources.requests.memory }}
       containers:
 {{- if eq .Values.statsdExporter.enabled true }}
         - name: statsd-exporter
